@@ -203,8 +203,8 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);z-index:500}
 
 /* sheet */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:100;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background var(–dur)}
-.overlay.open{background:rgba(0,0,0,0.3);pointer-events:all}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:100;display:none;align-items:flex-end;justify-content:center;pointer-events:none;transition:background var(–dur)}
+.overlay.open{display:flex;background:rgba(0,0,0,0.3);pointer-events:all}
 .sheet{background:var(–card);border-radius:20px 20px 0 0;width:100%;max-width:430px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:var(–sh-lg);max-height:92vh;overflow-y:auto}
 .overlay.open .sheet{transform:translateY(0)}
 .sh-handle{width:36px;height:4px;border-radius:2px;background:var(–border2);margin:12px auto 16px}
