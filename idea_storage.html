@@ -23,6 +23,7 @@
   --sh:0 1px 3px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);
   --sh-lg:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);
   --serif:'Fraunces',Georgia,serif;--sans:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;--dur:.2s;
+  --dot-spark:#A57CF9;--dot-exploring:#D4A72C;--dot-active:#3FB950;--dot-delegated:#4C9EEB;--dot-done:#8A877F;
 }
 [data-theme="dark"] {
   --bg:#111110;--card:#1C1B19;--card2:#252420;--card3:#2E2C27;
@@ -43,16 +44,18 @@ html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--t
 #app{max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 
 /* screens */
-.screen{position:absolute;inset:0;display:flex;flex-direction:column;background:var(–bg);transition:transform var(–dur) cubic-bezier(.4,0,.2,1),opacity var(–dur);overflow:hidden}
-.screen.behind{transform:translateX(-28px);opacity:.6;pointer-events:none}
-.screen.ahead{transform:translateX(100%);pointer-events:none}
-.screen.active{transform:translateX(0);opacity:1}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(–bg);overflow:hidden}
+.screen.active{display:flex}
+.screen.behind{display:flex;transform:translateX(-28px);opacity:.6;pointer-events:none}
+.screen.ahead{display:none}
 
 /* topbar */
 .topbar{display:flex;align-items:center;padding:12px 16px 10px;gap:8px;flex-shrink:0;background:var(–bg)}
 .topbar-title{font-family:var(–serif);font-size:22px;font-weight:300;letter-spacing:-.02em;color:var(–text);flex:1}
 .topbar-title em{font-style:italic;color:var(–text2)}
 .icon-btn{width:34px;height:34px;border-radius:50%;background:none;border:none;cursor:pointer;color:var(–text2);display:flex;align-items:center;justify-content:center;font-size:16px;transition:background var(–dur);flex-shrink:0}
+.theme-toggle-btn{color:var(–text3)}
+.theme-toggle-btn:hover{color:var(–text2)}
 .icon-btn:hover{background:var(–card2)}
 .lang-btn{font-size:11px;font-weight:500;color:var(–text3);background:var(–card2);border:0.5px solid var(–border2);border-radius:6px;padding:4px 9px;cursor:pointer;letter-spacing:.04em;flex-shrink:0;font-family:var(–sans)}
 .lang-btn:hover{color:var(–text)}
@@ -232,9 +235,9 @@ html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--t
 
 /* tab bar */
 .tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(–bg);border-top:0.5px solid var(–border);display:flex;z-index:25;padding-bottom:env(safe-area-inset-bottom)}
-.tab-bar-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 10px;background:none;border:none;cursor:pointer;font-family:var(–sans);font-size:10px;font-weight:500;color:var(–text3);transition:color var(–dur);letter-spacing:.03em}
+.tab-bar-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 10px;background:none;border:none;cursor:pointer;font-family:var(–sans);font-size:10px;font-weight:500;color:var(–text3);transition:color var(–dur),opacity var(–dur);letter-spacing:.03em;opacity:.45}
 .tab-bar-btn svg{width:22px;height:22px}
-.tab-bar-btn.on{color:var(–blue)}
+.tab-bar-btn.on{color:var(–blue);opacity:1;font-weight:600}
 .tab-bar-btn .tbb-dot{width:5px;height:5px;border-radius:50%;background:var(–red);position:absolute;top:8px;right:calc(50% - 18px)}
 
 /* tasks all screen */
@@ -250,6 +253,15 @@ html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--t
 .prio-med{background:var(–border2)}
 .prio-lo{background:var(–blue-s)}
 
+/* tasks filter — segmented control */
+.filter-wrap{flex-shrink:0;padding:12px 16px;border-bottom:0.5px solid var(–border);display:flex;flex-direction:column;gap:8px}
+.seg-control{display:flex;background:var(–card2);border-radius:9px;padding:2px;gap:2px;flex-shrink:0}
+.seg-btn{flex:1;padding:6px 10px;border:none;background:none;border-radius:7px;font-size:12px;font-weight:500;font-family:var(–sans);color:var(–text3);cursor:pointer;transition:all .15s;white-space:nowrap;text-align:center}
+.seg-btn.on{background:var(–card);color:var(–text);box-shadow:0 1px 3px rgba(0,0,0,0.1),0 0.5px 0 rgba(0,0,0,0.05)}
+.proj-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:1px 0}
+.proj-scroll::-webkit-scrollbar{display:none}
+.proj-chip{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;font-family:var(–sans);color:var(–text2);background:var(–card2);border:0.5px solid var(–border);cursor:pointer;white-space:nowrap;transition:all .15s}
+.proj-chip.on{background:var(–card);border-color:var(–border2);color:var(–text);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
 /* finance calculator */
 .fin-summary{background:var(–green-s);border:0.5px solid var(–green);border-radius:var(–r-sm);padding:12px 14px;margin:10px 16px 4px;display:flex;gap:16px}
 .fin-sum-item{display:flex;flex-direction:column;gap:2px;flex:1}
@@ -276,7 +288,7 @@ html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--t
 <div id="s-list" class="screen active">
   <div class="topbar">
     <span class="topbar-title">Idea <em>Storage</em></span>
-    <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Přepnout režim">☀️</button>
+    <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
   </div>
   <div class="search-wrap"><input class="search-input" id="search-input" type="search" oninput="renderList()"></div>
@@ -290,13 +302,13 @@ html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--t
 
 <!-- DETAIL -->
 
-<div id="s-detail" class="screen ahead">
+<div id="s-detail" class="screen">
   <div class="topbar">
     <button class="back-btn" onclick="showList()">
       <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
       <span id="back-lbl">Zpět</span>
     </button>
-    <button class="icon-btn" id="theme-btn2" onclick="toggleTheme()">☀️</button>
+    <button class="icon-btn theme-toggle-btn" id="theme-btn2" onclick="toggleTheme()"><svg id="theme-btn2-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt2" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="exportProject()" title="Export">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
@@ -396,11 +408,27 @@ html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--t
 
 <!-- TASKS ALL SCREEN -->
 
-<div id="s-tasks" class="screen ahead">
+<div id="s-tasks" class="screen">
   <div class="topbar">
     <span class="topbar-title">Idea <em>Storage</em></span>
     <button class="icon-btn" id="theme-btn3" onclick="toggleTheme()">☀️</button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
+  </div>
+  <div class="filter-wrap">
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="seg-control" id="filter-bar-status" style="flex:1">
+        <button class="seg-btn on" data-status="all" onclick="setTaskFilter('status','all')">Vše</button>
+        <button class="seg-btn" data-status="open" onclick="setTaskFilter('status','open')">Nesplněné</button>
+        <button class="seg-btn" data-status="done" onclick="setTaskFilter('status','done')">Splněné</button>
+      </div>
+      <div class="seg-control" id="filter-bar-prio">
+        <button class="seg-btn on" data-prio="all" onclick="setTaskFilter('prio','all')" style="padding:6px 8px">Vše</button>
+        <button class="seg-btn" data-prio="hi" onclick="setTaskFilter('prio','hi')" style="padding:6px 8px">🔴</button>
+        <button class="seg-btn" data-prio="med" onclick="setTaskFilter('prio','med')" style="padding:6px 8px">⚪</button>
+        <button class="seg-btn" data-prio="lo" onclick="setTaskFilter('prio','lo')" style="padding:6px 8px">🔵</button>
+      </div>
+    </div>
+    <div class="proj-scroll" id="filter-bar-proj"></div>
   </div>
   <div class="tasks-all-body" id="tasks-all-body"></div>
   <button class="fab" id="tasks-fab" onclick="openSheet('task-global')" style="display:none">
@@ -661,8 +689,13 @@ function applyTheme(){
   const prefersDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
   const isDark=theme==='dark'||(theme==='auto'&&prefersDark);
   document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
-  const icon=isDark?'☀️':'🌙';
-  ['theme-btn','theme-btn2','theme-btn3'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=icon;});
+  const sunPaths = '<circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+  const moonPaths = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  const iconPaths = isDark ? sunPaths : moonPaths;
+  ['theme-btn','theme-btn2','theme-btn3'].forEach(id=>{
+    const svg=document.getElementById(id+'-svg');
+    if(svg)svg.innerHTML=iconPaths;
+  });
 }
 function toggleTheme(){
   const prefersDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
@@ -776,23 +809,21 @@ function autoCl(p,si){
 function openDetail(id){
   curId=id;const p=projects.find(x=>x.id===id);if(!p)return;
   renderDetail(p);
-  document.getElementById('s-list').classList.remove('active');
-  document.getElementById('s-list').classList.add('behind');
-  document.getElementById('s-tasks').classList.remove('active');
-  document.getElementById('s-tasks').classList.add('behind');
-  document.getElementById('s-detail').classList.replace('ahead','active');
+  document.getElementById('s-list').className='screen behind';
+  document.getElementById('s-tasks').className='screen';
+  document.getElementById('s-detail').className='screen active';
   switchTabBar('hide');
 }
 function showList(){
-  document.getElementById('s-detail').classList.replace('active','ahead');
-  document.getElementById('s-list').classList.remove('behind');
-  document.getElementById('s-tasks').classList.remove('behind');
+  document.getElementById('s-detail').className='screen';
   switchTabBar('show');
   if(activeTab==='projects'){
-    document.getElementById('s-list').classList.add('active');
+    document.getElementById('s-list').className='screen active';
+    document.getElementById('s-tasks').className='screen';
     renderList();
   } else {
-    document.getElementById('s-tasks').classList.add('active');
+    document.getElementById('s-list').className='screen';
+    document.getElementById('s-tasks').className='screen active';
     renderTasksAll();
   }
 }
@@ -1209,16 +1240,11 @@ document.getElementById(‘tbb-tasks’).classList.toggle(‘on’, !isProjects)
 const listEl = document.getElementById(‘s-list’);
 const tasksEl = document.getElementById(‘s-tasks’);
 const fab = document.getElementById(‘tasks-fab’);
-if (isProjects) {
-listEl.classList.replace(‘ahead’,‘active’); listEl.classList.remove(‘behind’);
-tasksEl.classList.replace(‘active’,‘ahead’);
-fab.style.display = ‘none’;
-} else {
-tasksEl.classList.replace(‘ahead’,‘active’); tasksEl.classList.remove(‘behind’);
-listEl.classList.replace(‘active’,‘ahead’);
-fab.style.display = ‘flex’;
-renderTasksAll();
-}
+// cleanly set classes
+listEl.className = ‘screen’ + (isProjects ? ’ active’ : ‘’);
+tasksEl.className = ‘screen’ + (!isProjects ? ’ active’ : ‘’);
+fab.style.display = isProjects ? ‘none’ : ‘flex’;
+if (!isProjects) renderTasksAll();
 }
 
 // ── Global task (from Tasks tab) ──────────────────────────────────────────
@@ -1331,15 +1357,59 @@ inp.addEventListener(‘keydown’, e => { if(e.key===‘Enter’){e.preventDefa
 // ── Tab bar ───────────────────────────────────────────────────────────────
 let activeTab = ‘projects’;
 
+let taskFilters = {status:‘all’, prio:‘all’, proj:‘all’};
+
+function setTaskFilter(type, val) {
+taskFilters[type] = val;
+if(type===‘proj’) {
+document.querySelectorAll(’.proj-chip’).forEach(ch =>
+ch.classList.toggle(‘on’, ch.getAttribute(‘data-proj’)===val));
+} else if(type===‘prio’) {
+document.getElementById(‘filter-bar-prio’).querySelectorAll(’[data-prio]’).forEach(ch =>
+ch.classList.toggle(‘on’, ch.getAttribute(‘data-prio’)===val));
+} else {
+document.getElementById(‘filter-bar-status’).querySelectorAll(’[data-status]’).forEach(ch =>
+ch.classList.toggle(‘on’, ch.getAttribute(‘data-status’)===val));
+}
+renderTasksAll();
+}
+
+function buildProjFilterBar() {
+const bar = document.getElementById(‘filter-bar-proj’); if(!bar) return;
+const allLabel = lang===‘cs’?‘Vše’:‘All’;
+const chips = [{id:‘all’, name:allLabel},…projects.map(p=>({id:p.id,name:p.name||’—’,status:p.status}))];
+bar.innerHTML = chips.map(p=>{
+const dot = p.id!==‘all’?`<span style="width:6px;height:6px;border-radius:50%;background:var(--dot-${p.status});flex-shrink:0;display:inline-block"></span>`:’’;
+return `<button class="proj-chip${taskFilters.proj===p.id?' on':''}" data-proj="${p.id}" onclick="setTaskFilter('proj','${p.id}')">${dot}${escAttr(p.name)}</button>`;
+}).join(’’);
+}
+
+function escAttr(s){const d=document.createElement(‘div’);d.textContent=s||’’;return d.innerHTML;}
+
 function renderTasksAll() {
 const el = document.getElementById(‘tasks-all-body’);
 const l = ll();
-// collect all tasks across projects, filter incomplete
+buildProjFilterBar();
+// refresh status seg labels
+const sb=document.getElementById(‘filter-bar-status’);
+if(sb){const chips=[…sb.querySelectorAll(’[data-status]’)];
+const lbls=lang===‘cs’?[‘Vše’,‘Nesplněné’,‘Splněné’]:[‘All’,‘Open’,‘Done’];
+chips.forEach((ch,i)=>{if(lbls[i])ch.textContent=lbls[i];ch.classList.toggle(‘on’,ch.getAttribute(‘data-status’)===taskFilters.status);});}
+// refresh prio seg
+const pb=document.getElementById(‘filter-bar-prio’);
+if(pb){const allChip=pb.querySelector(’[data-prio=“all”]’);
+if(allChip)allChip.textContent=lang===‘cs’?‘Vše’:‘All’;
+pb.querySelectorAll(’[data-prio]’).forEach(ch=>ch.classList.toggle(‘on’,ch.getAttribute(‘data-prio’)===taskFilters.prio));}
 const prioOrder = { hi: 0, med: 1, lo: 2 };
-// group by project
 const groups = [];
 projects.forEach(p => {
-const tasks = (p.tasks || []).filter(t => !t.done);
+if(taskFilters.proj !== ‘all’ && p.id !== taskFilters.proj) return;
+let tasks = (p.tasks || []);
+// filter by status
+if(taskFilters.status === ‘open’) tasks = tasks.filter(t => !t.done);
+else if(taskFilters.status === ‘done’) tasks = tasks.filter(t => t.done);
+// filter by prio
+if(taskFilters.prio !== ‘all’) tasks = tasks.filter(t => (t.prio||‘med’) === taskFilters.prio);
 if (!tasks.length) return;
 // sort within group: hi first, then med, then lo, then no deadline
 const sorted = […tasks].sort((a, b) => {
@@ -1394,6 +1464,10 @@ document.getElementById(‘tab-bar’).style.display = action === ‘hide’ ? �
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
+// set initial screen states
+document.getElementById(‘s-list’).className=‘screen active’;
+document.getElementById(‘s-tasks’).className=‘screen’;
+document.getElementById(‘s-detail’).className=‘screen’;
 applyTheme();applyLang();renderTabs();renderList();
 </script>
 
