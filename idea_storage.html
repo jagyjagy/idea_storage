@@ -281,6 +281,9 @@ html{height:100%;overflow:hidden}body{height:100%;font-family:var(--sans);backgr
     <span class="topbar-title">Idea <em>Storage</em></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
+    <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
+      <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    </button>
   </div>
   <div class="search-wrap"><input class="search-input" id="search-input" type="search" oninput="renderList()"></div>
   <div class="tabs" id="tabs-row"></div>
@@ -583,10 +586,62 @@ html{height:100%;overflow:hidden}body{height:100%;font-family:var(--sans);backgr
   <div class="field"><label id="fl-impr-txt">Nápad</label><textarea id="f-impr-txt" style="min-height:80px"></textarea></div>
   <div class="sh-btns"><button class="btn-c" onclick="cs('ov-impr')" id="bc-impr">Zrušit</button><button class="btn-p" onclick="saveImprSheet()" id="bs-impr">Přidat</button></div>
 </div></div></div>
+<!-- settings sheet -->
+<div class="overlay" id="ov-settings" onclick="ovc(event,'ov-settings')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
+  <div class="sh-title" id="sh-settings-t">Nastavení</div>
+
+  <!-- Theme -->
+
+  <div style="margin-bottom:18px">
+    <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" id="set-theme-lbl">Vzhled</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="setTheme('light')" id="set-light" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">☀️ Světlý</button>
+      <button onclick="setTheme('dark')" id="set-dark" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">🌙 Tmavý</button>
+      <button onclick="setTheme('auto')" id="set-auto" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)" id="set-auto">⚙️ Auto</button>
+    </div>
+  </div>
+
+  <!-- Language -->
+
+  <div style="margin-bottom:18px">
+    <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" id="set-lang-lbl">Jazyk</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="setLang('cs')" id="set-cs" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">🇨🇿 Čeština</button>
+      <button onclick="setLang('en')" id="set-en" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">🇬🇧 English</button>
+    </div>
+  </div>
+
+  <!-- Data -->
+
+  <div style="margin-bottom:18px">
+    <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" id="set-data-lbl">Data</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="exportAllData()" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)" id="set-export-btn">📤 Export JSON</button>
+      <label style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2);text-align:center;display:flex;align-items:center;justify-content:center" id="set-import-btn">
+        📥 Import JSON
+        <input type="file" accept=".json" onchange="importAllData(event)" style="display:none">
+      </label>
+    </div>
+  </div>
+
+  <!-- Version -->
+
+  <div style="border-top:0.5px solid var(--border);padding-top:16px;text-align:center">
+    <div style="font-family:var(--serif);font-size:18px;font-style:italic;font-weight:300;color:var(--text2);margin-bottom:4px">Idea <em>Storage</em></div>
+    <div style="font-size:12px;color:var(--text3);font-family:var(--sans)" id="ver-string"></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:var(--sans)" id="ver-projects-count"></div>
+  </div>
+
+  <div style="margin-top:20px"><button class="btn-c" style="width:100%" onclick="cs('ov-settings')" id="bc-settings">Zavřít</button></div>
+</div></div></div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 // ── i18n ──────────────────────────────────────────────────────────────────
+const APP_VERSION = '0.8.0';
+const APP_BUILD = '2026-05-16';
+
 const L={
 cs:{
   langBtn:'EN',back:'Zpět',fabLbl:'Nový nápad',searchPh:'Hledat...',
@@ -1245,6 +1300,7 @@ if(type===‘res’){clr([‘f-res-name’,‘f-res-note’]);document.getElemen
 if(type===‘task’){clr([‘f-task-txt’,‘f-task-who’,‘f-task-con’,‘f-task-dl’]);document.getElementById(‘f-task-prio’).value=‘med’;openOv(‘ov-task’);foc(‘f-task-txt’);}
 if(type===‘cl’){clr([‘f-cl-txt’]);openOv(‘ov-cl’);foc(‘f-cl-txt’);}
 if(type===‘del’)openOv(‘ov-del’);
+if(type===‘settings’){openSettings();return;}
 if(type===‘task-global’){openGlobalTaskSheet();return;}
 if(type===‘fin’){clr([‘f-fin-name’,‘f-fin-amount’,‘f-fin-note’]);document.getElementById(‘f-fin-subtype’).value=‘sw’;document.getElementById(‘f-fin-freq’).value=‘monthly’;openOv(‘ov-fin’);foc(‘f-fin-name’);return;}
 if(type===‘impr’){
@@ -1545,6 +1601,68 @@ document.getElementById(‘tab-bar’).style.display = action === ‘hide’ ? �
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
+// ── Settings ─────────────────────────────────────────────────────────────
+function openSettings(){
+// update active theme buttons
+[‘light’,‘dark’,‘auto’].forEach(t=>{
+const btn=document.getElementById(‘set-’+t);
+if(btn) btn.style.background=theme===t?‘var(–accent)’:‘var(–card2)’,
+btn.style.color=theme===t?‘var(–bg)’:‘var(–text2)’,
+btn.style.borderColor=theme===t?‘var(–accent)’:‘var(–border)’;
+});
+// update active lang buttons
+[‘cs’,‘en’].forEach(l=>{
+const btn=document.getElementById(‘set-’+l);
+if(btn) btn.style.background=lang===l?‘var(–accent)’:‘var(–card2)’,
+btn.style.color=lang===l?‘var(–bg)’:‘var(–text2)’,
+btn.style.borderColor=lang===l?‘var(–accent)’:‘var(–border)’;
+});
+// version string
+const vs=document.getElementById(‘ver-string’);
+if(vs) vs.textContent=’Verze ‘+APP_VERSION+’ · ‘+APP_BUILD;
+const pc=document.getElementById(‘ver-projects-count’);
+if(pc) pc.textContent=projects.length+’ ‘+(lang===‘cs’?‘projektů’:‘projects’)+’ · ‘+projects.reduce((s,p)=>(p.tasks||[]).length+s,0)+’ ’+(lang===‘cs’?‘úkolů’:‘tasks’);
+// labels
+const sl=document.getElementById(‘sh-settings-t’);if(sl)sl.textContent=lang===‘cs’?‘Nastavení’:‘Settings’;
+const tl=document.getElementById(‘set-theme-lbl’);if(tl)tl.textContent=lang===‘cs’?‘Vzhled’:‘Appearance’;
+const ll=document.getElementById(‘set-lang-lbl’);if(ll)ll.textContent=lang===‘cs’?‘Jazyk’:‘Language’;
+const dl=document.getElementById(‘set-data-lbl’);if(dl)dl.textContent=lang===‘cs’?‘Data’:‘Data’;
+const eb=document.getElementById(‘set-export-btn’);if(eb)eb.textContent=lang===‘cs’?‘📤 Export JSON’:‘📤 Export JSON’;
+const ib=document.getElementById(‘set-import-btn’);if(ib)ib.childNodes[0].textContent=lang===‘cs’?‘📥 Import JSON’:‘📥 Import JSON’;
+const cb=document.getElementById(‘bc-settings’);if(cb)cb.textContent=lang===‘cs’?‘Zavřít’:‘Close’;
+openOv(‘ov-settings’);
+}
+
+function setTheme(t){
+theme=t;localStorage.setItem(‘is-theme’,t);applyTheme();openSettings();
+}
+
+function setLang(l){
+lang=l;localStorage.setItem(‘is-lang’,l);applyLang();renderTabs();renderList();
+if(curId){const p=projects.find(x=>x.id===curId);if(p)renderDetail(p);}
+openSettings();
+}
+
+function exportAllData(){
+const data=JSON.stringify({version:APP_VERSION,exported:new Date().toISOString(),projects},null,2);
+navigator.clipboard.writeText(data).then(()=>showToast(lang===‘cs’?‘JSON zkopírováno ✓’:‘JSON copied ✓’));
+}
+
+function importAllData(e){
+const file=e.target.files[0];if(!file)return;
+const reader=new FileReader();
+reader.onload=ev=>{
+try{
+const data=JSON.parse(ev.target.result);
+if(data.projects&&Array.isArray(data.projects)){
+projects=data.projects;saveD(projects);renderList();cs(‘ov-settings’);
+showToast(lang===‘cs’?‘Importováno ✓’:‘Imported ✓’);
+}
+}catch(err){showToast(lang===‘cs’?‘Chyba importu’:‘Import error’);}
+};
+reader.readAsText(file);
+}
+
 // ── Quick note ───────────────────────────────────────────────────────────
 function toggleQuickNote(){
 const wrap=document.getElementById(‘d-quicknote-wrap’);
