@@ -39,9 +39,9 @@
   --sh:0 1px 3px rgba(0,0,0,0.2),0 4px 16px rgba(0,0,0,0.15);
   --sh-lg:0 8px 32px rgba(0,0,0,0.35),0 2px 8px rgba(0,0,0,0.2);
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}
-#app{width:100%;max-width:430px;height:100svh;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;isolation:isolate;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role="button"]{touch-action:manipulation;cursor:pointer;}
+#app{width:100%;max-width:430px;height:100vh;height:100svh;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;}
 
 /* screens */
 .screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(–bg);overflow:hidden}
@@ -278,7 +278,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v0.9</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -415,7 +415,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v0.9</span></span>
     <button class="icon-btn" id="theme-btn3" onclick="toggleTheme()">☀️</button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
   </div>
