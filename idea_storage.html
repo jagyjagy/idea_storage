@@ -40,8 +40,8 @@
   --sh-lg:0 8px 32px rgba(0,0,0,0.35),0 2px 8px rgba(0,0,0,0.2);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{height:100%;overflow:hidden}body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;overflow:hidden;position:fixed;width:100%;top:0;left:0}
-#app{width:100%;max-width:430px;height:100%;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative}
+html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}
+#app{width:100%;max-width:430px;height:100svh;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;isolation:isolate;}
 
 /* screens */
 .screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(–bg);overflow:hidden}
@@ -1691,7 +1691,6 @@ const ta=document.getElementById(‘d-quicknote’);
 if(ta)ta.placeholder=lang===‘cs’?‘Rychlý nápad… (Enter = přidat)’:‘Quick note… (Enter = add)’;
 }
 
-// set initial screen states
 // set initial screen states
 document.getElementById(‘s-list’).className=‘screen active’;
 document.getElementById(‘s-tasks’).className=‘screen’;
