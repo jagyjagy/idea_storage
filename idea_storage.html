@@ -6,12 +6,18 @@
 <script>
   // Set theme before page renders to prevent flash
   (function(){
-    var t=localStorage.getItem('is-theme');
-    // migrate: if was 'auto', reset to 'light'
-    if(!t||t==='auto'){t='light';localStorage.setItem('is-theme','light');}
-    var dark=t==='dark';
-    document.documentElement.setAttribute('data-theme',dark?'dark':'light');
-    document.documentElement.style.colorScheme=dark?'dark':'light';
+    // Always start light - dark only via manual toggle
+    var t=localStorage.getItem('is-theme')||'light';
+    if(t==='auto'||t==='dark'){
+      // reset to light - user must manually enable dark
+      t='light';localStorage.setItem('is-theme','light');
+    }
+    document.documentElement.setAttribute('data-theme','light');
+    document.documentElement.style.colorScheme='light';
+    // Force light colors directly - bypass any Safari dark mode
+    document.documentElement.style.backgroundColor='#F7F6F3';
+    document.documentElement.style.color='#0F0E0C';
+    document.write('<style>html,body,#app,.screen{background:#F7F6F3!important;color:#0F0E0C!important}</style>');
   })();
 </script>
 <meta name="color-scheme" content="only light">
@@ -24,6 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
+  filter:none!important;-webkit-filter:none!important;
   --bg:#F7F6F3;--card:#FFFFFF;--card2:#F2F1EE;--card3:#ECEAE5;
   --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.2);
   --text:#0F0E0C;--text2:#4A4844;--text3:#8A877F;--accent:#1C1B18;
@@ -82,8 +89,8 @@
 [data-theme=“dark”] .action-zone{background:#1a1918!important}
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-drag:none;-webkit-text-size-adjust:100%}
-html{height:-webkit-fill-available;-webkit-text-size-adjust:100%}body{min-height:100%;min-height:-webkit-fill-available;margin:0;padding:0;color-scheme:light;background:var(–bg)!important;}body{font-family:var(–sans);background:var(–bg);color:var(–text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role=“button”]{touch-action:manipulation;cursor:pointer;}
-#app{width:100%;max-width:430px;height:100vh;height:100svh;height:-webkit-fill-available;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;}
+html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!important;-webkit-filter:none!important}body{min-height:100%;min-height:-webkit-fill-available;margin:0;padding:0;color-scheme:light;background:var(–bg)!important;}body{font-family:var(–sans);background:var(–bg);color:var(–text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role=“button”]{touch-action:manipulation;cursor:pointer;}
+#app{width:100%;max-width:430px;height:100vh;height:100svh;height:-webkit-fill-available;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;filter:none!important;-webkit-filter:none!important;}
 
 /* screens */
 .screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(–bg)!important;overflow:hidden}
@@ -387,7 +394,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%}body{min-height
 
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v2.2</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v2.6</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -529,7 +536,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%}body{min-height
 
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v2.2</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v2.6</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
   </div>
@@ -749,6 +756,14 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%}body{min-height
     </div>
   </div>
 
+  <!-- Reset theme -->
+
+  <div style="margin-bottom:18px">
+    <button onclick="resetTheme()" style="width:100%;padding:11px;background:var(--red-s);color:var(--red);border:0.5px solid var(--red);border-radius:var(--r-sm);font-size:14px;font-family:var(--sans);cursor:pointer">
+      🔄 Resetovat téma (světlý)
+    </button>
+  </div>
+
   <!-- Version -->
 
   <div style="border-top:0.5px solid var(--border);padding-top:16px;text-align:center">
@@ -765,7 +780,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%}body{min-height
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '2.2.0';
+const APP_VERSION = '2.6.0';
 const APP_BUILD = '2026-05-16';
 
 const L={
@@ -878,6 +893,24 @@ function applyTheme(){
   const isDark=theme==='dark';
   document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
   document.documentElement.style.colorScheme=isDark?'dark':'light';
+  // Apply inline to override any Safari forced darkening
+  if(!isDark){
+    document.documentElement.style.filter='none';
+    document.documentElement.style.webkitFilter='none';
+    document.body&&(document.body.style.background='#F7F6F3');
+    document.body&&(document.body.style.color='#0F0E0C');
+    const app=document.getElementById('app');
+    if(app){app.style.background='#F7F6F3';app.style.filter='none';}
+    const screens=document.querySelectorAll('.screen.active');
+    screens.forEach(s=>{s.style.background='#F7F6F3';});
+  } else {
+    document.body&&(document.body.style.background='#111110');
+    document.body&&(document.body.style.color='#F5F2EB');
+    const app=document.getElementById('app');
+    if(app)app.style.background='#111110';
+    const screens=document.querySelectorAll('.screen.active');
+    screens.forEach(s=>{s.style.background='#111110';});
+  }
   const sunPaths = '<circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
   const moonPaths = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
   const iconPaths = isDark ? sunPaths : moonPaths;
@@ -1872,6 +1905,21 @@ function openSettings(){
   openOv('ov-settings');
 }
 
+function resetTheme(){
+  localStorage.removeItem('is-theme');
+  theme='light';
+  applyTheme();
+  // Force all key elements to light colors directly
+  const lightBg='#F7F6F3', lightCard='#FFFFFF', lightCard2='#F2F1EE', lightText='#0F0E0C';
+  document.documentElement.setAttribute('data-theme','light');
+  document.documentElement.style.cssText='background:'+lightBg+'!important;color:'+lightText+'!important;filter:none;-webkit-filter:none';
+  document.body.style.cssText='background:'+lightBg+'!important;color:'+lightText+'!important;filter:none;-webkit-filter:none';
+  const app=document.getElementById('app');
+  if(app)app.style.cssText='background:'+lightBg+'!important;filter:none;-webkit-filter:none';
+  showToast(lang==='cs'?'Téma resetováno ✓':'Theme reset ✓');
+  setTimeout(()=>location.reload(),1000);
+}
+
 function setTheme(t){
   theme=t;localStorage.setItem('is-theme',t);applyTheme();openSettings();
 }
@@ -1935,6 +1983,15 @@ document.getElementById('s-list').className='screen active';
 document.getElementById('s-tasks').className='screen';
 document.getElementById('s-detail').className='screen';
 applyTheme();applyLang();renderTabs();renderList();
+// Extra: force light mode inline after everything renders
+setTimeout(()=>{
+  if(theme!=='dark'){
+    document.body.style.background='#F7F6F3';
+    document.body.style.color='#0F0E0C';
+    const app=document.getElementById('app');
+    if(app)app.style.background='#F7F6F3';
+  }
+},100);
 
 // Firebase: load data and listen for changes
 async function initFirebase() {
