@@ -3,7 +3,9 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Idea Storage</title>
 <link rel="apple-touch-icon" href="idea_storage_icon.svg">
   <link rel="icon" type="image/svg+xml" href="idea_storage_icon.svg">
@@ -41,9 +43,9 @@
   --sh:0 1px 3px rgba(0,0,0,0.2),0 4px 16px rgba(0,0,0,0.15);
   --sh-lg:0 8px 32px rgba(0,0,0,0.35),0 2px 8px rgba(0,0,0,0.2);
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-drag:none}
-html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role="button"]{touch-action:manipulation;cursor:pointer;}
-#app{width:100%;max-width:430px;height:100vh;height:100svh;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-drag:none;-webkit-text-size-adjust:100%}
+html{height:-webkit-fill-available}body{min-height:100%;min-height:-webkit-fill-available;margin:0;padding:0;color-scheme:light dark}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role="button"]{touch-action:manipulation;cursor:pointer;}
+#app{width:100%;max-width:430px;height:100vh;height:100svh;height:-webkit-fill-available;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;}
 
 /* screens */
 .screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(–bg);overflow:hidden}
@@ -117,6 +119,9 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 
 /* det sections */
 .det-section{border-bottom:0.5px solid var(–border)}
+.action-zone{background:var(–action-bg,var(–card2));padding:4px 0 8px;border-bottom:2px solid var(–border)}
+.action-zone-label{font-size:10px;font-weight:600;color:var(–action-col,var(–text3));text-transform:uppercase;letter-spacing:.1em;padding:12px 16px 4px;display:flex;align-items:center;gap:6px}
+.planning-zone{background:var(–bg)}
 .det-sec-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0}
 .det-sec-label{font-size:11px;font-weight:500;color:var(–text3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
 .det-sec-label svg{width:13px;height:13px}
@@ -145,7 +150,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 
 /* checklist */
 .chk-list{padding:4px 0 2px}
-.chk-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:0.5px solid var(–border);position:relative}
+.chk-row{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(–card);border-radius:var(–r-sm);margin-bottom:5px;box-shadow:var(–sh)}
 .chk-row:last-child{border-bottom:none}
 .cb{width:18px;height:18px;border-radius:5px;border:1.5px solid var(–border2);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(–dur);background:none}
 .cb.chk{background:var(–blue);border-color:var(–blue)}
@@ -185,7 +190,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 .res-status{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px}
 
 /* tasks */
-.task-item{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-top:0.5px solid var(–border)}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(–card);border-radius:var(–r-sm);margin:0 16px 6px;box-shadow:var(–sh)}
 .t-check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(–border2);flex-shrink:0;cursor:pointer;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(–dur)}
 .t-check.chk{background:var(–blue);border-color:var(–blue)}
 .t-body{flex:1;min-width:0}
@@ -227,7 +232,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 .empty-serif{font-family:var(–serif);font-size:40px;font-style:italic;font-weight:300;color:var(–border2);margin-bottom:12px}
 
 /* tab bar */
-.tab-bar{position:absolute;bottom:0;left:0;right:0;background:var(–bg);border-top:0.5px solid var(–border);display:flex;z-index:25;padding-bottom:max(env(safe-area-inset-bottom), 16px)}
+.tab-bar{position:absolute;bottom:0;left:0;right:0;background:var(–bg);border-top:0.5px solid var(–border);display:flex;z-index:25;padding-bottom:max(env(safe-area-inset-bottom, 16px), 20px)}
 .tab-bar-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 10px;background:none;border:none;cursor:pointer;font-family:var(–sans);font-size:10px;font-weight:500;color:var(–text3);transition:color var(–dur),opacity var(–dur);letter-spacing:.03em;opacity:.45}
 .tab-bar-btn svg{width:22px;height:22px}
 .tab-bar-btn.on{color:var(–blue);opacity:1;font-weight:600}
@@ -267,6 +272,16 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 .fin-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.04em}
 .fin-amount{font-size:13px;font-weight:500;color:var(–text2);margin-top:2px}
 
+/* project theme colors */
+.proj-theme-blue{–pt:#0071E3;–pt-s:rgba(0,113,227,0.08)}
+.proj-theme-green{–pt:#1A7F37;–pt-s:rgba(26,127,55,0.08)}
+.proj-theme-pink{–pt:#DB2777;–pt-s:rgba(219,39,119,0.08)}
+.proj-theme-yellow{–pt:#B45309;–pt-s:rgba(180,83,9,0.09)}
+.proj-theme-purple{–pt:#7C3AED;–pt-s:rgba(124,58,237,0.09)}
+.proj-theme-orange{–pt:#C2410C;–pt-s:rgba(194,65,12,0.09)}
+.color-swatch{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
+.color-swatch.selected{border-color:var(–text);transform:scale(1.15)}
+.proj-card.has-theme{border-left:3px solid var(–pt,var(–blue))}
 /* status colors */
 .dot-spark{background:#A57CF9}.dot-exploring{background:#D4A72C}.dot-active{background:#3FB950}.dot-delegated{background:#4C9EEB}.dot-done{background:#8A877F}
 .pill-spark{background:var(–purple-s);color:var(–purple)}.pill-exploring{background:var(–amber-s);color:var(–amber)}.pill-active{background:var(–green-s);color:var(–green)}.pill-delegated{background:var(–blue-s);color:var(–blue)}.pill-done{background:var(–card2);color:var(–text2)}
@@ -334,7 +349,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v1.5</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v1.8</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -368,7 +383,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
     </button>
   </div>
   <div class="detail-scroll">
-    <div class="detail-hero">
+    <div class="detail-hero" id="detail-hero-el">
       <div class="stage-wrap">
         <button class="stage-pill" id="stage-pill" onclick="toggleDD()">
           <span id="stage-lbl"></span>
@@ -389,83 +404,84 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
     </button>
   </div>
 </div>
-<!-- tasks -->
-<div class="det-section">
-  <div class="det-sec-head">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      <span id="lbl-tasks">Úkoly</span>
-    </span>
-    <button class="add-lnk" onclick="openSheet('task')" id="add-task-btn">+ přidat</button>
+<!-- ACTION ZONE: Úkoly + Nápady -->
+<div class="action-zone" id="action-zone">
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <span id="lbl-tasks">Úkoly</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('task')" id="add-task-btn">+ přidat</button>
+    </div>
+    <div id="task-list"></div>
   </div>
-  <div id="task-list"></div>
-</div>
-<!-- improvements -->
-<div class="det-section" id="sec-improvements">
-  <div class="det-sec-head">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <span id="lbl-impr">Nápady na zlepšení</span>
-    </span>
-    <button class="add-lnk" onclick="openSheet('impr')" id="add-impr-btn">+ přidat</button>
+  <div class="det-section" id="sec-improvements" style="border-bottom:none">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span id="lbl-impr">Nápady na zlepšení</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('impr')" id="add-impr-btn">+ přidat</button>
+    </div>
+    <div id="impr-list"></div>
   </div>
-  <div id="impr-list"></div>
 </div>
-<!-- think blocks as tabs -->
-<div class="det-section" style="padding-bottom:0">
-  <div class="det-sec-head" style="padding-bottom:8px">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      <span id="lbl-think">Rozpad myšlenky</span>
-    </span>
+
+<!-- PLANNING ZONE: Detail -->
+<div class="planning-zone">
+  <div class="det-section" style="padding-bottom:0">
+    <div class="det-sec-head" style="padding-bottom:8px">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span id="lbl-think">Rozpad myšlenky</span>
+      </span>
+    </div>
+    <div class="think-tab-bar" id="think-tab-bar"></div>
+    <div id="think-panel-content"></div>
   </div>
-  <div class="think-tab-bar" id="think-tab-bar"></div>
-  <div id="think-panel-content"></div>
-</div>
-<!-- insights -->
-<div class="det-section">
-  <div class="det-sec-head">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-      <span id="lbl-ins">Insights</span>
-    </span>
-    <button class="add-lnk" onclick="openSheet('ins')" id="add-ins-btn">+ přidat</button>
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        <span id="lbl-ins">Zápisky z terénu</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('ins')" id="add-ins-btn">+ přidat zápis</button>
+    </div>
+    <div id="ins-list"></div>
   </div>
-  <div id="ins-list"></div>
-</div>
-<!-- costs -->
-<div class="det-section">
-  <div class="det-sec-head">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      <span id="lbl-costs">Náklady</span>
-    </span>
-    <button class="add-lnk" onclick="openSheet('fin')" id="add-fin-btn">+ přidat</button>
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <span id="lbl-costs">Náklady</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('fin')" id="add-fin-btn">+ přidat</button>
+    </div>
+    <div id="fin-list"></div>
   </div>
-  <div id="fin-list"></div>
-</div>
-<!-- resources -->
-<div class="det-section">
-  <div class="det-sec-head">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-      <span id="lbl-res">Zdroje</span>
-    </span>
-    <button class="add-lnk" onclick="openSheet('res')" id="add-res-btn">+ přidat</button>
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        <span id="lbl-res">Zdroje</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('res')" id="add-res-btn">+ přidat</button>
+    </div>
+    <div id="res-list"></div>
   </div>
-  <div id="res-list"></div>
-</div>
-<!-- changelog -->
-<div class="det-section" style="border-bottom:none">
-  <div class="det-sec-head">
-    <span class="det-sec-label">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <span id="lbl-cl">Changelog</span>
-    </span>
-    <button class="add-lnk" onclick="openSheet('cl')" id="add-cl-btn">+ záznam</button>
+  <div class="det-section" style="border-bottom:none">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="lbl-cl">Changelog</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('cl')" id="add-cl-btn">+ záznam</button>
+    </div>
+    <div id="cl-list"></div>
   </div>
-  <div id="cl-list"></div>
 </div>
+</div><!-- end planning-zone -->
 ```
 
   </div>
@@ -475,8 +491,8 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v1.5</span></span>
-    <button class="icon-btn" id="theme-btn3" onclick="toggleTheme()">☀️</button>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v1.8</span></span>
+    <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
   </div>
   <div class="filter-wrap">
@@ -536,6 +552,17 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
   <div class="sh-title" id="sh-proj-t">Nový nápad</div>
   <div class="field"><label id="fl-name">Název</label><input id="f-name" type="text"></div>
   <div class="field"><label id="fl-desc">Popis</label><textarea id="f-desc"></textarea></div>
+  <div class="field">
+    <label id="fl-color">Barva</label>
+    <div style="display:flex;gap:10px;align-items:center;padding:4px 0" id="color-picker">
+      <div class="color-swatch selected" data-color="blue" style="background:#0071E3" onclick="selectColor('blue',this)"></div>
+      <div class="color-swatch" data-color="green" style="background:#1A7F37" onclick="selectColor('green',this)"></div>
+      <div class="color-swatch" data-color="pink" style="background:#DB2777" onclick="selectColor('pink',this)"></div>
+      <div class="color-swatch" data-color="yellow" style="background:#B45309" onclick="selectColor('yellow',this)"></div>
+      <div class="color-swatch" data-color="purple" style="background:#7C3AED" onclick="selectColor('purple',this)"></div>
+      <div class="color-swatch" data-color="orange" style="background:#C2410C" onclick="selectColor('orange',this)"></div>
+    </div>
+  </div>
   <div class="sh-btns"><button class="btn-c" onclick="cs('ov-proj')" id="bc1">Zrušit</button><button class="btn-p" onclick="saveProj()" id="bs1">Uložit</button></div>
 </div></div></div>
 
@@ -700,7 +727,7 @@ html,body{height:100%;margin:0;padding:0}body{font-family:var(--sans);background
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '1.5.0';
+const APP_VERSION = '1.8.1';
 const APP_BUILD = '2026-05-16';
 
 const L={
@@ -844,7 +871,7 @@ function applyLang(){
   sp('search-input',l.searchPh);
   s('tbb-proj-lbl',lang==='cs'?'Projekty':'Projects');
   s('tbb-tasks-lbl',lang==='cs'?'Úkoly':'Tasks');
-  s('lbl-think',l.lblThink);s('lbl-ins',l.lblIns);s('lbl-costs',l.lblCosts||'Náklady');s('lbl-res',l.lblRes);s('lbl-tasks',l.lblTasks);s('lbl-cl',l.lblCl);s('lbl-impr',l.lblImpr);
+  s('lbl-think',l.lblThink);s('fl-color',lang==='cs'?'Barva':'Color');s('lbl-ins',l.lblIns);s('lbl-costs',l.lblCosts||'Náklady');s('lbl-res',l.lblRes);s('lbl-tasks',l.lblTasks);s('lbl-cl',l.lblCl);s('lbl-impr',l.lblImpr);
   s('add-ins-btn',l.addIns);s('add-res-btn',l.addRes);s('add-task-btn',l.addTask);s('add-cl-btn',l.addCl);s('add-impr-btn',l.addImpr);
   s('sh-proj-t',l.shProjT);s('fl-name',l.flName);s('fl-desc',l.flDesc);
   s('sh-ins-t',l.shInsT);s('fl-ins-type',l.flInsType);s('fl-ins-txt',l.flInsTxt);
@@ -902,7 +929,7 @@ function renderList(){
   let ps=projects;
   if(activeFilter!=='all')ps=ps.filter(p=>p.status===activeFilter);
   if(q)ps=ps.filter(p=>(p.name||'').toLowerCase().includes(q)||(p.desc||'').toLowerCase().includes(q));
-  const quoteHtml = `<div style="font-family:var(--serif);font-size:15px;font-style:italic;font-weight:300;line-height:1.6;letter-spacing:-.01em;color:var(--text3);opacity:1;max-width:280px;margin:0 auto;text-align:center">Nápad, co neopustí putýku,<br>je k hovnu.<span style="display:block;font-style:normal;font-size:11px;font-family:var(--sans);letter-spacing:.06em;margin-top:5px;opacity:.8">— Jagy<\/span><\/div>`;
+  const quoteHtml = `<div style="font-family:var(--serif);font-size:15px;font-style:italic;font-weight:300;line-height:1.6;letter-spacing:-.01em;color:var(--text3);max-width:280px;margin:0 auto;text-align:center">Ideas are cheap.<br>Execution is everything.<span style="display:block;font-style:normal;font-size:11px;font-family:var(--sans);letter-spacing:.06em;margin-top:5px;opacity:.8">— Chris Sacca</span></div>`
   if(!ps.length){
     el.innerHTML=`<div class="empty"><div class="empty-serif">idea.<\/div>${quoteHtml}<\/div>`;
     return;
@@ -977,6 +1004,13 @@ function renderDetail(p){
   const de=document.getElementById('d-desc');de.value=p.desc||'';ar(de);de.placeholder=l.flDesc;
   const ue=document.getElementById('d-url');ue.value=p.url||'';ue.placeholder=l.urlPh;
   document.getElementById('url-open-btn').style.display=p.url?'flex':'none';
+  // Apply color theme to action zone and hero
+  const _themeColors={blue:{bg:'rgba(0,113,227,0.08)',col:'#0071E3'},green:{bg:'rgba(26,127,55,0.08)',col:'#1A7F37'},pink:{bg:'rgba(219,39,119,0.08)',col:'#DB2777'},yellow:{bg:'rgba(180,83,9,0.08)',col:'#B45309'},purple:{bg:'rgba(124,58,237,0.08)',col:'#7C3AED'},orange:{bg:'rgba(194,65,12,0.08)',col:'#C2410C'}};
+  const _theme=p.color&&_themeColors[p.color]?_themeColors[p.color]:null;
+  const _heroEl=document.getElementById('detail-hero-el');
+  const _actionEl=document.getElementById('action-zone');
+  if(_heroEl)_heroEl.style.background=_theme?_theme.bg:'';
+  if(_actionEl){_actionEl.style.background=_theme?_theme.bg:'';_actionEl.style.borderBottomColor=_theme?_theme.col+'55':'var(--border)';}
   renderImpr(p);renderThink(p);renderIns(p);renderFin(p);renderRes(p);renderTasks(p);renderCl(p);
 
 }
@@ -1005,7 +1039,7 @@ function renderImpr(p){
   const el=document.getElementById('impr-list');const l=ll();
   p.improvements=p.improvements||[];
   if(!p.improvements.length){el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${l.emptyImpr}<\/div>`;return;}
-  el.innerHTML=`<div style="padding:0 16px 8px"><div class="chk-list">`+
+  el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list">`+
     p.improvements.map(it=>`<div class="chk-row" id="impr-row-${it.id}">
       <div class="cb${it.done?' chk':''}" onclick="togImpr('${it.id}')">
         ${it.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
@@ -1467,10 +1501,20 @@ function saveImprSheet(){
   addImprItem(text);cs('ov-impr');
 }
 
+let _selectedColor = 'blue';
+function selectColor(color, el){
+  _selectedColor = color;
+  document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
 function saveProj(){
   const name=document.getElementById('f-name').value.trim();if(!name)return;
-  const p={id:uid(),name,desc:document.getElementById('f-desc').value.trim(),status:'spark',url:'',think:{},checkData:{},improvements:[],insights:[],resources:[],finances:[],tasks:[],changelog:[{id:uid(),text:'Spark',date:new Date().toISOString()}]};
-  projects.unshift(p);saveD(projects);cs('ov-proj');renderList();
+  const p={id:uid(),name,desc:document.getElementById('f-desc').value.trim(),status:'spark',color:_selectedColor,url:'',think:{},checkData:{},improvements:[],insights:[],resources:[],finances:[],tasks:[],changelog:[{id:uid(),text:'Spark',date:new Date().toISOString()}]};
+  projects.unshift(p);saveD(projects);cs('ov-proj');
+  _selectedColor='blue'; // reset
+  document.querySelectorAll('.color-swatch').forEach((s,i)=>s.classList.toggle('selected',i===0));
+  renderList();
 }
 function saveIns(){
   const text=document.getElementById('f-ins-txt').value.trim();if(!text)return;
