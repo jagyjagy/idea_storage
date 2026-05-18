@@ -156,6 +156,9 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 .det-sec-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
 .det-sec-label svg{width:13px;height:13px}
 .add-lnk{font-size:13px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:0}
+.add-bottom{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:10px 16px 4px;font-weight:500;letter-spacing:.01em;margin:0}
+.add-bottom::before{content:"+";font-size:15px;font-weight:400;line-height:1}
+.add-bottom:hover{color:var(--text)}
 
 /* export btn */
 .export-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text2);background:var(--card2);border:0.5px solid var(--border);border-radius:var(--r-xs);padding:5px 10px;cursor:pointer;font-family:var(--sans)}
@@ -287,6 +290,26 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 
 /* tasks filter — segmented control */
 .filter-wrap{flex-shrink:0;padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;flex-direction:column;gap:8px}
+/* Big type segment switcher */
+.ttype-bar{display:flex;gap:5px;padding:10px 16px 0;background:var(--bg);flex-shrink:0}
+.ttype-btn{flex:1;padding:9px 4px;background:var(--card2);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s;letter-spacing:.01em}
+.ttype-btn.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.ttype-btn:active{transform:scale(.96)}
+/* Elegant filter cell */
+.filter-cell{margin:10px 16px 8px;padding:10px 12px;background:var(--card2);border-radius:12px;border:1px solid var(--border);display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.filter-row-top{display:flex;align-items:center;gap:8px}
+.filter-row-prio{display:flex;align-items:center;gap:8px;font-size:12px}
+.filter-label{font-size:10px;color:var(--text3);font-family:var(--sans);font-weight:500;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.search-iconbtn{width:32px;height:32px;border-radius:8px;background:var(--card);border:1px solid var(--border);cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.search-iconbtn:hover{color:var(--text);background:var(--card3)}
+.search-iconbtn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.search-task-input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;font-family:var(--sans);color:var(--text);outline:none;width:100%}
+.search-task-input:focus{border-color:var(--blue)}
+.prio-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.prio-hi-dot{background:#DC2626}
+.prio-med-dot{background:#94A3B8}
+.prio-lo-dot{background:#3B82F6}
+.seg-prio .seg-btn{padding:5px 9px;font-size:11px}
 .seg-control{display:flex;background:var(--card2);border-radius:9px;padding:2px;gap:2px;flex-shrink:0}
 .seg-btn{flex:1;padding:6px 10px;border:none;background:none;border-radius:7px;font-size:12px;font-weight:500;font-family:var(--sans);color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap;text-align:center}
 .seg-btn.on{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.1),0 0.5px 0 rgba(0,0,0,0.05)}
@@ -379,7 +402,7 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 <!-- LIST -->
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.9</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v4.0</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -447,9 +470,9 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
             <span id="lbl-tasks">Úkoly</span>
           </span>
-          <button class="add-lnk" onclick="openSheet('task')" id="add-task-btn">+ přidat</button>
         </div>
         <div id="task-list"></div>
+        <button class="add-bottom" onclick="openSheet('task')" id="add-task-btn-b">přidat úkol</button>
       </div>
       <div class="det-section" id="sec-improvements" style="border-bottom:none">
         <div class="det-sec-head">
@@ -457,9 +480,31 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <span id="lbl-impr">Nápady na zlepšení</span>
           </span>
-          <button class="add-lnk" onclick="openSheet('impr')" id="add-impr-btn">+ přidat</button>
         </div>
         <div id="impr-list"></div>
+        <button class="add-bottom" onclick="openSheet('impr')" id="add-impr-btn-b">přidat nápad</button>
+      </div>
+      <!-- Bugfixy -->
+      <div class="det-section" style="border-bottom:none">
+        <div class="det-sec-head">
+          <span class="det-sec-label">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 14l2 2 4-4"/></svg>
+            <span id="lbl-bugs">Bugfixy</span>
+          </span>
+        </div>
+        <div id="bug-list"></div>
+        <button class="add-bottom" onclick="openSheet('bug')" id="add-bug-btn">přidat bug</button>
+      </div>
+      <!-- Updaty -->
+      <div class="det-section" style="border-bottom:none">
+        <div class="det-sec-head">
+          <span class="det-sec-label">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>
+            <span id="lbl-updates">Updaty</span>
+          </span>
+        </div>
+        <div id="update-list"></div>
+        <button class="add-bottom" onclick="openSheet('update')" id="add-update-btn">přidat update</button>
       </div>
     </div>
 
@@ -484,6 +529,7 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
           <button class="add-lnk" onclick="openSheet('ins')" id="add-ins-btn">+ přidat zápis</button>
         </div>
         <div id="ins-list"></div>
+        <button class="add-bottom" onclick="openSheet('ins')" id="add-ins-btn-b">přidat zápis</button>
       </div>
       <div class="det-section">
         <div class="det-sec-head">
@@ -491,9 +537,9 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
             <span id="lbl-costs">Náklady</span>
           </span>
-          <button class="add-lnk" onclick="openSheet('fin')" id="add-fin-btn">+ přidat</button>
         </div>
         <div id="fin-list"></div>
+        <button class="add-bottom" onclick="openSheet('fin')" id="add-fin-btn-b">přidat náklad</button>
       </div>
       <div class="det-section">
         <div class="det-sec-head">
@@ -501,9 +547,9 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
             <span id="lbl-res">Zdroje</span>
           </span>
-          <button class="add-lnk" onclick="openSheet('res')" id="add-res-btn">+ přidat</button>
         </div>
         <div id="res-list"></div>
+        <button class="add-bottom" onclick="openSheet('res')" id="add-res-btn-b">přidat zdroj</button>
       </div>
       <div class="det-section" style="border-bottom:none">
         <div class="det-sec-head">
@@ -511,9 +557,10 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span id="lbl-cl">Changelog</span>
           </span>
-          <button class="add-lnk" onclick="openSheet('cl')" id="add-cl-btn">+ záznam</button>
+          
         </div>
         <div id="cl-list"></div>
+        <button class="add-bottom" onclick="openSheet('cl')" id="add-cl-btn-b">přidat záznam</button>
       </div>
     </div>
     </div><!-- end planning-zone -->
@@ -522,29 +569,53 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 <!-- TASKS ALL SCREEN -->
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.9</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v4.0</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
   </div>
-  <div class="filter-wrap">
-    <div style="display:flex;gap:8px;align-items:center">
+  <!-- BIG type segment switcher -->
+  <div class="ttype-bar">
+    <button class="ttype-btn on" data-type="tasks" onclick="setTaskType('tasks')" id="ttype-tasks">
+      <span id="ttype-tasks-lbl">Úkoly</span>
+    </button>
+    <button class="ttype-btn" data-type="ideas" onclick="setTaskType('ideas')" id="ttype-ideas">
+      <span id="ttype-ideas-lbl">Nápady</span>
+    </button>
+    <button class="ttype-btn" data-type="bugs" onclick="setTaskType('bugs')" id="ttype-bugs">
+      <span id="ttype-bugs-lbl">Bugfixy</span>
+    </button>
+    <button class="ttype-btn" data-type="updates" onclick="setTaskType('updates')" id="ttype-updates">
+      <span id="ttype-updates-lbl">Updaty</span>
+    </button>
+  </div>
+
+  <!-- Elegant filter cell -->
+  <div class="filter-cell">
+    <div class="filter-row-top">
       <div class="seg-control" id="filter-bar-status" style="flex:1">
-        <button class="seg-btn on" data-status="all" onclick="setTaskFilter('status','all')">Vše</button>
-        <button class="seg-btn" data-status="open" onclick="setTaskFilter('status','open')">Nesplněné</button>
-        <button class="seg-btn" data-status="done" onclick="setTaskFilter('status','done')">Splněné</button>
+        <button class="seg-btn on" data-status="all" onclick="setTaskFilter('status','all')" id="fs-all">Vše</button>
+        <button class="seg-btn" data-status="open" onclick="setTaskFilter('status','open')" id="fs-open">Otevřené</button>
+        <button class="seg-btn" data-status="done" onclick="setTaskFilter('status','done')" id="fs-done">Hotové</button>
       </div>
-      <div class="seg-control" id="filter-bar-prio">
-        <button class="seg-btn on" data-prio="all" onclick="setTaskFilter('prio','all')" style="padding:6px 8px">Vše</button>
-        <button class="seg-btn" data-prio="hi" onclick="setTaskFilter('prio','hi')" style="padding:6px 8px">🔴</button>
-        <button class="seg-btn" data-prio="med" onclick="setTaskFilter('prio','med')" style="padding:6px 8px">⚪</button>
-        <button class="seg-btn" data-prio="lo" onclick="setTaskFilter('prio','lo')" style="padding:6px 8px">🔵</button>
+      <button class="search-iconbtn" id="search-toggle-btn" onclick="toggleTaskSearch()" title="Hledat">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <input type="text" class="search-task-input" id="search-task-input" placeholder="Hledat..." oninput="onTaskSearch(this.value)" onblur="onTaskSearchBlur()" style="display:none">
+    </div>
+    <div class="filter-row-prio" id="filter-row-prio">
+      <span class="filter-label">Priorita:</span>
+      <div class="seg-control seg-prio" id="filter-bar-prio">
+        <button class="seg-btn on" data-prio="all" onclick="setTaskFilter('prio','all')" id="fp-all">Vše</button>
+        <button class="seg-btn" data-prio="hi" onclick="setTaskFilter('prio','hi')"><span class="prio-dot prio-hi-dot"></span>Vys.</button>
+        <button class="seg-btn" data-prio="med" onclick="setTaskFilter('prio','med')"><span class="prio-dot prio-med-dot"></span>Stř.</button>
+        <button class="seg-btn" data-prio="lo" onclick="setTaskFilter('prio','lo')"><span class="prio-dot prio-lo-dot"></span>Níz.</button>
       </div>
     </div>
     <div class="proj-scroll" id="filter-bar-proj"></div>
   </div>
   <div class="tasks-all-body" id="tasks-all-body"></div>
-  <button class="fab" id="tasks-fab" onclick="openSheet('task-global')" style="display:none">
+  <button class="fab" id="tasks-fab" onclick="openTaskFab()" style="display:none">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     <span id="fab-task-lbl">Nový úkol</span>
   </button>
@@ -711,6 +782,18 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
   <div class="field"><label id="fl-impr-txt">Nápad</label><textarea id="f-impr-txt" style="min-height:80px"></textarea></div>
   <div class="sh-btns"><button class="btn-c" onclick="cs('ov-impr')" id="bc-impr">Zrušit</button><button class="btn-p" onclick="saveImprSheet()" id="bs-impr">Přidat</button></div>
 </div></div></div>
+
+<div class="overlay" id="ov-bug" onclick="ovc(event,'ov-bug')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
+  <div class="sh-title" id="sh-bug-t">Nový bugfix</div>
+  <div class="field"><label id="fl-bug">Popis bugu</label><textarea id="f-bug" style="min-height:80px" placeholder="Co je rozbité..."></textarea></div>
+  <div class="sh-btns"><button class="btn-c" onclick="cs('ov-bug')" id="bc-bug">Zrušit</button><button class="btn-p" onclick="saveBug()" id="bs-bug">Přidat</button></div>
+</div></div></div>
+
+<div class="overlay" id="ov-update" onclick="ovc(event,'ov-update')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
+  <div class="sh-title" id="sh-update-t">Nový update</div>
+  <div class="field"><label id="fl-update">Popis updatu</label><textarea id="f-update" style="min-height:80px" placeholder="Co se mění..."></textarea></div>
+  <div class="sh-btns"><button class="btn-c" onclick="cs('ov-update')" id="bc-update">Zrušit</button><button class="btn-p" onclick="saveUpdate()" id="bs-update">Přidat</button></div>
+</div></div></div>
 <!-- settings sheet -->
 <div class="overlay" id="ov-settings" onclick="ovc(event,'ov-settings')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
   <div class="sh-title" id="sh-settings-t">Nastavení</div>
@@ -799,7 +882,7 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '3.9.0';
+const APP_VERSION = '4.0.0';
 const APP_BUILD = '2026-05-16';
 
 const L={
@@ -1106,7 +1189,7 @@ function renderDetail(p){
   if(_colorBtn)_colorBtn.style.background=_theme?_theme.col:'#0071E3';
   const colorBtn=document.getElementById('detail-color-btn');
   if(colorBtn)colorBtn.style.background=_theme?_theme.col:'#0071E3';
-  renderImpr(p);renderThink(p);renderIns(p);renderFin(p);renderRes(p);renderTasks(p);renderCl(p);
+  renderImpr(p);renderBugs(p);renderUpdates(p);renderThink(p);renderIns(p);renderFin(p);renderRes(p);renderTasks(p);renderCl(p);
 
 }
 
@@ -1130,6 +1213,108 @@ function goStage(idx){
 }
 
 // ── Improvements (first section) ──────────────────────────────────────────
+function renderBugs(p){
+  const el=document.getElementById('bug-list');
+  if(!el) return;
+  p.bugs=p.bugs||[];
+  if(!p.bugs.length){
+    const msg=lang==='cs'?'Žádné bugfixy':'No bugs';
+    el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${msg}<\/div>`;
+    return;
+  }
+  el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list">`+
+    p.bugs.map(it=>`<div class="chk-row" id="bug-row-${it.id}">
+      <div class="cb${it.done?' chk':''}" onclick="togBug('${it.id}')">
+        ${it.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
+      <\/div>
+      <span class="cb-lbl${it.done?' done':''}" onclick="togBug('${it.id}')">${esc(it.text)}<\/span>
+      <button class="cb-del" onclick="delBug('${it.id}')"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/><\/svg><\/button>
+    <\/div>`).join('')+
+    `<\/div><\/div>`;
+}
+
+function renderUpdates(p){
+  const el=document.getElementById('update-list');
+  if(!el) return;
+  p.updates=p.updates||[];
+  if(!p.updates.length){
+    const msg=lang==='cs'?'Žádné updaty':'No updates';
+    el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${msg}<\/div>`;
+    return;
+  }
+  el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list">`+
+    p.updates.map(it=>`<div class="chk-row" id="update-row-${it.id}">
+      <div class="cb${it.done?' chk':''}" onclick="togUpdate('${it.id}')">
+        ${it.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
+      <\/div>
+      <span class="cb-lbl${it.done?' done':''}" onclick="togUpdate('${it.id}')">${esc(it.text)}<\/span>
+      <button class="cb-del" onclick="delUpdate('${it.id}')"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/><\/svg><\/button>
+    <\/div>`).join('')+
+    `<\/div><\/div>`;
+}
+
+function togBug(id){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const b=(p.bugs||[]).find(x=>x.id===id);if(!b)return;
+  b.done=!b.done;
+  // Mirror state to tasks list
+  const taskMirror=(p.tasks||[]).find(t=>t.fromBug===id);
+  if(taskMirror)taskMirror.done=b.done;
+  saveD(projects);renderBugs(p);renderTasks(p);
+}
+
+function togUpdate(id){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const u=(p.updates||[]).find(x=>x.id===id);if(!u)return;
+  u.done=!u.done;
+  const taskMirror=(p.tasks||[]).find(t=>t.fromUpdate===id);
+  if(taskMirror)taskMirror.done=u.done;
+  saveD(projects);renderUpdates(p);renderTasks(p);
+}
+
+function delBug(id){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  p.bugs=(p.bugs||[]).filter(x=>x.id!==id);
+  p.tasks=(p.tasks||[]).filter(t=>t.fromBug!==id);
+  saveD(projects);renderBugs(p);renderTasks(p);
+}
+
+function delUpdate(id){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  p.updates=(p.updates||[]).filter(x=>x.id!==id);
+  p.tasks=(p.tasks||[]).filter(t=>t.fromUpdate!==id);
+  saveD(projects);renderUpdates(p);renderTasks(p);
+}
+
+function saveBug(){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const inp=document.getElementById('f-bug');
+  if(!inp)return;
+  const text=inp.value.trim();if(!text)return;
+  const id=uid();
+  p.bugs=p.bugs||[];
+  p.bugs.push({id,text,done:false});
+  // Mirror to tasks
+  p.tasks=p.tasks||[];
+  p.tasks.push({id:uid(),text,done:false,prio:'med',fromBug:id});
+  inp.value='';
+  saveD(projects);cs('ov-bug');renderBugs(p);renderTasks(p);
+}
+
+function saveUpdate(){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const inp=document.getElementById('f-update');
+  if(!inp)return;
+  const text=inp.value.trim();if(!text)return;
+  const id=uid();
+  p.updates=p.updates||[];
+  p.updates.push({id,text,done:false});
+  p.tasks=p.tasks||[];
+  p.tasks.push({id:uid(),text,done:false,prio:'med',fromUpdate:id});
+  inp.value='';
+  saveD(projects);cs('ov-update');renderUpdates(p);renderTasks(p);
+}
+
 function renderImpr(p){
   const el=document.getElementById('impr-list');const l=ll();
   p.improvements=p.improvements||[];
@@ -1587,6 +1772,8 @@ function openSheet(type){
     clr(['f-impr-txt']);openOv('ov-impr');foc('f-impr-txt');
     return;
   }
+  if(type==='bug'){clr(['f-bug']);openOv('ov-bug');foc('f-bug');}
+  if(type==='update'){clr(['f-update']);openOv('ov-update');foc('f-update');}
 }
 function clr(ids){ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});}
 function openOv(id){document.getElementById(id).classList.add('open');}
@@ -1717,6 +1904,24 @@ function switchTab(tab) {
 }
 
 // ── Global task (from Tasks tab) ──────────────────────────────────────────
+function openTaskFab(){
+  // Open correct sheet based on active type
+  if(activeTaskType==='ideas'){
+    // Need to choose project first - for now, just open generic global task
+    openGlobalTaskSheet();
+    return;
+  }
+  if(activeTaskType==='bugs'){
+    openGlobalTaskSheet();
+    return;
+  }
+  if(activeTaskType==='updates'){
+    openGlobalTaskSheet();
+    return;
+  }
+  openGlobalTaskSheet();
+}
+
 function openGlobalTaskSheet() {
   const sel = document.getElementById('f-tg-proj');
   sel.innerHTML = projects.map(p => `<option value="${p.id}">${esc(p.name||'Bez názvu')}<\/option>`).join('');
@@ -1827,6 +2032,55 @@ function editChkInline(key, id, el) {
 let activeTab = 'projects';
 
 let taskFilters = {status:'all', prio:'all', proj:'all'};
+let activeTaskType = 'tasks'; // tasks | ideas | bugs | updates
+let taskSearchQuery = '';
+
+function setTaskType(type) {
+  activeTaskType = type;
+  document.querySelectorAll('.ttype-btn').forEach(b =>
+    b.classList.toggle('on', b.getAttribute('data-type')===type));
+  // FAB label changes based on type
+  const fabLbl = document.getElementById('fab-task-lbl');
+  if(fabLbl){
+    const labels = {tasks:'Nový úkol', ideas:'Nový nápad', bugs:'Nový bugfix', updates:'Nový update'};
+    const labelsEn = {tasks:'New task', ideas:'New idea', bugs:'New bug', updates:'New update'};
+    fabLbl.textContent = (lang==='cs'?labels:labelsEn)[type] || 'Nový';
+  }
+  renderTasksAll();
+}
+
+function toggleTaskSearch() {
+  const inp = document.getElementById('search-task-input');
+  const btn = document.getElementById('search-toggle-btn');
+  if(!inp || !btn) return;
+  const isOpen = inp.style.display !== 'none';
+  if(isOpen) {
+    inp.style.display = 'none';
+    btn.classList.remove('active');
+    taskSearchQuery = '';
+    inp.value = '';
+    renderTasksAll();
+  } else {
+    inp.style.display = 'block';
+    btn.classList.add('active');
+    setTimeout(()=>inp.focus(), 50);
+  }
+}
+
+function onTaskSearch(val) {
+  taskSearchQuery = (val||'').toLowerCase().trim();
+  renderTasksAll();
+}
+
+function onTaskSearchBlur() {
+  // If empty, hide it
+  const inp = document.getElementById('search-task-input');
+  const btn = document.getElementById('search-toggle-btn');
+  if(inp && !inp.value.trim()) {
+    inp.style.display = 'none';
+    btn && btn.classList.remove('active');
+  }
+}
 
 function setTaskFilter(type, val) {
   taskFilters[type] = val;
@@ -1871,53 +2125,114 @@ function renderTasksAll() {
   // refresh status seg labels
   const sb=document.getElementById('filter-bar-status');
   if(sb){const chips=[...sb.querySelectorAll('[data-status]')];
-    const lbls=lang==='cs'?['Vše','Nesplněné','Splněné']:['All','Open','Done'];
+    const lbls=lang==='cs'?['Vše','Otevřené','Hotové']:['All','Open','Done'];
     chips.forEach((ch,i)=>{if(lbls[i])ch.textContent=lbls[i];ch.classList.toggle('on',ch.getAttribute('data-status')===taskFilters.status);});}
   // refresh prio seg
   const pb=document.getElementById('filter-bar-prio');
-  if(pb){const allChip=pb.querySelector('[data-prio="all"]');
+  if(pb){const allChip=pb.querySelector('[data-prio=\"all\"]');
     if(allChip)allChip.textContent=lang==='cs'?'Vše':'All';
     pb.querySelectorAll('[data-prio]').forEach(ch=>ch.classList.toggle('on',ch.getAttribute('data-prio')===taskFilters.prio));}
+  // refresh type segment labels
+  const ttypeBar = document.querySelector('.ttype-bar');
+  if(ttypeBar){
+    const tl = lang==='cs' ? {tasks:'Úkoly',ideas:'Nápady',bugs:'Bugfixy',updates:'Updaty'} : {tasks:'Tasks',ideas:'Ideas',bugs:'Bugs',updates:'Updates'};
+    ttypeBar.querySelectorAll('[data-type]').forEach(b=>{
+      const t = b.getAttribute('data-type');
+      const sp = b.querySelector('span');
+      if(sp && tl[t]) sp.textContent = tl[t];
+      b.classList.toggle('on', t===activeTaskType);
+    });
+  }
+  // Show/hide prio filter row based on type (only for tasks)
+  const prioRow = document.getElementById('filter-row-prio');
+  if(prioRow) prioRow.style.display = (activeTaskType==='tasks' || activeTaskType==='bugs') ? 'flex' : 'none';
+
   const prioOrder = { hi: 0, med: 1, lo: 2 };
   const groups = [];
+  const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
+  
   projects.forEach(p => {
     if(taskFilters.proj !== 'all' && p.id !== taskFilters.proj) return;
-    let tasks = (p.tasks || []);
-    // filter by status
-    if(taskFilters.status === 'open') tasks = tasks.filter(t => !t.done);
-    else if(taskFilters.status === 'done') tasks = tasks.filter(t => t.done);
-    // filter by prio
-    if(taskFilters.prio !== 'all') tasks = tasks.filter(t => (t.prio||'med') === taskFilters.prio);
-    if (!tasks.length) return;
-    // sort within group: hi first, then med, then lo, then no deadline
-    const sorted = [...tasks].sort((a, b) => {
-      const pa = prioOrder[a.prio] ?? 1;
-      const pb = prioOrder[b.prio] ?? 1;
-      if (pa !== pb) return pa - pb;
-      if (a.deadline && b.deadline) return a.deadline.localeCompare(b.deadline);
-      if (a.deadline) return -1;
-      if (b.deadline) return 1;
+    let items = [];
+    // Choose source based on active type
+    if(activeTaskType === 'tasks') {
+      items = (p.tasks || []).filter(t => !t.fromBug && !t.fromUpdate);
+    } else if(activeTaskType === 'ideas') {
+      items = (p.improvements || []).map(i => ({...i, _isIdea:true, text:i.text||i.name||''}));
+    } else if(activeTaskType === 'bugs') {
+      items = (p.tasks || []).filter(t => t.fromBug);
+    } else if(activeTaskType === 'updates') {
+      items = (p.tasks || []).filter(t => t.fromUpdate);
+    }
+    
+    // Search filter
+    if(taskSearchQuery) {
+      items = items.filter(t => (t.text||'').toLowerCase().includes(taskSearchQuery));
+    }
+    
+    // Status filter (only for task-like items)
+    if(activeTaskType !== 'ideas') {
+      if(taskFilters.status === 'open') items = items.filter(t => !t.done);
+      else if(taskFilters.status === 'done') items = items.filter(t => t.done);
+    }
+    
+    // Priority filter
+    if((activeTaskType === 'tasks' || activeTaskType === 'bugs') && taskFilters.prio !== 'all') {
+      items = items.filter(t => (t.prio||'med') === taskFilters.prio);
+    }
+    
+    if (!items.length) return;
+    
+    // Sort
+    const sorted = [...items].sort((a, b) => {
+      if(activeTaskType !== 'ideas') {
+        const pa = prioOrder[a.prio] ?? 1;
+        const pb = prioOrder[b.prio] ?? 1;
+        if (pa !== pb) return pa - pb;
+        if (a.deadline && b.deadline) return a.deadline.localeCompare(b.deadline);
+        if (a.deadline) return -1;
+        if (b.deadline) return 1;
+      }
       return 0;
     });
-    groups.push({ proj: p, tasks: sorted });
+    groups.push({ proj: p, items: sorted });
   });
 
   if (!groups.length) {
-    el.innerHTML = `<div class="empty"><div class="empty-serif">done.<\/div><div>${l.emptyTask}<\/div><\/div>`;
+    const emptyLbl = {
+      tasks: lang==='cs'?'Žádné úkoly':'No tasks',
+      ideas: lang==='cs'?'Žádné nápady':'No ideas',
+      bugs: lang==='cs'?'Žádné bugfixy':'No bugs',
+      updates: lang==='cs'?'Žádné updaty':'No updates'
+    };
+    el.innerHTML = `<div class="empty"><div class="empty-serif">empty.<\/div><div>${emptyLbl[activeTaskType]||l.emptyTask}<\/div><\/div>`;
     return;
   }
 
   el.innerHTML = groups.map(g => {
     const p = g.proj;
     const si = l.sk.indexOf(p.status);
+    const projColorHex = p.color && colorMap[p.color] ? colorMap[p.color] : '';
     return `<div>
       <div class="tg-header">
-        <span class="tg-proj-dot dot-${p.status}"><\/span>
+        <span class="tg-proj-dot" style="${projColorHex?`background:${projColorHex}`:`background:var(--dot-${p.status})`}"><\/span>
         <span class="tg-proj-name">${esc(p.name || '')}<\/span>${p.client?`<span style="font-size:11px;color:var(--text3);background:var(--card2);padding:2px 8px;border-radius:10px;margin-left:6px;font-family:var(--sans)">${esc(p.client)}<\/span>`:''}
         <button class="tg-proj-link" onclick="openDetail('${p.id}');switchTabBar('hide')">${l.sl[si] || p.status} →<\/button>
       <\/div>
-      ${g.tasks.map(t => `
-        <div class="tall-item" style="${p.color&&{blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'}[p.color]?`border-left:3px solid ${({blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'})[p.color]};padding-left:11px;`:''}">
+      ${g.items.map(t => {
+        const borderStyle = projColorHex ? `border-left:3px solid ${projColorHex};padding-left:11px;` : '';
+        if(activeTaskType === 'ideas') {
+          // Idea rendering (no checkbox, simpler)
+          return `<div class="tall-item" style="${borderStyle}">
+            <div class="t-body">
+              <div class="t-text">${esc(t.text||'')}<\/div>
+            <\/div>
+          <\/div>`;
+        }
+        // Task/Bug/Update rendering
+        const typeBadge = t.fromBug ? `<span class="t-tag" style="background:rgba(220,38,38,0.1);color:#DC2626">bug<\/span>` 
+          : t.fromUpdate ? `<span class="t-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED">update<\/span>` : '';
+        return `<div class="tall-item" style="${borderStyle}">
           <div class="tall-prio-bar prio-${t.prio || 'med'}"><\/div>
           <div class="t-check${t.done ? ' chk' : ''}" onclick="togTaskAll('${p.id}','${t.id}')" style="margin-top:0;flex-shrink:0">
             ${t.done ? `<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>` : ''}
@@ -1925,13 +2240,15 @@ function renderTasksAll() {
           <div class="t-body">
             <div class="t-text">${esc(t.text)}<\/div>
             <div class="t-tags" style="margin-top:4px">
+              ${typeBadge}
               ${t.who ? `<span class="t-tag">${esc(t.who)}<\/span>` : ''}
               ${t.contact ? `<span class="t-tag">${esc(t.contact)}<\/span>` : ''}
               ${t.prio && t.prio !== 'med' ? `<span class="t-tag${t.prio === 'hi' ? ' hi' : ''}">${l.pl[t.prio]}<\/span>` : ''}
               ${t.deadline ? `<span class="t-tag">${fmtD(t.deadline)}<\/span>` : ''}
             <\/div>
           <\/div>
-        <\/div>`).join('')}
+        <\/div>`;
+      }).join('')}
     <\/div>`;
   }).join('');
 }
