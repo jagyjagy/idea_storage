@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
@@ -14,11 +15,10 @@
     document.documentElement.setAttribute('data-theme','light');
     document.documentElement.style.colorScheme='light';
 
-
-  })();
+})();
 </script>
 <meta name="color-scheme" content="only light">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Idea Storage</title>
 <link rel="apple-touch-icon" sizes="1024x1024" href="idea_storage_icon.png">
@@ -62,256 +62,257 @@
   --sh-lg:0 8px 32px rgba(0,0,0,0.35),0 2px 8px rgba(0,0,0,0.2);
 }
 
-
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-drag:none;-webkit-text-size-adjust:100%}
-html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!important;-webkit-filter:none!important}body{min-height:100%;min-height:-webkit-fill-available;margin:0;padding:0;color-scheme:light;background:var(--bg);}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role="button"]{touch-action:manipulation;cursor:pointer;}
+html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!important;-webkit-filter:none!important}body{min-height:100%;min-height:-webkit-fill-available;margin:0;padding:0;color-scheme:light;background:var(–bg);}body{font-family:var(–sans);background:var(–bg);color:var(–text);font-size:16px;overscroll-behavior:none;transition:background .25s,color .25s;}button,a,[role=“button”]{touch-action:manipulation;cursor:pointer;}
 #app{width:100%;max-width:430px;height:100vh;height:100svh;height:-webkit-fill-available;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;filter:none!important;-webkit-filter:none!important;}
 
 /* screens */
-.screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(--bg);overflow:hidden}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(–bg);overflow:hidden}
 .screen.active{display:flex}
 .screen.behind{display:flex;transform:translateX(-28px);opacity:.6;pointer-events:none}
 .screen.ahead{display:none}
 
 /* topbar */
-.topbar{display:flex;align-items:center;padding:12px 16px 10px;gap:8px;flex-shrink:0;background:var(--bg)}
-.topbar-title{font-family:var(--serif);font-size:22px;font-weight:300;letter-spacing:-.02em;color:var(--text);flex:1}
-.topbar-title em{font-style:italic;color:var(--text2)}
-.icon-btn{width:34px;height:34px;border-radius:50%;background:none;border:none;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:16px;transition:background var(--dur);flex-shrink:0}
-.theme-toggle-btn{color:var(--text3)}
-.theme-toggle-btn:hover{color:var(--text2)}
-.icon-btn:hover{background:var(--card2)}
-.lang-btn{font-size:11px;font-weight:500;color:var(--text3);background:var(--card2);border:0.5px solid var(--border2);border-radius:6px;padding:4px 9px;cursor:pointer;letter-spacing:.04em;flex-shrink:0;font-family:var(--sans)}
-.lang-btn:hover{color:var(--text)}
-.back-btn{display:flex;align-items:center;gap:5px;font-size:15px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:4px 0;flex-shrink:0}
+.topbar{display:flex;align-items:center;padding:12px 16px 10px;gap:8px;flex-shrink:0;background:var(–bg)}
+.topbar-title{font-family:var(–serif);font-size:22px;font-weight:300;letter-spacing:-.02em;color:var(–text);flex:1}
+.topbar-title em{font-style:italic;color:var(–text2)}
+.icon-btn{width:34px;height:34px;border-radius:50%;background:none;border:none;cursor:pointer;color:var(–text2);display:flex;align-items:center;justify-content:center;font-size:16px;transition:background var(–dur);flex-shrink:0}
+.theme-toggle-btn{color:var(–text3)}
+.theme-toggle-btn:hover{color:var(–text2)}
+.icon-btn:hover{background:var(–card2)}
+.lang-btn{font-size:11px;font-weight:500;color:var(–text3);background:var(–card2);border:0.5px solid var(–border2);border-radius:6px;padding:4px 9px;cursor:pointer;letter-spacing:.04em;flex-shrink:0;font-family:var(–sans)}
+.lang-btn:hover{color:var(–text)}
+.back-btn{display:flex;align-items:center;gap:5px;font-size:15px;color:var(–blue);background:none;border:none;cursor:pointer;font-family:var(–sans);padding:4px 0;flex-shrink:0}
 
 /* search + tabs */
 .search-wrap{padding:0 16px 10px;flex-shrink:0}
-.search-input{width:100%;background:var(--card2);border:0.5px solid var(--border);border-radius:12px;padding:9px 14px 9px 36px;font-size:14px;font-family:var(--sans);color:var(--text);outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' stroke='%23B0ADA5' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px center;transition:border-color var(--dur);background-color:var(--card2)}
-.search-input:focus{border-color:var(--border2);background-color:var(--card)}
-.tabs{display:flex;padding:0 16px;border-bottom:0.5px solid var(--border);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.search-input{width:100%;background:var(–card2);border:0.5px solid var(–border);border-radius:12px;padding:9px 14px 9px 36px;font-size:14px;font-family:var(–sans);color:var(–text);outline:none;background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘15’ height=‘15’ fill=‘none’ stroke=’%23B0ADA5’ stroke-width=‘2’ viewBox=‘0 0 24 24’%3E%3Ccircle cx=‘11’ cy=‘11’ r=‘8’/%3E%3Cpath d=‘m21 21-4.35-4.35’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:12px center;transition:border-color var(–dur);background-color:var(–card2)}
+.search-input:focus{border-color:var(–border2);background-color:var(–card)}
+.tabs{display:flex;padding:0 16px;border-bottom:0.5px solid var(–border);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:9px 14px;font-size:12px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;margin-bottom:-0.5px;transition:color var(--dur),border-color var(--dur)}
-.tab.on{color:var(--blue);border-bottom-color:var(--blue)}
+.tab{padding:9px 14px;font-size:12px;font-weight:500;color:var(–text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;margin-bottom:-0.5px;transition:color var(–dur),border-color var(–dur)}
+.tab.on{color:var(–blue);border-bottom-color:var(–blue)}
 
 /* list */
 .list-body{flex:1;overflow-y:auto;padding:14px 16px 120px;display:flex;flex-direction:column;gap:10px}
-.proj-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;cursor:pointer;transition:transform var(--dur),box-shadow var(--dur);box-shadow:var(--sh)}
+.proj-card{background:var(–card);border:0.5px solid var(–border);border-radius:var(–r);padding:16px;cursor:pointer;transition:transform var(–dur),box-shadow var(–dur);box-shadow:var(–sh)}
 .proj-card:active{transform:scale(.985)}
-.proj-card:hover{box-shadow:var(--sh-lg)}
+.proj-card:hover{box-shadow:var(–sh-lg)}
 .card-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
 .proj-title{font-size:16px;font-weight:500;flex:1;line-height:1.25;letter-spacing:-.01em}
 .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.proj-sub{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:10px}
+.cc-sw{width:44px;height:44px;border-radius:50%;cursor:pointer;border:2px solid var(–bg);box-shadow:0 0 0 1px var(–border),0 2px 6px rgba(0,0,0,0.08);transition:transform .15s}
+.cc-sw:hover{transform:scale(1.08)}
+.cc-sw:active{transform:scale(0.95)}
+.proj-color-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;box-shadow:0 0 0 1.5px var(–bg),0 0 0 2.5px rgba(0,0,0,0.08)}
+.proj-client-badge{font-size:10px;font-weight:500;color:var(–text3);background:var(–card2);padding:2px 8px;border-radius:10px;font-family:var(–sans);margin-left:auto;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proj-sub{font-size:13px;color:var(–text2);line-height:1.5;margin-bottom:10px}
 .card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .card-chips{display:flex;gap:6px;flex-wrap:wrap;flex:1}
 .chip{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap}
-.adv-btn{font-size:12px;font-weight:500;color:var(--blue);background:var(--blue-s);border:none;border-radius:20px;padding:5px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:var(--sans)}
+.adv-btn{font-size:12px;font-weight:500;color:var(–blue);background:var(–blue-s);border:none;border-radius:20px;padding:5px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:var(–sans)}
 .adv-btn:hover{opacity:.75}
-.done-tag{font-size:11px;font-weight:500;color:var(--green);background:var(--green-s);padding:4px 10px;border-radius:20px;white-space:nowrap}
+.done-tag{font-size:11px;font-weight:500;color:var(–green);background:var(–green-s);padding:4px 10px;border-radius:20px;white-space:nowrap}
 
 /* fab */
-.fab{position:absolute;bottom:90px;right:16px;display:flex;align-items:center;gap:8px;background:var(--accent);color:var(--bg);padding:13px 22px;border-radius:50px;font-size:14px;font-weight:500;font-family:var(--sans);border:none;cursor:pointer;box-shadow:var(--sh-lg);transition:transform var(--dur);z-index:20}
+.fab{position:absolute;bottom:90px;right:16px;display:flex;align-items:center;gap:8px;background:var(–accent);color:var(–bg);padding:13px 22px;border-radius:50px;font-size:14px;font-weight:500;font-family:var(–sans);border:none;cursor:pointer;box-shadow:var(–sh-lg);transition:transform var(–dur);z-index:20}
 .fab:active{transform:scale(.96)}
 
 /* detail */
 .detail-scroll{flex:1;overflow-y:auto;padding-bottom:40px}
-.detail-hero{padding:6px 16px 18px;border-bottom:0.5px solid var(--border)}
+.detail-hero{padding:6px 16px 18px;border-bottom:0.5px solid var(–border)}
 .stage-wrap{position:relative;display:inline-block;margin-bottom:10px}
-.stage-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--sans)}
+.stage-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(–sans)}
 .stage-pill svg{width:12px;height:12px}
 
-.detail-title{font-family:var(--serif);font-size:26px;font-weight:300;line-height:1.2;letter-spacing:-.02em;background:none;border:none;color:var(--text);resize:none;width:100%;outline:none;padding:0;margin-bottom:8px;border-bottom:0.5px solid var(--border)}
-.detail-desc{width:100%;background:none;border:none;font-size:14px;font-family:var(--sans);color:var(--text2);line-height:1.65;resize:none;outline:none;padding:0;margin-bottom:12px}
-.url-row{display:flex;align-items:center;gap:8px;background:var(--card2);border:0.5px solid var(--border);border-radius:var(--r-xs);padding:8px 10px}
-.url-row svg{width:14px;height:14px;color:var(--text3);flex-shrink:0}
-.url-input{flex:1;background:none;border:none;font-size:13px;font-family:var(--sans);color:var(--blue);outline:none;min-width:0}
-.url-input::placeholder{color:var(--text3)}
-.url-open{background:none;border:none;cursor:pointer;color:var(--blue);display:flex;align-items:center;padding:0;flex-shrink:0}
+.detail-title{font-family:var(–serif);font-size:26px;font-weight:300;line-height:1.2;letter-spacing:-.02em;background:none;border:none;color:var(–text);resize:none;width:100%;outline:none;padding:0;margin-bottom:8px;border-bottom:0.5px solid var(–border)}
+.detail-desc{width:100%;background:none;border:none;font-size:14px;font-family:var(–sans);color:var(–text2);line-height:1.65;resize:none;outline:none;padding:0;margin-bottom:12px}
+.url-row{display:flex;align-items:center;gap:8px;background:var(–card2);border:0.5px solid var(–border);border-radius:var(–r-xs);padding:8px 10px}
+.url-row svg{width:14px;height:14px;color:var(–text3);flex-shrink:0}
+.url-input{flex:1;background:none;border:none;font-size:13px;font-family:var(–sans);color:var(–blue);outline:none;min-width:0}
+.url-input::placeholder{color:var(–text3)}
+.url-open{background:none;border:none;cursor:pointer;color:var(–blue);display:flex;align-items:center;padding:0;flex-shrink:0}
 .url-open svg{width:14px;height:14px}
 
 /* stage dropdown */
-.stage-dropdown{position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:0.5px solid var(--border2);border-radius:var(--r-sm);box-shadow:var(--sh-lg);padding:6px;z-index:50;min-width:160px;display:none}
+.stage-dropdown{position:absolute;top:calc(100% + 6px);left:0;background:var(–card);border:0.5px solid var(–border2);border-radius:var(–r-sm);box-shadow:var(–sh-lg);padding:6px;z-index:50;min-width:160px;display:none}
 .stage-dropdown.open{display:block}
-.stage-opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r-xs);cursor:pointer;font-size:13px;font-weight:500;transition:background var(--dur);font-family:var(--sans)}
-.stage-opt:hover{background:var(--card2)}
+.stage-opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(–r-xs);cursor:pointer;font-size:13px;font-weight:500;transition:background var(–dur);font-family:var(–sans)}
+.stage-opt:hover{background:var(–card2)}
 .s-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
 /* det sections */
-.det-section{border-bottom:0.5px solid var(--border)}
-.action-zone{background:var(--action-bg,var(--card2));padding:4px 0 8px;border-bottom:2px solid var(--border)}
-.action-zone-label{font-size:10px;font-weight:600;color:var(--action-col,var(--text3));text-transform:uppercase;letter-spacing:.1em;padding:12px 16px 4px;display:flex;align-items:center;gap:6px}
-.planning-zone{background:var(--bg)}
+.det-section{border-bottom:0.5px solid var(–border)}
+.action-zone{background:var(–action-bg,var(–card2));padding:4px 0 8px;border-bottom:2px solid var(–border)}
+.action-zone-label{font-size:10px;font-weight:600;color:var(–action-col,var(–text3));text-transform:uppercase;letter-spacing:.1em;padding:12px 16px 4px;display:flex;align-items:center;gap:6px}
+.planning-zone{background:var(–bg)}
 .det-sec-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0}
-.det-sec-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.det-sec-label{font-size:11px;font-weight:500;color:var(–text3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
 .det-sec-label svg{width:13px;height:13px}
-.add-lnk{font-size:13px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:0}
+.add-lnk{font-size:13px;color:var(–blue);background:none;border:none;cursor:pointer;font-family:var(–sans);padding:0}
 
 /* export btn */
-.export-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text2);background:var(--card2);border:0.5px solid var(--border);border-radius:var(--r-xs);padding:5px 10px;cursor:pointer;font-family:var(--sans)}
-.export-btn:hover{color:var(--text)}
+.export-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(–text2);background:var(–card2);border:0.5px solid var(–border);border-radius:var(–r-xs);padding:5px 10px;cursor:pointer;font-family:var(–sans)}
+.export-btn:hover{color:var(–text)}
 .export-btn svg{width:13px;height:13px}
 
 /* think blocks — horizontal tabs */
-.think-tab-bar{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 12px;border-bottom:0.5px solid var(--border);gap:0;flex-shrink:0}
+.think-tab-bar{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 12px;border-bottom:0.5px solid var(–border);gap:0;flex-shrink:0}
 .think-tab-bar::-webkit-scrollbar{display:none}
-.think-tab{padding:9px 10px;font-size:12px;font-weight:400;color:var(--text3);background:none;border:none;border-bottom:1.5px solid transparent;cursor:pointer;white-space:nowrap;font-family:var(--sans);margin-bottom:-0.5px;transition:color .15s,border-color .15s;position:relative;user-select:none;letter-spacing:.01em}
-.think-tab.on{color:var(--text);font-weight:500;border-bottom-color:var(--text)}
-.think-tab.has-data::after{content:'·';margin-left:3px;color:var(--blue);font-size:14px;vertical-align:middle;line-height:1}
-.think-tab.dragging{opacity:.35;background:var(--card2);border-radius:4px}
-.think-tab.drag-over{border-left:2px solid var(--blue)}
+.think-tab{padding:9px 10px;font-size:12px;font-weight:400;color:var(–text3);background:none;border:none;border-bottom:1.5px solid transparent;cursor:pointer;white-space:nowrap;font-family:var(–sans);margin-bottom:-0.5px;transition:color .15s,border-color .15s;position:relative;user-select:none;letter-spacing:.01em}
+.think-tab.on{color:var(–text);font-weight:500;border-bottom-color:var(–text)}
+.think-tab.has-data::after{content:’·’;margin-left:3px;color:var(–blue);font-size:14px;vertical-align:middle;line-height:1}
+.think-tab.dragging{opacity:.35;background:var(–card2);border-radius:4px}
+.think-tab.drag-over{border-left:2px solid var(–blue)}
 .think-panel{display:none;padding:14px 16px}
 .think-panel.on{display:block}
-.think-textarea{width:100%;background:transparent;border:none;font-size:14px;font-family:var(--sans);color:var(--text2);line-height:1.7;resize:none;outline:none;min-height:120px;padding:0}
-.tip-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;font-weight:500;font-family:var(--sans);padding:1px 5px;border-radius:50%;border:0.5px solid var(--border2);line-height:1.4;flex-shrink:0;position:relative}
-.tip-btn:hover{color:var(--text2)}
-.tooltip-popup{position:absolute;top:calc(100% + 6px);right:0;background:var(--accent);color:var(--bg);font-size:12px;font-family:var(--sans);line-height:1.5;padding:8px 10px;border-radius:var(--r-sm);width:220px;z-index:200;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:var(--sh-lg);font-weight:400}
+.think-textarea{width:100%;background:transparent;border:none;font-size:14px;font-family:var(–sans);color:var(–text2);line-height:1.7;resize:none;outline:none;min-height:120px;padding:0}
+.tip-btn{background:none;border:none;cursor:pointer;color:var(–text3);font-size:11px;font-weight:500;font-family:var(–sans);padding:1px 5px;border-radius:50%;border:0.5px solid var(–border2);line-height:1.4;flex-shrink:0;position:relative}
+.tip-btn:hover{color:var(–text2)}
+.tooltip-popup{position:absolute;top:calc(100% + 6px);right:0;background:var(–accent);color:var(–bg);font-size:12px;font-family:var(–sans);line-height:1.5;padding:8px 10px;border-radius:var(–r-sm);width:220px;z-index:200;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:var(–sh-lg);font-weight:400}
 .tip-btn:hover .tooltip-popup,.tip-btn:focus .tooltip-popup{opacity:1}
-
-
 
 /* checklist */
 .chk-list{padding:4px 0 2px}
-.chk-row{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--card);border-radius:var(--r-sm);margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border:0.5px solid var(--border)}
+.chk-row{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(–card);border-radius:var(–r-sm);margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border:0.5px solid var(–border)}
 .chk-row:last-child{border-bottom:none}
-.cb{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border2);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--dur);background:none}
-.cb.chk{background:var(--blue);border-color:var(--blue)}
-.cb-lbl{font-size:13px;color:var(--text);flex:1;line-height:1.4;cursor:pointer;-webkit-user-select:none;user-select:none}
-.cb-lbl.done{text-decoration:line-through;color:var(--text3)}
-.cb-lbl-input{font-size:13px;color:var(--text);flex:1;line-height:1.4;background:none;border:none;outline:none;font-family:var(--sans);padding:0;width:100%}
-.cb-del{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;display:flex;flex-shrink:0;margin-top:1px}
-.cb-del:hover{color:var(--red)}
+.cb{width:18px;height:18px;border-radius:5px;border:1.5px solid var(–border2);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(–dur);background:none}
+.cb.chk{background:var(–blue);border-color:var(–blue)}
+.cb-lbl{font-size:13px;color:var(–text);flex:1;line-height:1.4;cursor:pointer;-webkit-user-select:none;user-select:none}
+.cb-lbl.done{text-decoration:line-through;color:var(–text3)}
+.cb-lbl-input{font-size:13px;color:var(–text);flex:1;line-height:1.4;background:none;border:none;outline:none;font-family:var(–sans);padding:0;width:100%}
+.cb-del{background:none;border:none;cursor:pointer;color:var(–text3);padding:2px;display:flex;flex-shrink:0;margin-top:1px}
+.cb-del:hover{color:var(–red)}
 .chk-add-row{display:flex;align-items:center;gap:8px;padding:7px 0 2px}
-.chk-inp{flex:1;background:none;border:none;border-bottom:0.5px solid var(--border);font-size:13px;font-family:var(--sans);color:var(--text2);outline:none;padding:3px 0}
-.chk-inp::placeholder{color:var(--text3)}
+.chk-inp{flex:1;background:none;border:none;border-bottom:0.5px solid var(–border);font-size:13px;font-family:var(–sans);color:var(–text2);outline:none;padding:3px 0}
+.chk-inp::placeholder{color:var(–text3)}
 
 /* context menu */
-.ctx-menu{position:fixed;background:var(--card);border:0.5px solid var(--border2);border-radius:var(--r-sm);box-shadow:var(--sh-lg);padding:6px;z-index:300;min-width:180px;display:none}
+.ctx-menu{position:fixed;background:var(–card);border:0.5px solid var(–border2);border-radius:var(–r-sm);box-shadow:var(–sh-lg);padding:6px;z-index:300;min-width:180px;display:none}
 .ctx-menu.open{display:block}
-.ctx-opt{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--r-xs);cursor:pointer;font-size:14px;font-family:var(--sans);color:var(--text);transition:background var(--dur)}
-.ctx-opt:hover{background:var(--card2)}
-.ctx-opt.danger{color:var(--red)}
-.ctx-opt svg{width:15px;height:15px;flex-shrink:0;color:var(--text3)}
-.ctx-opt.danger svg{color:var(--red)}
+.ctx-opt{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(–r-xs);cursor:pointer;font-size:14px;font-family:var(–sans);color:var(–text);transition:background var(–dur)}
+.ctx-opt:hover{background:var(–card2)}
+.ctx-opt.danger{color:var(–red)}
+.ctx-opt svg{width:15px;height:15px;flex-shrink:0;color:var(–text3)}
+.ctx-opt.danger svg{color:var(–red)}
 
 /* insights */
-.ins-item{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-top:0.5px solid var(--border)}
+.ins-item{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-top:0.5px solid var(–border)}
 .ins-badge{font-size:10px;font-weight:600;padding:3px 7px;border-radius:5px;flex-shrink:0;margin-top:1px;text-transform:uppercase;letter-spacing:.04em}
-.ins-text-el{font-size:14px;color:var(--text);flex:1;line-height:1.55;-webkit-user-select:none;user-select:none;cursor:pointer}
-.ins-text-inp{font-size:14px;color:var(--text);flex:1;line-height:1.55;background:none;border:none;outline:none;font-family:var(--sans);border-bottom:1px solid var(--blue);padding-bottom:2px}
-.x-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;display:flex;flex-shrink:0}
-.x-btn:hover{color:var(--red)}
+.ins-text-el{font-size:14px;color:var(–text);flex:1;line-height:1.55;-webkit-user-select:none;user-select:none;cursor:pointer}
+.ins-text-inp{font-size:14px;color:var(–text);flex:1;line-height:1.55;background:none;border:none;outline:none;font-family:var(–sans);border-bottom:1px solid var(–blue);padding-bottom:2px}
+.x-btn{background:none;border:none;cursor:pointer;color:var(–text3);padding:2px;display:flex;flex-shrink:0}
+.x-btn:hover{color:var(–red)}
 
 /* resources */
-.res-item{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-top:0.5px solid var(--border)}
+.res-item{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-top:0.5px solid var(–border)}
 .res-left{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
-.res-name{font-size:14px;font-weight:500;color:var(--text)}
+.res-name{font-size:14px;font-weight:500;color:var(–text)}
 .res-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.res-note{font-size:12px;color:var(--text2);margin-top:3px;line-height:1.4}
+.res-note{font-size:12px;color:var(–text2);margin-top:3px;line-height:1.4}
 .res-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.04em}
 .res-status{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px}
 
 /* tasks */
-.task-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--card);border-radius:var(--r-sm);margin:0 16px 8px;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);border:0.5px solid var(--border)}
-.t-check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(--dur)}
-.t-check.chk{background:var(--blue);border-color:var(--blue)}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(–card);border-radius:var(–r-sm);margin:0 16px 8px;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);border:0.5px solid var(–border)}
+.t-check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(–border2);flex-shrink:0;cursor:pointer;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(–dur)}
+.t-check.chk{background:var(–blue);border-color:var(–blue)}
 .t-body{flex:1;min-width:0}
-.t-text{font-size:14px;color:var(--text);line-height:1.4;margin-bottom:4px}
-.t-text.done{text-decoration:line-through;color:var(--text3)}
+.t-text{font-size:14px;color:var(–text);line-height:1.4;margin-bottom:4px}
+.t-text.done{text-decoration:line-through;color:var(–text3)}
 .t-tags{display:flex;gap:5px;flex-wrap:wrap}
-.t-tag{font-size:11px;color:var(--text2);background:var(--card2);padding:2px 8px;border-radius:5px;border:0.5px solid var(--border)}
-.t-tag.hi{color:var(--red);background:var(--red-s);border-color:transparent}
+.t-tag{font-size:11px;color:var(–text2);background:var(–card2);padding:2px 8px;border-radius:5px;border:0.5px solid var(–border)}
+.t-tag.hi{color:var(–red);background:var(–red-s);border-color:transparent}
 
 /* changelog */
-.cl-log-item{display:flex;gap:12px;padding:10px 16px;border-top:0.5px solid var(--border)}
-.cl-date{font-size:11px;color:var(--text3);min-width:44px;padding-top:2px}
-.cl-text-el{font-size:13px;color:var(--text2);flex:1;line-height:1.5}
+.cl-log-item{display:flex;gap:12px;padding:10px 16px;border-top:0.5px solid var(–border)}
+.cl-date{font-size:11px;color:var(–text3);min-width:44px;padding-top:2px}
+.cl-text-el{font-size:13px;color:var(–text2);flex:1;line-height:1.5}
 
 /* toast */
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:var(--bg);padding:10px 18px;border-radius:50px;font-size:13px;font-family:var(--sans);font-weight:500;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:400;white-space:nowrap}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(–accent);color:var(–bg);padding:10px 18px;border-radius:50px;font-size:13px;font-family:var(–sans);font-weight:500;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:400;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);z-index:500}
 
 /* sheet */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:100;display:none;align-items:flex-end;justify-content:center;pointer-events:none;transition:background var(--dur)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:100;display:none;align-items:flex-end;justify-content:center;pointer-events:none;transition:background var(–dur)}
 .overlay.open{display:flex;background:rgba(0,0,0,0.3);pointer-events:all}
-.sheet{background:var(--card);border-radius:20px 20px 0 0;width:100%;max-width:430px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:var(--sh-lg);max-height:92vh;overflow-y:auto}
+.sheet{background:var(–card);border-radius:20px 20px 0 0;width:100%;max-width:430px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:var(–sh-lg);max-height:92vh;overflow-y:auto}
 .overlay.open .sheet{transform:translateY(0)}
-.sh-handle{width:36px;height:4px;border-radius:2px;background:var(--border2);margin:12px auto 16px}
+.sh-handle{width:36px;height:4px;border-radius:2px;background:var(–border2);margin:12px auto 16px}
 .sh-inner{padding:0 20px 40px}
 .sh-title{font-size:17px;font-weight:500;margin-bottom:18px;letter-spacing:-.01em}
 .field{margin-bottom:14px}
-.field label{display:block;font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
-.field input,.field textarea,.field select{width:100%;background:var(--card2);border:0.5px solid var(--border);border-radius:var(--r-sm);padding:10px 13px;font-size:14px;font-family:var(--sans);color:var(--text);outline:none;transition:border-color var(--dur);-webkit-appearance:none}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
+.field label{display:block;font-size:11px;font-weight:500;color:var(–text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;background:var(–card2);border:0.5px solid var(–border);border-radius:var(–r-sm);padding:10px 13px;font-size:14px;font-family:var(–sans);color:var(–text);outline:none;transition:border-color var(–dur);-webkit-appearance:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(–blue)}
 .field textarea{resize:none;min-height:72px}
-.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23B0ADA5' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.field select{cursor:pointer;background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘12’ fill=‘none’ stroke=’%23B0ADA5’ stroke-width=‘2’ viewBox=‘0 0 24 24’%3E%3Cpath d=‘m6 9 6 6 6-6’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .sh-btns{display:flex;gap:8px;margin-top:20px}
-.btn-p{flex:1;padding:13px;background:var(--accent);color:var(--bg);border:none;border-radius:var(--r-sm);font-size:15px;font-family:var(--sans);font-weight:500;cursor:pointer}
+.btn-p{flex:1;padding:13px;background:var(–accent);color:var(–bg);border:none;border-radius:var(–r-sm);font-size:15px;font-family:var(–sans);font-weight:500;cursor:pointer}
 .btn-p:hover{opacity:.85}
-.btn-c{padding:13px 18px;background:var(--card2);color:var(--text2);border:0.5px solid var(--border);border-radius:var(--r-sm);font-size:15px;font-family:var(--sans);cursor:pointer}
+.btn-c{padding:13px 18px;background:var(–card2);color:var(–text2);border:0.5px solid var(–border);border-radius:var(–r-sm);font-size:15px;font-family:var(–sans);cursor:pointer}
 
-.empty{text-align:center;padding:60px 24px;color:var(--text3);font-size:14px;line-height:1.8}
-.empty-serif{font-family:var(--serif);font-size:40px;font-style:italic;font-weight:300;color:var(--border2);margin-bottom:12px}
+.empty{text-align:center;padding:60px 24px;color:var(–text3);font-size:14px;line-height:1.8}
+.empty-serif{font-family:var(–serif);font-size:40px;font-style:italic;font-weight:300;color:var(–border2);margin-bottom:12px}
 
 /* tab bar */
-.tab-bar{position:absolute;bottom:0;left:0;right:0;background:var(--bg);border-top:0.5px solid var(--border);display:flex;z-index:25;padding-bottom:max(env(safe-area-inset-bottom, 16px), 20px)}
-.tab-bar-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 10px;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:500;color:var(--text3);transition:color var(--dur),opacity var(--dur);letter-spacing:.03em;opacity:.45}
+.tab-bar{position:absolute;bottom:0;left:0;right:0;background:var(–bg);border-top:0.5px solid var(–border);display:flex;z-index:25;padding-bottom:max(env(safe-area-inset-bottom, 16px), 20px)}
+.tab-bar-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 10px;background:none;border:none;cursor:pointer;font-family:var(–sans);font-size:10px;font-weight:500;color:var(–text3);transition:color var(–dur),opacity var(–dur);letter-spacing:.03em;opacity:.45}
 .tab-bar-btn svg{width:22px;height:22px}
-.tab-bar-btn.on{color:var(--blue);opacity:1;font-weight:600}
-.tab-bar-btn .tbb-dot{width:5px;height:5px;border-radius:50%;background:var(--red);position:absolute;top:8px;right:calc(50% - 18px)}
+.tab-bar-btn.on{color:var(–blue);opacity:1;font-weight:600}
+.tab-bar-btn .tbb-dot{width:5px;height:5px;border-radius:50%;background:var(–red);position:absolute;top:8px;right:calc(50% - 18px)}
 
 /* tasks all screen */
 .tasks-all-body{flex:1;overflow-y:auto;padding:14px 16px 120px;display:flex;flex-direction:column;gap:16px}
 .tg-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .tg-proj-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.tg-proj-name{font-size:13px;font-weight:500;color:var(--text2);flex:1}
-.tg-proj-link{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--sans)}
-.tall-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--card);border:0.5px solid var(--border);border-radius:var(--r-sm);box-shadow:var(--sh)}
+.tg-proj-name{font-size:13px;font-weight:500;color:var(–text2);flex:1}
+.tg-proj-link{font-size:12px;color:var(–blue);background:none;border:none;cursor:pointer;font-family:var(–sans)}
+.tall-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(–card);border:0.5px solid var(–border);border-radius:var(–r-sm);box-shadow:var(–sh)}
 .tall-item+.tall-item{margin-top:6px}
 .tall-prio-bar{width:3px;border-radius:2px;align-self:stretch;flex-shrink:0;min-height:20px}
-.prio-hi{background:var(--red)}
-.prio-med{background:var(--border2)}
-.prio-lo{background:var(--blue-s)}
-
-
+.prio-hi{background:var(–red)}
+.prio-med{background:var(–border2)}
+.prio-lo{background:var(–blue-s)}
 
 /* tasks filter — segmented control */
-.filter-wrap{flex-shrink:0;padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;flex-direction:column;gap:8px}
-.seg-control{display:flex;background:var(--card2);border-radius:9px;padding:2px;gap:2px;flex-shrink:0}
-.seg-btn{flex:1;padding:6px 10px;border:none;background:none;border-radius:7px;font-size:12px;font-weight:500;font-family:var(--sans);color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap;text-align:center}
-.seg-btn.on{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.1),0 0.5px 0 rgba(0,0,0,0.05)}
+.filter-wrap{flex-shrink:0;padding:12px 16px;border-bottom:0.5px solid var(–border);display:flex;flex-direction:column;gap:8px}
+.seg-control{display:flex;background:var(–card2);border-radius:9px;padding:2px;gap:2px;flex-shrink:0}
+.seg-btn{flex:1;padding:6px 10px;border:none;background:none;border-radius:7px;font-size:12px;font-weight:500;font-family:var(–sans);color:var(–text3);cursor:pointer;transition:all .15s;white-space:nowrap;text-align:center}
+.seg-btn.on{background:var(–card);color:var(–text);box-shadow:0 1px 3px rgba(0,0,0,0.1),0 0.5px 0 rgba(0,0,0,0.05)}
 .proj-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:1px 0}
 .proj-scroll::-webkit-scrollbar{display:none}
-.proj-chip{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;font-family:var(--sans);color:var(--text2);background:var(--card2);border:0.5px solid var(--border);cursor:pointer;white-space:nowrap;transition:all .15s}
-.proj-chip.on{background:var(--card);border-color:var(--border2);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+.proj-chip{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;font-family:var(–sans);color:var(–text2);background:var(–card2);border:0.5px solid var(–border);cursor:pointer;white-space:nowrap;transition:all .15s}
+.proj-chip.on{background:var(–card);border-color:var(–border2);color:var(–text);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
 /* finance calculator */
-.fin-summary{background:var(--green-s);border:0.5px solid var(--green);border-radius:var(--r-sm);padding:12px 14px;margin:10px 16px 4px;display:flex;gap:16px}
+.fin-summary{background:var(–green-s);border:0.5px solid var(–green);border-radius:var(–r-sm);padding:12px 14px;margin:10px 16px 4px;display:flex;gap:16px}
 .fin-sum-item{display:flex;flex-direction:column;gap:2px;flex:1}
-.fin-sum-label{font-size:10px;font-weight:500;color:var(--green);text-transform:uppercase;letter-spacing:.06em}
-.fin-sum-val{font-size:18px;font-weight:500;color:var(--green);font-variant-numeric:tabular-nums}
-.fin-item{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-top:0.5px solid var(--border)}
+.fin-sum-label{font-size:10px;font-weight:500;color:var(–green);text-transform:uppercase;letter-spacing:.06em}
+.fin-sum-val{font-size:18px;font-weight:500;color:var(–green);font-variant-numeric:tabular-nums}
+.fin-item{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-top:0.5px solid var(–border)}
 .fin-left{flex:1;min-width:0}
-.fin-name{font-size:14px;font-weight:500;color:var(--text)}
+.fin-name{font-size:14px;font-weight:500;color:var(–text)}
 .fin-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:3px}
 .fin-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.04em}
-.fin-amount{font-size:13px;font-weight:500;color:var(--text2);margin-top:2px}
+.fin-amount{font-size:13px;font-weight:500;color:var(–text2);margin-top:2px}
 
 /* project theme colors */
-.proj-theme-blue{--pt:#0071E3;--pt-s:rgba(0,113,227,0.08)}
-.proj-theme-green{--pt:#1A7F37;--pt-s:rgba(26,127,55,0.08)}
-.proj-theme-pink{--pt:#DB2777;--pt-s:rgba(219,39,119,0.08)}
-.proj-theme-yellow{--pt:#B45309;--pt-s:rgba(180,83,9,0.09)}
-.proj-theme-purple{--pt:#7C3AED;--pt-s:rgba(124,58,237,0.09)}
-.proj-theme-orange{--pt:#C2410C;--pt-s:rgba(194,65,12,0.09)}
+.proj-theme-blue{–pt:#0071E3;–pt-s:rgba(0,113,227,0.08)}
+.proj-theme-green{–pt:#1A7F37;–pt-s:rgba(26,127,55,0.08)}
+.proj-theme-pink{–pt:#DB2777;–pt-s:rgba(219,39,119,0.08)}
+.proj-theme-yellow{–pt:#B45309;–pt-s:rgba(180,83,9,0.09)}
+.proj-theme-purple{–pt:#7C3AED;–pt-s:rgba(124,58,237,0.09)}
+.proj-theme-orange{–pt:#C2410C;–pt-s:rgba(194,65,12,0.09)}
 .color-swatch{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
-.color-swatch.selected{border-color:var(--text);transform:scale(1.15)}
-.proj-card.has-theme{border-left:3px solid var(--pt,var(--blue))}
+.color-swatch.selected{border-color:var(–text);transform:scale(1.15)}
+.proj-card.has-theme{border-left:3px solid var(–pt,var(–blue))}
 /* status colors */
 .dot-spark{background:#A57CF9}.dot-exploring{background:#D4A72C}.dot-active{background:#3FB950}.dot-delegated{background:#4C9EEB}.dot-done{background:#8A877F}
-.pill-spark{background:var(--purple-s);color:var(--purple)}.pill-exploring{background:var(--amber-s);color:var(--amber)}.pill-active{background:var(--green-s);color:var(--green)}.pill-delegated{background:var(--blue-s);color:var(--blue)}.pill-done{background:var(--card2);color:var(--text2)}
+.pill-spark{background:var(–purple-s);color:var(–purple)}.pill-exploring{background:var(–amber-s);color:var(–amber)}.pill-active{background:var(–green-s);color:var(–green)}.pill-delegated{background:var(–blue-s);color:var(–blue)}.pill-done{background:var(–card2);color:var(–text2)}
 </style>
 
   <!-- Firebase -->
+
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
     import { getFirestore, doc, setDoc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -363,14 +364,16 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
     window.firebaseReady = true;
     window.dispatchEvent(new Event('firebase-ready'));
   </script>
+
 </head>
 <body>
 <div id="app">
 
 <!-- LIST -->
+
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.4</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.5</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -387,6 +390,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 </div>
 
 <!-- DETAIL -->
+
 <div id="s-detail" class="screen">
   <div class="topbar">
     <button class="back-btn" onclick="showList()">
@@ -416,104 +420,108 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
         <button id="d-client-badge" onclick="editClient()" style="font-size:11px;font-weight:500;color:var(--text3);background:var(--card2);padding:4px 10px;border-radius:14px;border:0.5px solid var(--border);cursor:pointer;font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em">+ zadavatel</button>
       </div>
 
-      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
-        <button id="detail-color-btn" onclick="openColorChange()" style="width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);box-shadow:0 0 0 1.5px var(--border);cursor:pointer;background:#0071E3;flex-shrink:0;margin-top:13px;padding:0" title="Změnit barvu"></button>
-        <textarea class="detail-title" id="d-title" rows="1" oninput="ar(this);saveF('name',this.value)" style="flex:1;margin-bottom:0;border-bottom:none"></textarea>
-      </div>
-      <textarea class="detail-desc" id="d-desc" rows="2" oninput="ar(this);saveF('desc',this.value)"></textarea>
+```
+  <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
+    <button id="detail-color-btn" onclick="openColorChange()" style="width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);box-shadow:0 0 0 1.5px var(--border);cursor:pointer;background:#0071E3;flex-shrink:0;margin-top:13px;padding:0" title="Změnit barvu"></button>
+    <textarea class="detail-title" id="d-title" rows="1" oninput="ar(this);saveF('name',this.value)" style="flex:1;margin-bottom:0;border-bottom:none"></textarea>
+  </div>
+  <textarea class="detail-desc" id="d-desc" rows="2" oninput="ar(this);saveF('desc',this.value)"></textarea>
 
-      <div class="url-row">
-        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        <input class="url-input" id="d-url" type="url" placeholder="https://..." oninput="saveF('url',this.value)">
-        <button class="url-open" id="url-open-btn" onclick="openUrl()" style="display:none">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </button>
-      </div>
+  <div class="url-row">
+    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+    <input class="url-input" id="d-url" type="url" placeholder="https://..." oninput="saveF('url',this.value)">
+    <button class="url-open" id="url-open-btn" onclick="openUrl()" style="display:none">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </button>
+  </div>
+</div>
+<!-- ACTION ZONE: Úkoly + Nápady -->
+<div class="action-zone" id="action-zone">
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <span id="lbl-tasks">Úkoly</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('task')" id="add-task-btn">+ přidat</button>
     </div>
-    <!-- ACTION ZONE: Úkoly + Nápady -->
-    <div class="action-zone" id="action-zone">
-      <div class="det-section">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-            <span id="lbl-tasks">Úkoly</span>
-          </span>
-          <button class="add-lnk" onclick="openSheet('task')" id="add-task-btn">+ přidat</button>
-        </div>
-        <div id="task-list"></div>
-      </div>
-      <div class="det-section" id="sec-improvements" style="border-bottom:none">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <span id="lbl-impr">Nápady na zlepšení</span>
-          </span>
-          <button class="add-lnk" onclick="openSheet('impr')" id="add-impr-btn">+ přidat</button>
-        </div>
-        <div id="impr-list"></div>
-      </div>
+    <div id="task-list"></div>
+  </div>
+  <div class="det-section" id="sec-improvements" style="border-bottom:none">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span id="lbl-impr">Nápady na zlepšení</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('impr')" id="add-impr-btn">+ přidat</button>
     </div>
+    <div id="impr-list"></div>
+  </div>
+</div>
 
-    <!-- PLANNING ZONE: Detail -->
-    <div class="planning-zone">
-      <div class="det-section" style="padding-bottom:0">
-        <div class="det-sec-head" style="padding-bottom:8px">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            <span id="lbl-think">Rozpad myšlenky</span>
-          </span>
-        </div>
-        <div class="think-tab-bar" id="think-tab-bar"></div>
-        <div id="think-panel-content"></div>
-      </div>
-      <div class="det-section">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-            <span id="lbl-ins">Zápisky z terénu</span>
-          </span>
-          <button class="add-lnk" onclick="openSheet('ins')" id="add-ins-btn">+ přidat zápis</button>
-        </div>
-        <div id="ins-list"></div>
-      </div>
-      <div class="det-section">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-            <span id="lbl-costs">Náklady</span>
-          </span>
-          <button class="add-lnk" onclick="openSheet('fin')" id="add-fin-btn">+ přidat</button>
-        </div>
-        <div id="fin-list"></div>
-      </div>
-      <div class="det-section">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-            <span id="lbl-res">Zdroje</span>
-          </span>
-          <button class="add-lnk" onclick="openSheet('res')" id="add-res-btn">+ přidat</button>
-        </div>
-        <div id="res-list"></div>
-      </div>
-      <div class="det-section" style="border-bottom:none">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span id="lbl-cl">Changelog</span>
-          </span>
-          <button class="add-lnk" onclick="openSheet('cl')" id="add-cl-btn">+ záznam</button>
-        </div>
-        <div id="cl-list"></div>
-      </div>
+<!-- PLANNING ZONE: Detail -->
+<div class="planning-zone">
+  <div class="det-section" style="padding-bottom:0">
+    <div class="det-sec-head" style="padding-bottom:8px">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span id="lbl-think">Rozpad myšlenky</span>
+      </span>
     </div>
-    </div><!-- end planning-zone -->
+    <div class="think-tab-bar" id="think-tab-bar"></div>
+    <div id="think-panel-content"></div>
+  </div>
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        <span id="lbl-ins">Zápisky z terénu</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('ins')" id="add-ins-btn">+ přidat zápis</button>
+    </div>
+    <div id="ins-list"></div>
+  </div>
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <span id="lbl-costs">Náklady</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('fin')" id="add-fin-btn">+ přidat</button>
+    </div>
+    <div id="fin-list"></div>
+  </div>
+  <div class="det-section">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        <span id="lbl-res">Zdroje</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('res')" id="add-res-btn">+ přidat</button>
+    </div>
+    <div id="res-list"></div>
+  </div>
+  <div class="det-section" style="border-bottom:none">
+    <div class="det-sec-head">
+      <span class="det-sec-label">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="lbl-cl">Changelog</span>
+      </span>
+      <button class="add-lnk" onclick="openSheet('cl')" id="add-cl-btn">+ záznam</button>
+    </div>
+    <div id="cl-list"></div>
+  </div>
+</div>
+</div><!-- end planning-zone -->
+```
+
   </div>
 
 <!-- TASKS ALL SCREEN -->
+
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.4</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.5</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
@@ -542,6 +550,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 </div>
 
 <!-- TAB BAR -->
+
 <div class="tab-bar" id="tab-bar">
   <button class="tab-bar-btn on" id="tbb-projects" onclick="switchTab('projects')">
     <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -569,6 +578,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 </div>
 
 <!-- SHEETS -->
+
 <div class="overlay" id="ov-proj" onclick="ovc(event,'ov-proj')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
   <div class="sh-title" id="sh-proj-t">Nový nápad</div>
   <div class="field"><label id="fl-name">Název</label><input id="f-name" type="text"></div>
@@ -579,13 +589,19 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
   </div>
   <div class="field">
     <label id="fl-color">Barva</label>
-    <div style="display:flex;gap:10px;align-items:center;padding:4px 0" id="color-picker">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:4px 0" id="color-picker">
       <div class="color-swatch selected" data-color="blue" style="background:#0071E3" onclick="selectColor('blue',this)"></div>
+      <div class="color-swatch" data-color="teal" style="background:#0891B2" onclick="selectColor('teal',this)"></div>
       <div class="color-swatch" data-color="green" style="background:#1A7F37" onclick="selectColor('green',this)"></div>
-      <div class="color-swatch" data-color="pink" style="background:#DB2777" onclick="selectColor('pink',this)"></div>
-      <div class="color-swatch" data-color="yellow" style="background:#B45309" onclick="selectColor('yellow',this)"></div>
-      <div class="color-swatch" data-color="purple" style="background:#7C3AED" onclick="selectColor('purple',this)"></div>
+      <div class="color-swatch" data-color="amber" style="background:#D97706" onclick="selectColor('amber',this)"></div>
       <div class="color-swatch" data-color="orange" style="background:#C2410C" onclick="selectColor('orange',this)"></div>
+      <div class="color-swatch" data-color="red" style="background:#DC2626" onclick="selectColor('red',this)"></div>
+      <div class="color-swatch" data-color="rose" style="background:#E11D48" onclick="selectColor('rose',this)"></div>
+      <div class="color-swatch" data-color="pink" style="background:#DB2777" onclick="selectColor('pink',this)"></div>
+      <div class="color-swatch" data-color="purple" style="background:#7C3AED" onclick="selectColor('purple',this)"></div>
+      <div class="color-swatch" data-color="violet" style="background:#9333EA" onclick="selectColor('violet',this)"></div>
+      <div class="color-swatch" data-color="yellow" style="background:#B45309" onclick="selectColor('yellow',this)"></div>
+      <div class="color-swatch" data-color="slate" style="background:#475569" onclick="selectColor('slate',this)"></div>
     </div>
   </div>
   <div class="sh-btns"><button class="btn-c" onclick="cs('ov-proj')" id="bc1">Zrušit</button><button class="btn-p" onclick="saveProj()" id="bs1">Uložit</button></div>
@@ -639,6 +655,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 </div></div></div>
 
 <!-- task prefill sheet (from checklist item) -->
+
 <div class="overlay" id="ov-task2" onclick="ovc(event,'ov-task2')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
   <div class="sh-title" id="sh-task2-t">Přesunout do úkolů</div>
   <div class="field"><label id="fl2-task-txt">Úkol</label><input id="f2-task-txt" type="text"></div>
@@ -651,8 +668,8 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
   <div class="sh-btns"><button class="btn-c" onclick="cs('ov-task2')" id="bc7">Zrušit</button><button class="btn-p" onclick="saveTask2()" id="bs7">Přesunout</button></div>
 </div></div></div>
 
-
 <!-- global task sheet -->
+
 <div class="overlay" id="ov-task-global" onclick="ovc(event,'ov-task-global')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
   <div class="sh-title" id="sh-tg-t">Nový úkol</div>
   <div class="field"><label id="fl-tg-proj">Projekt</label><select id="f-tg-proj"></select></div>
@@ -667,6 +684,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 </div></div></div>
 
 <!-- finance sheet -->
+
 <div class="overlay" id="ov-fin" onclick="ovc(event,'ov-fin')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
   <div class="sh-title" id="sh-fin-t">Nový náklad</div>
   <div class="field"><label id="fl-fin-name">Název</label><input id="f-fin-name" type="text" placeholder="např. Hosting, Designer..."></div>
@@ -701,44 +719,48 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
   <div class="sh-title" id="sh-settings-t">Nastavení</div>
 
   <!-- Theme -->
+
   <div style="margin-bottom:18px">
     <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" id="set-theme-lbl">Vzhled</div>
     <div style="display:flex;gap:8px">
-      <button onclick="setTheme('light')" id="set-light" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">☀️ Světlý</button>
-      <button onclick="setTheme('dark')" id="set-dark" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">🌙 Tmavý</button>
-      <button onclick="setTheme('auto')" id="set-auto" style="display:none" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)" id="set-auto">⚙️ Auto</button>
+      <button onclick="setTheme('light')" id="set-light" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span id="set-light-lbl">Světlý</span></button>
+      <button onclick="setTheme('dark')" id="set-dark" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span id="set-dark-lbl">Tmavý</span></button>
     </div>
   </div>
 
   <!-- Language -->
+
   <div style="margin-bottom:18px">
     <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" id="set-lang-lbl">Jazyk</div>
     <div style="display:flex;gap:8px">
-      <button onclick="setLang('cs')" id="set-cs" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">🇨🇿 Čeština</button>
-      <button onclick="setLang('en')" id="set-en" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)">🇬🇧 English</button>
+      <button onclick="setLang('cs')" id="set-cs" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.04em;cursor:pointer;color:var(--text2)">Čeština</button>
+      <button onclick="setLang('en')" id="set-en" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.04em;cursor:pointer;color:var(--text2)">English</button>
     </div>
   </div>
 
   <!-- Data -->
+
   <div style="margin-bottom:18px">
     <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" id="set-data-lbl">Data</div>
     <div style="display:flex;gap:8px">
-      <button onclick="exportAllData()" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2)" id="set-export-btn">📤 Export JSON</button>
-      <label style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2);text-align:center;display:flex;align-items:center;justify-content:center" id="set-import-btn">
-        📥 Import JSON
+      <button onclick="exportAllData()" style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center" id="set-export-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span id="set-export-lbl">Export</span></button>
+      <label style="flex:1;padding:10px;border-radius:var(--r-sm);border:0.5px solid var(--border);background:var(--card2);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center" id="set-import-btn">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span id="set-import-lbl">Import</span>
         <input type="file" accept=".json" onchange="importAllData(event)" style="display:none">
       </label>
     </div>
   </div>
 
   <!-- Reset theme -->
+
   <div style="margin-bottom:18px">
-    <button onclick="resetTheme()" style="width:100%;padding:11px;background:var(--red-s);color:var(--red);border:0.5px solid var(--red);border-radius:var(--r-sm);font-size:14px;font-family:var(--sans);cursor:pointer">
-      🔄 Resetovat téma (světlý)
+    <button onclick="resetTheme()" style="width:100%;padding:11px;background:var(--red-s);color:var(--red);border:0.5px solid var(--red);border-radius:var(--r-sm);font-size:14px;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center" id="set-reset-btn">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg><span id="set-reset-lbl">Resetovat téma</span>
     </button>
   </div>
 
   <!-- Version -->
+
   <div style="border-top:0.5px solid var(--border);padding-top:16px;text-align:center">
     <div style="font-family:var(--serif);font-size:18px;font-style:italic;font-weight:300;color:var(--text2);margin-bottom:4px">Idea <em>Storage</em></div>
     <div style="font-size:12px;color:var(--text3);font-family:var(--sans)" id="ver-string"></div>
@@ -749,17 +771,37 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 </div></div></div>
 
 <!-- Color picker overlay -->
+
 <div class="overlay" id="ov-color" onclick="ovc(event,'ov-color')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
-  <div class="sh-title">Barva projektu</div>
-  <div style="display:flex;gap:14px;align-items:center;justify-content:center;padding:24px 0">
-    <div class="cc-sw" data-color="blue" style="background:#0071E3;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('blue')"></div>
-    <div class="cc-sw" data-color="green" style="background:#1A7F37;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('green')"></div>
-    <div class="cc-sw" data-color="pink" style="background:#DB2777;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('pink')"></div>
-    <div class="cc-sw" data-color="yellow" style="background:#B45309;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('yellow')"></div>
-    <div class="cc-sw" data-color="purple" style="background:#7C3AED;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('purple')"></div>
-    <div class="cc-sw" data-color="orange" style="background:#C2410C;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('orange')"></div>
+  <div class="sh-title" id="ov-color-title">Barva projektu</div>
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px;justify-items:center;padding:24px 8px">
+    <div class="cc-sw" data-color="blue" style="background:#0071E3" onclick="chooseProjColor('blue')"></div>
+    <div class="cc-sw" data-color="teal" style="background:#0891B2" onclick="chooseProjColor('teal')"></div>
+    <div class="cc-sw" data-color="green" style="background:#1A7F37" onclick="chooseProjColor('green')"></div>
+    <div class="cc-sw" data-color="amber" style="background:#D97706" onclick="chooseProjColor('amber')"></div>
+    <div class="cc-sw" data-color="orange" style="background:#C2410C" onclick="chooseProjColor('orange')"></div>
+    <div class="cc-sw" data-color="red" style="background:#DC2626" onclick="chooseProjColor('red')"></div>
+    <div class="cc-sw" data-color="rose" style="background:#E11D48" onclick="chooseProjColor('rose')"></div>
+    <div class="cc-sw" data-color="pink" style="background:#DB2777" onclick="chooseProjColor('pink')"></div>
+    <div class="cc-sw" data-color="purple" style="background:#7C3AED" onclick="chooseProjColor('purple')"></div>
+    <div class="cc-sw" data-color="violet" style="background:#9333EA" onclick="chooseProjColor('violet')"></div>
+    <div class="cc-sw" data-color="yellow" style="background:#B45309" onclick="chooseProjColor('yellow')"></div>
+    <div class="cc-sw" data-color="slate" style="background:#475569" onclick="chooseProjColor('slate')"></div>
   </div>
-  <button class="btn-c" style="width:100%" onclick="cs('ov-color')">Zavřít</button>
+  <button class="btn-c" style="width:100%" onclick="cs('ov-color')" id="ov-color-close">Zavřít</button>
+</div></div></div>
+
+<!-- Client edit overlay -->
+
+<div class="overlay" id="ov-client" onclick="ovc(event,'ov-client')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
+  <div class="sh-title" id="ov-client-title">Zadavatel projektu</div>
+  <div class="field" style="margin-top:8px">
+    <input id="f-client-edit" type="text" placeholder="Job, Klient X, Sám..." style="width:100%">
+  </div>
+  <div style="display:flex;gap:8px;margin-top:14px">
+    <button class="btn-c" style="flex:1" onclick="cs('ov-client')" id="ov-client-cancel">Zrušit</button>
+    <button class="btn-s" style="flex:1" onclick="saveClient()" id="ov-client-save">Uložit</button>
+  </div>
 </div></div></div>
 
 <div class="toast" id="toast"></div>
@@ -767,7 +809,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '3.4.0';
+const APP_VERSION = '3.5.0';
 const APP_BUILD = '2026-05-16';
 
 const L={
@@ -981,8 +1023,14 @@ function renderList(){
     const tasks=p.tasks||[];const done=tasks.filter(t=>t.done).length;
     const res=(p.resources||[]).length;const isDone=p.status==='done';
     const ni=si+1;const hasNext=ni<l.sk.length;
-    return `<div class="proj-card" onclick="openDetail('${p.id}')">
-      <div class="card-row1"><span class="status-dot dot-${p.status}"><\/span><span class="proj-title">${esc(p.name||'')}<\/span><\/div>
+    const _colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
+    const _projColor = p.color&&_colorMap[p.color]?_colorMap[p.color]:'';
+    return `<div class="proj-card" onclick="openDetail('${p.id}')" style="${_projColor?`border-left:3px solid ${_projColor};`:''}">
+      <div class="card-row1">
+        ${_projColor?`<span class="proj-color-dot" style="background:${_projColor}"><\/span>`:`<span class="status-dot dot-${p.status}"><\/span>`}
+        <span class="proj-title">${esc(p.name||'')}<\/span>
+        ${p.client?`<span class="proj-client-badge">${esc(p.client)}<\/span>`:''}
+      <\/div>
       ${p.desc?`<div class="proj-sub">${esc(p.desc)}<\/div>`:''}
       <div class="card-footer">
         <div class="card-chips">
@@ -1058,7 +1106,7 @@ function renderDetail(p){
   const ue=document.getElementById('d-url');ue.value=p.url||'';ue.placeholder=l.urlPh;
   document.getElementById('url-open-btn').style.display=p.url?'flex':'none';
   // Apply color theme to action zone and hero
-  const _themeColors={blue:{bg:'rgba(0,113,227,0.08)',col:'#0071E3'},green:{bg:'rgba(26,127,55,0.08)',col:'#1A7F37'},pink:{bg:'rgba(219,39,119,0.08)',col:'#DB2777'},yellow:{bg:'rgba(180,83,9,0.08)',col:'#B45309'},purple:{bg:'rgba(124,58,237,0.08)',col:'#7C3AED'},orange:{bg:'rgba(194,65,12,0.08)',col:'#C2410C'}};
+  const _themeColors={blue:{bg:'rgba(0,113,227,0.08)',col:'#0071E3'},green:{bg:'rgba(26,127,55,0.08)',col:'#1A7F37'},pink:{bg:'rgba(219,39,119,0.08)',col:'#DB2777'},yellow:{bg:'rgba(180,83,9,0.08)',col:'#B45309'},purple:{bg:'rgba(124,58,237,0.08)',col:'#7C3AED'},orange:{bg:'rgba(194,65,12,0.08)',col:'#C2410C'},red:{bg:'rgba(220,38,38,0.08)',col:'#DC2626'},teal:{bg:'rgba(8,145,178,0.08)',col:'#0891B2'},amber:{bg:'rgba(217,119,6,0.08)',col:'#D97706'},violet:{bg:'rgba(147,51,234,0.08)',col:'#9333EA'},rose:{bg:'rgba(225,29,72,0.08)',col:'#E11D48'},slate:{bg:'rgba(71,85,105,0.08)',col:'#475569'}};
   const _theme=p.color&&_themeColors[p.color]?_themeColors[p.color]:null;
   const _heroEl=document.getElementById('detail-hero-el');
   const _actionEl=document.getElementById('action-zone');
@@ -1450,7 +1498,7 @@ function renderTasks(p){
       <\/div>
     <\/div>` : '';
   const projColor=p.color||null;
-  const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'};
+  const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
   const borderStyle=projColor&&colorMap[projColor]?`border-left:3px solid ${colorMap[projColor]};`:'';
   el.innerHTML=(visibleTasks.length ? visibleTasks.map(t=>`<div class="task-item" style="${borderStyle}">
     <div class="t-check${t.done?' chk':''}" onclick="togTask('${t.id}')">
@@ -1589,8 +1637,23 @@ function chooseProjColor(color){
 
 function editClient(){
   const p=projects.find(x=>x.id===curId);if(!p)return;
-  const v=prompt(lang==='cs'?'Zadavatel projektu:':'Project owner/client:',p.client||'');
-  if(v!==null){p.client=v.trim();saveD(projects);renderDetail(p);}
+  const inp=document.getElementById('f-client-edit');
+  if(inp){
+    inp.value=p.client||'';
+    setTimeout(()=>inp.focus(),100);
+  }
+  openOv('ov-client');
+}
+
+function saveClient(){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const inp=document.getElementById('f-client-edit');
+  if(!inp)return;
+  p.client=inp.value.trim();
+  saveD(projects);
+  cs('ov-client');
+  renderDetail(p);
+  renderList();
 }
 
 function saveProj(){
@@ -1793,7 +1856,7 @@ function setTaskFilter(type, val) {
 function buildProjFilterBar() {
   const bar = document.getElementById('filter-bar-proj'); if(!bar) return;
   const allLabel = lang==='cs'?'Vše':'All';
-  const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'};
+  const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
   const chips = [{id:'all', name:allLabel},...projects.map(p=>({id:p.id,name:p.name||'—',status:p.status,color:p.color}))];
   bar.innerHTML = chips.map(p=>{
     let dot='';
@@ -1864,7 +1927,7 @@ function renderTasksAll() {
         <button class="tg-proj-link" onclick="openDetail('${p.id}');switchTabBar('hide')">${l.sl[si] || p.status} →<\/button>
       <\/div>
       ${g.tasks.map(t => `
-        <div class="tall-item" style="${p.color&&{blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'}[p.color]?`border-left:3px solid ${({blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'})[p.color]};padding-left:11px;`:''}">
+        <div class="tall-item" style="${p.color&&{blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'}[p.color]?`border-left:3px solid ${({blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'})[p.color]};padding-left:11px;`:''}">
           <div class="tall-prio-bar prio-${t.prio || 'med'}"><\/div>
           <div class="t-check${t.done ? ' chk' : ''}" onclick="togTaskAll('${p.id}','${t.id}')" style="margin-top:0;flex-shrink:0">
             ${t.done ? `<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>` : ''}
@@ -1922,8 +1985,8 @@ function openSettings(){
   const tl=document.getElementById('set-theme-lbl');if(tl)tl.textContent=lang==='cs'?'Vzhled':'Appearance';
   const ll=document.getElementById('set-lang-lbl');if(ll)ll.textContent=lang==='cs'?'Jazyk':'Language';
   const dl=document.getElementById('set-data-lbl');if(dl)dl.textContent=lang==='cs'?'Data':'Data';
-  const eb=document.getElementById('set-export-btn');if(eb)eb.textContent=lang==='cs'?'📤 Export JSON':'📤 Export JSON';
-  const ib=document.getElementById('set-import-btn');if(ib)ib.childNodes[0].textContent=lang==='cs'?'📥 Import JSON':'📥 Import JSON';
+  const eb=document.getElementById('set-export-btn');const exl=document.getElementById('set-export-lbl');if(exl)exl.textContent=lang==='cs'?'Export':'Export';
+  const ib=document.getElementById('set-import-btn');const iml=document.getElementById('set-import-lbl');if(iml)iml.textContent=lang==='cs'?'Import':'Import';
   const cb=document.getElementById('bc-settings');if(cb)cb.textContent=lang==='cs'?'Zavřít':'Close';
   openOv('ov-settings');
 }
@@ -2046,5 +2109,6 @@ if(window.firebaseReady) {
 }
 
 </script>
+
 </body>
 </html>
