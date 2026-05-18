@@ -95,7 +95,9 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 
 /* list */
 .list-body{flex:1;overflow-y:auto;padding:14px 16px 120px;display:flex;flex-direction:column;gap:12px}
-.proj-card{background:var(–card);border:1px solid var(–border);border-radius:var(–r);padding:16px;cursor:pointer;transition:transform var(–dur),box-shadow var(–dur);box-shadow:0 1px 3px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)}
+.proj-card{position:relative;background:var(–card);border:1px solid var(–border);border-radius:var(–r);padding:16px;cursor:pointer;transition:transform var(–dur),box-shadow var(–dur);box-shadow:0 1px 3px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);overflow:hidden}
+.proj-card.has-color{padding-left:22px}
+.proj-card.has-color::before{content:’’;position:absolute;left:0;top:0;bottom:0;width:5px;background:var(–card-stripe);border-radius:var(–r) 0 0 var(–r)}
 .proj-card:active{transform:scale(.985)}
 .proj-card:hover{box-shadow:var(–sh-lg)}
 .card-row1{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
@@ -305,7 +307,6 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 .proj-theme-orange{–pt:#C2410C;–pt-s:rgba(194,65,12,0.09)}
 .color-swatch{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
 .color-swatch.selected{border-color:var(–text);transform:scale(1.15)}
-.proj-card.has-theme{border-left:3px solid var(–pt,var(–blue))}
 /* status colors */
 .dot-spark{background:#A57CF9}.dot-exploring{background:#D4A72C}.dot-active{background:#3FB950}.dot-delegated{background:#4C9EEB}.dot-done{background:#8A877F}
 .pill-spark{background:var(–purple-s);color:var(–purple)}.pill-exploring{background:var(–amber-s);color:var(–amber)}.pill-active{background:var(–green-s);color:var(–green)}.pill-delegated{background:var(–blue-s);color:var(–blue)}.pill-done{background:var(–card2);color:var(–text2)}
@@ -373,7 +374,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.6</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.7</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -521,7 +522,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.6</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.7</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
@@ -809,7 +810,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '3.6.0';
+const APP_VERSION = '3.7.0';
 const APP_BUILD = '2026-05-16';
 
 const L={
@@ -1025,7 +1026,7 @@ function renderList(){
     const ni=si+1;const hasNext=ni<l.sk.length;
     const _colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
     const _projColor = p.color&&_colorMap[p.color]?_colorMap[p.color]:'';
-    return `<div class="proj-card" onclick="openDetail('${p.id}')" style="${_projColor?`box-shadow:inset 4px 0 0 0 ${_projColor},var(--sh);`:''}">
+    return `<div class="proj-card${_projColor?' has-color':''}" onclick="openDetail('${p.id}')" style="${_projColor?`--card-stripe:${_projColor};`:''}">
       <div class="card-row1">
         ${_projColor?`<span class="proj-color-dot" style="background:${_projColor}"><\/span>`:`<span class="status-dot dot-${p.status}"><\/span>`}
         <span class="proj-title">${esc(p.name||'')}<\/span>
