@@ -21,8 +21,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Idea Storage</title>
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1024' height='1024' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='230' fill='%231C1B18'/%3E%3Ctext x='512' y='640' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-weight='300' font-size='420' fill='rgba(255,255,255,0.45)'%3Eidea%3C/text%3E%3C/svg%3E">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='230' fill='%231C1B18'/%3E%3Ctext x='512' y='640' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-weight='300' font-size='420' fill='rgba(255,255,255,0.45)'%3Eidea%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="apple-touch-icon" sizes="1024x1024" href="idea_storage_icon.png">
+  <link rel="apple-touch-icon" href="idea_storage_icon.png">
+  <link rel="icon" type="image/png" href="idea_storage_icon.png">
+  <link rel="icon" type="image/svg+xml" href="idea_storage_icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -170,7 +172,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 
 /* checklist */
 .chk-list{padding:4px 0 2px}
-.chk-row{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--card);border-radius:var(--r-sm);margin-bottom:5px;box-shadow:var(--sh)}
+.chk-row{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--card);border-radius:var(--r-sm);margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border:0.5px solid var(--border)}
 .chk-row:last-child{border-bottom:none}
 .cb{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border2);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--dur);background:none}
 .cb.chk{background:var(--blue);border-color:var(--blue)}
@@ -210,7 +212,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 .res-status{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px}
 
 /* tasks */
-.task-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--card);border-radius:var(--r-sm);margin:0 16px 6px;box-shadow:var(--sh)}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--card);border-radius:var(--r-sm);margin:0 16px 8px;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);border:0.5px solid var(--border)}
 .t-check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(--dur)}
 .t-check.chk{background:var(--blue);border-color:var(--blue)}
 .t-body{flex:1;min-width:0}
@@ -368,7 +370,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 <!-- LIST -->
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v2.9</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.3</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -407,12 +409,17 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
           <span id="stage-lbl"></span>
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
         </button>
+        <button id="detail-color-btn" onclick="openColorChange()" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--border);cursor:pointer;background:#0071E3;margin-left:8px;flex-shrink:0" title="Změnit barvu"></button>
         <div class="stage-dropdown" id="stage-dd"></div>
       </div>
 
       <textarea class="detail-title" id="d-title" rows="1" oninput="ar(this);saveF('name',this.value)"></textarea>
       <textarea class="detail-desc" id="d-desc" rows="2" oninput="ar(this);saveF('desc',this.value)"></textarea>
 
+      <div id="d-client-row" style="margin-bottom:8px;font-size:13px;color:var(--text2);display:none">
+        <span style="font-weight:500">Zadavatel:</span> <span id="d-client-val"></span>
+        <button onclick="editClient()" style="margin-left:6px;background:none;border:none;color:var(--blue);font-size:12px;cursor:pointer;font-family:var(--sans);padding:0">upravit</button>
+      </div>
       <div class="url-row">
         <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
         <input class="url-input" id="d-url" type="url" placeholder="https://..." oninput="saveF('url',this.value)">
@@ -504,7 +511,7 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
 <!-- TASKS ALL SCREEN -->
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v2.9</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v3.3</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
@@ -564,6 +571,10 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
   <div class="sh-title" id="sh-proj-t">Nový nápad</div>
   <div class="field"><label id="fl-name">Název</label><input id="f-name" type="text"></div>
   <div class="field"><label id="fl-desc">Popis</label><textarea id="f-desc"></textarea></div>
+  <div class="field">
+    <label id="fl-client">Zadavatel</label>
+    <input id="f-client" type="text" placeholder="Pro koho je projekt (např. Job, Klient X, Sám)">
+  </div>
   <div class="field">
     <label id="fl-color">Barva</label>
     <div style="display:flex;gap:10px;align-items:center;padding:4px 0" id="color-picker">
@@ -735,20 +746,34 @@ html{height:-webkit-fill-available;-webkit-text-size-adjust:100%;filter:none!imp
   <div style="margin-top:20px"><button class="btn-c" style="width:100%" onclick="cs('ov-settings')" id="bc-settings">Zavřít</button></div>
 </div></div></div>
 
+<!-- Color picker overlay -->
+<div class="overlay" id="ov-color" onclick="ovc(event,'ov-color')"><div class="sheet"><div class="sh-handle"></div><div class="sh-inner">
+  <div class="sh-title">Barva projektu</div>
+  <div style="display:flex;gap:14px;align-items:center;justify-content:center;padding:24px 0">
+    <div class="cc-sw" data-color="blue" style="background:#0071E3;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('blue')"></div>
+    <div class="cc-sw" data-color="green" style="background:#1A7F37;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('green')"></div>
+    <div class="cc-sw" data-color="pink" style="background:#DB2777;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('pink')"></div>
+    <div class="cc-sw" data-color="yellow" style="background:#B45309;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('yellow')"></div>
+    <div class="cc-sw" data-color="purple" style="background:#7C3AED;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('purple')"></div>
+    <div class="cc-sw" data-color="orange" style="background:#C2410C;width:42px;height:42px;border-radius:50%;cursor:pointer;border:2px solid var(--border)" onclick="chooseProjColor('orange')"></div>
+  </div>
+  <button class="btn-c" style="width:100%" onclick="cs('ov-color')">Zavřít</button>
+</div></div></div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '2.9.0';
+const APP_VERSION = '3.3.0';
 const APP_BUILD = '2026-05-16';
 
 const L={
 cs:{
   langBtn:'EN',back:'Zpět',fabLbl:'Nový nápad',searchPh:'Hledat...',
-  tabs:['Vše','Spark','Zkoumám','Aktivní','Delegováno','Hotovo'],
+  tabs:['Vše','Idea','Research','In progress','Delegated','Done'],
   sk:['spark','exploring','active','delegated','done'],
-  sl:['Spark','Zkoumám','Aktivní','Delegováno','Hotovo'],
+  sl:['Idea','Research','In progress','Delegated','Done'],
   doneLbl:'Hotovo ✓',prevStg:'← Zpět',
   lblThink:'Rozpad myšlenky',lblCosts:'Náklady',lblIns:'Zápisky z terénu',lblRes:'Zdroje',lblTasks:'Úkoly',lblCl:'Changelog',lblImpr:'Nápady na zlepšení',
   addIns:'+ přidat zápis',addRes:'+ přidat',addTask:'+ přidat',addCl:'+ záznam',addImpr:'+ přidat',
@@ -795,9 +820,9 @@ cs:{
 },
 en:{
   langBtn:'CS',back:'Back',fabLbl:'New idea',searchPh:'Search...',
-  tabs:['All','Spark','Exploring','Active','Delegated','Done'],
+  tabs:['All','Idea','Research','In progress','Delegated','Done'],
   sk:['spark','exploring','active','delegated','done'],
-  sl:['Spark','Exploring','Active','Delegated','Done'],
+  sl:['Idea','Research','In progress','Delegated','Done'],
   doneLbl:'Done ✓',prevStg:'← Back',
   lblThink:'Idea breakdown',lblCosts:'Náklady',lblIns:'Zápisky z terénu',lblRes:'Resources',lblTasks:'Tasks',lblCl:'Changelog',lblImpr:'Ideas for improvement',
   addIns:'+ add note',addRes:'+ add',addTask:'+ add',addCl:'+ entry',addImpr:'+ add',
@@ -874,6 +899,7 @@ function toggleLang(){
   localStorage.setItem('is-lang',lang);
   applyLang();renderTabs();renderList();
   if(curId){const p=projects.find(x=>x.id===curId);if(p)renderDetail(p);}
+  if(typeof renderTasksAll==='function')renderTasksAll();
 }
 
 function applyLang(){
@@ -884,7 +910,7 @@ function applyLang(){
   sp('search-input',l.searchPh);
   s('tbb-proj-lbl',lang==='cs'?'Projekty':'Projects');
   s('tbb-tasks-lbl',lang==='cs'?'Úkoly':'Tasks');
-  s('lbl-think',l.lblThink);s('fl-color',lang==='cs'?'Barva':'Color');s('lbl-ins',l.lblIns);s('lbl-costs',l.lblCosts||'Náklady');s('lbl-res',l.lblRes);s('lbl-tasks',l.lblTasks);s('lbl-cl',l.lblCl);s('lbl-impr',l.lblImpr);
+  s('lbl-think',l.lblThink);s('fl-color',lang==='cs'?'Barva':'Color');s('fl-client',lang==='cs'?'Zadavatel':'Client');s('lbl-ins',l.lblIns);s('lbl-costs',l.lblCosts||'Náklady');s('lbl-res',l.lblRes);s('lbl-tasks',l.lblTasks);s('lbl-cl',l.lblCl);s('lbl-impr',l.lblImpr);
   s('add-ins-btn',l.addIns);s('add-res-btn',l.addRes);s('add-task-btn',l.addTask);s('add-cl-btn',l.addCl);s('add-impr-btn',l.addImpr);
   s('sh-proj-t',l.shProjT);s('fl-name',l.flName);s('fl-desc',l.flDesc);
   s('sh-ins-t',l.shInsT);s('fl-ins-type',l.flInsType);s('fl-ins-txt',l.flInsTxt);
@@ -981,11 +1007,18 @@ function autoCl(p,si){
 // ── Detail ────────────────────────────────────────────────────────────────
 function openDetail(id){
   curId=id;const p=projects.find(x=>x.id===id);if(!p)return;
-  renderDetail(p);
+  // Make screen active FIRST so textareas can calculate height
   document.getElementById('s-list').className='screen behind';
   document.getElementById('s-tasks').className='screen';
   document.getElementById('s-detail').className='screen active';
   switchTabBar('hide');
+  // Then render after screen is visible
+  renderDetail(p);
+  // Force textarea autoresize after layout
+  requestAnimationFrame(()=>{
+    const te=document.getElementById('d-title');if(te)ar(te);
+    const de=document.getElementById('d-desc');if(de)ar(de);
+  });
 }
 function showList(){
   document.getElementById('s-detail').className='screen';
@@ -1002,6 +1035,10 @@ function showList(){
 }
 
 function renderDetail(p){
+  // Ensure detail screen is visible before rendering text fields
+  const detailScreen=document.getElementById('s-detail');
+  if(detailScreen && !detailScreen.classList.contains('active')) detailScreen.classList.add('active');
+
   const l=ll();const si=l.sk.indexOf(p.status);
   // pill
   const pill=document.getElementById('stage-pill');
@@ -1024,6 +1061,10 @@ function renderDetail(p){
   const _actionEl=document.getElementById('action-zone');
   if(_heroEl)_heroEl.style.background=_theme?_theme.bg:'';
   if(_actionEl){_actionEl.style.background=_theme?_theme.bg:'';_actionEl.style.borderBottomColor=_theme?_theme.col+'55':'var(--border)';}
+  const _colorBtn=document.getElementById('detail-color-btn');
+  if(_colorBtn)_colorBtn.style.background=_theme?_theme.col:'#0071E3';
+  const colorBtn=document.getElementById('detail-color-btn');
+  if(colorBtn)colorBtn.style.background=_theme?_theme.col:'#0071E3';
   renderImpr(p);renderThink(p);renderIns(p);renderFin(p);renderRes(p);renderTasks(p);renderCl(p);
 
 }
@@ -1405,7 +1446,10 @@ function renderTasks(p){
         <\/div>`).join('')}
       <\/div>
     <\/div>` : '';
-  el.innerHTML=(visibleTasks.length ? visibleTasks.map(t=>`<div class="task-item">
+  const projColor=p.color||null;
+  const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'};
+  const borderStyle=projColor&&colorMap[projColor]?`border-left:3px solid ${colorMap[projColor]};`:'';
+  el.innerHTML=(visibleTasks.length ? visibleTasks.map(t=>`<div class="task-item" style="${borderStyle}">
     <div class="t-check${t.done?' chk':''}" onclick="togTask('${t.id}')">
       ${t.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
     <\/div>
@@ -1521,9 +1565,35 @@ function selectColor(color, el){
   el.classList.add('selected');
 }
 
+function openColorChange(){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const ov=document.getElementById('ov-color');
+  if(!ov)return;
+  ov.querySelectorAll('.cc-sw').forEach(s=>{
+    s.style.outline=s.getAttribute('data-color')===(p.color||'blue')?'3px solid var(--text)':'none';
+  });
+  openOv('ov-color');
+}
+
+function chooseProjColor(color){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  p.color=color;
+  saveD(projects);
+  cs('ov-color');
+  renderDetail(p);
+  renderList();
+}
+
+function editClient(){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const v=prompt(lang==='cs'?'Zadavatel projektu:':'Project owner/client:',p.client||'');
+  if(v!==null){p.client=v.trim();saveD(projects);renderDetail(p);}
+}
+
 function saveProj(){
   const name=document.getElementById('f-name').value.trim();if(!name)return;
-  const p={id:uid(),name,desc:document.getElementById('f-desc').value.trim(),status:'spark',color:_selectedColor,url:'',think:{},checkData:{},improvements:[],insights:[],resources:[],finances:[],tasks:[],changelog:[{id:uid(),text:'Spark',date:new Date().toISOString()}]};
+  const client=document.getElementById('f-client')?.value.trim()||'';
+  const p={id:uid(),name,desc:document.getElementById('f-desc').value.trim(),client,status:'spark',color:_selectedColor,url:'',think:{},checkData:{},improvements:[],insights:[],resources:[],finances:[],tasks:[],changelog:[{id:uid(),text:'Idea',date:new Date().toISOString()}]};
   projects.unshift(p);saveD(projects);cs('ov-proj');
   _selectedColor='blue'; // reset
   document.querySelectorAll('.color-swatch').forEach((s,i)=>s.classList.toggle('selected',i===0));
@@ -1778,11 +1848,11 @@ function renderTasksAll() {
     return `<div>
       <div class="tg-header">
         <span class="tg-proj-dot dot-${p.status}"><\/span>
-        <span class="tg-proj-name">${esc(p.name || '')}<\/span>
+        <span class="tg-proj-name">${esc(p.name || '')}<\/span>${p.client?`<span style="font-size:11px;color:var(--text3);background:var(--card2);padding:2px 8px;border-radius:10px;margin-left:6px;font-family:var(--sans)">${esc(p.client)}<\/span>`:''}
         <button class="tg-proj-link" onclick="openDetail('${p.id}');switchTabBar('hide')">${l.sl[si] || p.status} →<\/button>
       <\/div>
       ${g.tasks.map(t => `
-        <div class="tall-item">
+        <div class="tall-item" style="${p.color&&{blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'}[p.color]?`border-left:3px solid ${({blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C'})[p.color]};padding-left:11px;`:''}">
           <div class="tall-prio-bar prio-${t.prio || 'med'}"><\/div>
           <div class="t-check${t.done ? ' chk' : ''}" onclick="togTaskAll('${p.id}','${t.id}')" style="margin-top:0;flex-shrink:0">
             ${t.done ? `<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>` : ''}
