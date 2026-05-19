@@ -111,6 +111,9 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 .cc-sw:hover{transform:scale(1.08)}
 .cc-sw:active{transform:scale(0.95)}
 .proj-color-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;box-shadow:0 0 0 1.5px var(--bg),0 0 0 2.5px rgba(0,0,0,0.08)}
+.proj-drag-handle{position:absolute;top:14px;right:14px;z-index:2;padding:6px;opacity:.25;transition:opacity .15s}
+.proj-drag-handle:hover{opacity:.8}
+.proj-card{position:relative}
 .proj-client-badge{font-size:10px;font-weight:500;color:var(--text3);background:var(--card2);padding:2px 8px;border-radius:10px;font-family:var(--sans);margin-left:auto;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .proj-sub{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:10px}
 .card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -189,7 +192,13 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 .chk-row:last-child{border-bottom:none}
 .cb{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border2);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--dur);background:none}
 .cb.chk{background:var(--blue);border-color:var(--blue)}
-.cb-lbl{font-size:13px;color:var(--text);flex:1;line-height:1.4;cursor:pointer;-webkit-user-select:none;user-select:none}
+.cb-lbl{font-size:13px;color:var(--text);flex:1;line-height:1.4;cursor:pointer;-webkit-user-select:none;user-select:none;word-break:break-word;white-space:pre-wrap}
+.drag-handle{cursor:grab;color:var(--text3);padding:2px 2px;display:flex;align-items:center;opacity:.5;transition:opacity .15s}
+.drag-handle:hover{opacity:1}
+.drag-handle:active{cursor:grabbing}
+.impr-row.dragging,.proj-card.dragging{opacity:.35;transform:scale(.97)}
+.impr-row.drag-over-top,.proj-card.drag-over-top{box-shadow:inset 0 3px 0 0 var(--blue),0 1px 3px rgba(0,0,0,0.05)}
+.impr-row.drag-over-bottom,.proj-card.drag-over-bottom{box-shadow:inset 0 -3px 0 0 var(--blue),0 1px 3px rgba(0,0,0,0.05)}
 .cb-lbl.done{text-decoration:line-through;color:var(--text3)}
 .cb-lbl-input{font-size:13px;color:var(--text);flex:1;line-height:1.4;background:none;border:none;outline:none;font-family:var(--sans);padding:0;width:100%}
 .cb-del{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;display:flex;flex-shrink:0;margin-top:1px}
@@ -226,6 +235,25 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 
 /* tasks */
 .task-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--card);border-radius:var(--r-sm);margin:0 16px 8px;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);border:0.5px solid var(--border)}
+.type-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.type-icon.idea-icon svg{stroke:#D97706}
+.type-icon.idea-icon{background:rgba(217,119,6,0.12)}
+.type-icon.bug-icon{background:rgba(220,38,38,0.12)}
+.type-icon.bug-icon svg{stroke:#DC2626}
+.type-icon.update-icon{background:rgba(124,58,237,0.12)}
+.type-icon.update-icon svg{stroke:#7C3AED}
+.type-icon.task-icon{background:rgba(0,113,227,0.12)}
+.type-icon.task-icon svg{stroke:#0071E3}
+/* Row inline type icon (in detail sections) */
+.row-type-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;flex-shrink:0;margin-right:2px}
+.row-type-icon.idea{color:#D97706;background:rgba(217,119,6,0.13)}
+.row-type-icon.bug{color:#DC2626;background:rgba(220,38,38,0.13)}
+.row-type-icon.update{color:#7C3AED;background:rgba(124,58,237,0.13)}
+.row-type-icon.task{color:#0071E3;background:rgba(0,113,227,0.13)}
+.type-icon.idea-icon{background:rgba(217,119,6,0.12)}
+.type-icon.bug-icon{background:rgba(220,38,38,0.12)}
+.type-icon.update-icon{background:rgba(124,58,237,0.12)}
+.type-icon.task-icon{background:rgba(0,113,227,0.12)}
 .t-check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(--dur)}
 .t-check.chk{background:var(--blue);border-color:var(--blue)}
 .t-body{flex:1;min-width:0}
@@ -291,25 +319,33 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 /* tasks filter — segmented control */
 .filter-wrap{flex-shrink:0;padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;flex-direction:column;gap:8px}
 /* Big type segment switcher */
-.ttype-bar{display:flex;gap:5px;padding:10px 16px 0;background:var(--bg);flex-shrink:0}
+.ttype-bar{display:flex;gap:5px;padding:10px 16px 4px;background:var(--bg);flex-shrink:0}
 .ttype-btn{flex:1;padding:9px 4px;background:var(--card2);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s;letter-spacing:.01em}
 .ttype-btn.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 .ttype-btn:active{transform:scale(.96)}
-/* Elegant filter cell */
-.filter-cell{margin:10px 16px 8px;padding:10px 12px;background:var(--card2);border-radius:12px;border:1px solid var(--border);display:flex;flex-direction:column;gap:8px;flex-shrink:0}
-.filter-row-top{display:flex;align-items:center;gap:8px}
-.filter-row-prio{display:flex;align-items:center;gap:8px;font-size:12px}
-.filter-label{font-size:10px;color:var(--text3);font-family:var(--sans);font-weight:500;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
-.search-iconbtn{width:32px;height:32px;border-radius:8px;background:var(--card);border:1px solid var(--border);cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
-.search-iconbtn:hover{color:var(--text);background:var(--card3)}
-.search-iconbtn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
-.search-task-input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;font-family:var(--sans);color:var(--text);outline:none;width:100%}
-.search-task-input:focus{border-color:var(--blue)}
-.prio-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:middle}
+/* Filter cell - elegant container with separated sections */
+.filter-area{margin:8px 16px 8px;background:var(--card);border-radius:14px;border:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,0.03);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.filt-row{display:flex;align-items:center;gap:6px;padding:8px 10px;min-height:38px}
+.filt-row + .filt-row{border-top:1px solid var(--border)}
+.filt-row-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:0 4px;flex-shrink:0;font-family:var(--sans)}
+.filt-pills{display:flex;align-items:center;gap:2px;flex:1;flex-wrap:wrap}
+.filt-pill{padding:5px 11px;background:transparent;border:none;border-radius:8px;font-family:var(--sans);font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;letter-spacing:.01em;white-space:nowrap;line-height:1.2}
+.filt-pill:hover{color:var(--text2);background:var(--card2)}
+.filt-pill.on{background:var(--text);color:var(--bg)}
+.filt-pill.on:hover{background:var(--text)}
+.filt-pills-sub .filt-pill{font-size:11px;padding:4px 10px}
+.filt-search-btn{width:30px;height:30px;border-radius:8px;background:transparent;border:none;cursor:pointer;color:var(--text3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;margin-left:auto}
+.filt-search-btn:hover{color:var(--text);background:var(--card2)}
+.filt-search-btn.active{color:var(--text);background:var(--card2)}
+.filt-search-input{flex:1;background:transparent;border:none;padding:5px 4px;font-size:13px;font-family:var(--sans);color:var(--text);outline:none;width:100%}
+.filt-search-input::placeholder{color:var(--text3)}
+.filt-proj-row{display:flex;align-items:center;padding:8px 10px;gap:6px;border-top:1px solid var(--border)}
+.filt-proj{flex:1;display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.filt-proj::-webkit-scrollbar{display:none}
+.prio-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .prio-hi-dot{background:#DC2626}
 .prio-med-dot{background:#94A3B8}
 .prio-lo-dot{background:#3B82F6}
-.seg-prio .seg-btn{padding:5px 9px;font-size:11px}
 .seg-control{display:flex;background:var(--card2);border-radius:9px;padding:2px;gap:2px;flex-shrink:0}
 .seg-btn{flex:1;padding:6px 10px;border:none;background:none;border-radius:7px;font-size:12px;font-weight:500;font-family:var(--sans);color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap;text-align:center}
 .seg-btn.on{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.1),0 0.5px 0 rgba(0,0,0,0.05)}
@@ -402,7 +438,7 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 <!-- LIST -->
 <div id="s-list" class="screen active">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v4.0</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v4.7</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn" onclick="toggleTheme()"><svg id="theme-btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt1" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')" title="Nastavení">
@@ -414,7 +450,7 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
   <div class="list-body" id="project-list"></div>
   <button class="fab" onclick="openSheet('proj')">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    <span id="fab-lbl">Nový nápad</span>
+    <span id="fab-lbl">Nový projekt</span>
   </button>
 </div>
 
@@ -462,19 +498,17 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
         </button>
       </div>
     </div>
+    <!-- Cost banner under hero -->
+    <div id="d-cost-summary" style="display:none;margin:0 16px 8px;padding:10px 14px;background:linear-gradient(135deg,rgba(26,127,55,0.08),rgba(26,127,55,0.03));border-radius:10px;border:1px solid rgba(26,127,55,0.18)">
+      <span style="font-size:13px;color:var(--green);font-family:var(--sans);font-weight:500;display:flex;align-items:center;gap:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9h20l-2 11H4L2 9z"/><path d="M6 9V6a4 4 0 014-4h4a4 4 0 014 4v3"/><circle cx="12" cy="14" r="2"/></svg>
+        <span id="d-cost-val"></span>
+      </span>
+    </div>
+
     <!-- ACTION ZONE: Úkoly + Nápady -->
     <div class="action-zone" id="action-zone">
-      <div class="det-section">
-        <div class="det-sec-head">
-          <span class="det-sec-label">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-            <span id="lbl-tasks">Úkoly</span>
-          </span>
-        </div>
-        <div id="task-list"></div>
-        <button class="add-bottom" onclick="openSheet('task')" id="add-task-btn-b">přidat úkol</button>
-      </div>
-      <div class="det-section" id="sec-improvements" style="border-bottom:none">
+      <div class="det-section" id="sec-improvements">
         <div class="det-sec-head">
           <span class="det-sec-label">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -485,7 +519,17 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
         <button class="add-bottom" onclick="openSheet('impr')" id="add-impr-btn-b">přidat nápad</button>
       </div>
       <!-- Bugfixy -->
-      <div class="det-section" style="border-bottom:none">
+      <div class="det-section">
+        <div class="det-sec-head">
+          <span class="det-sec-label">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <span id="lbl-tasks">Úkoly</span>
+          </span>
+        </div>
+        <div id="task-list"></div>
+        <button class="add-bottom" onclick="openSheet('task')" id="add-task-btn-b">přidat úkol</button>
+      </div>
+      <div class="det-section" >
         <div class="det-sec-head">
           <span class="det-sec-label">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 14l2 2 4-4"/></svg>
@@ -496,7 +540,7 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
         <button class="add-bottom" onclick="openSheet('bug')" id="add-bug-btn">přidat bug</button>
       </div>
       <!-- Updaty -->
-      <div class="det-section" style="border-bottom:none">
+      <div class="det-section" style="border-bottom:none" >
         <div class="det-sec-head">
           <span class="det-sec-label">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>
@@ -569,18 +613,18 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 <!-- TASKS ALL SCREEN -->
 <div id="s-tasks" class="screen">
   <div class="topbar">
-    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v4.0</span></span>
+    <span class="topbar-title">Idea <em>Storage</em> <span style="font-family:var(--sans);font-size:11px;color:var(--text3);font-style:normal;vertical-align:middle">v4.7</span></span>
     <button class="icon-btn theme-toggle-btn" id="theme-btn3" onclick="toggleTheme()"><svg id="theme-btn3-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="lang-btn" id="lt3" onclick="toggleLang()">EN</button>
     <button class="icon-btn" onclick="openSheet('settings')"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
   </div>
   <!-- BIG type segment switcher -->
   <div class="ttype-bar">
-    <button class="ttype-btn on" data-type="tasks" onclick="setTaskType('tasks')" id="ttype-tasks">
-      <span id="ttype-tasks-lbl">Úkoly</span>
-    </button>
-    <button class="ttype-btn" data-type="ideas" onclick="setTaskType('ideas')" id="ttype-ideas">
+    <button class="ttype-btn on" data-type="ideas" onclick="setTaskType('ideas')" id="ttype-ideas">
       <span id="ttype-ideas-lbl">Nápady</span>
+    </button>
+    <button class="ttype-btn" data-type="tasks" onclick="setTaskType('tasks')" id="ttype-tasks">
+      <span id="ttype-tasks-lbl">Úkoly</span>
     </button>
     <button class="ttype-btn" data-type="bugs" onclick="setTaskType('bugs')" id="ttype-bugs">
       <span id="ttype-bugs-lbl">Bugfixy</span>
@@ -590,34 +634,41 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
     </button>
   </div>
 
-  <!-- Elegant filter cell -->
-  <div class="filter-cell">
-    <div class="filter-row-top">
-      <div class="seg-control" id="filter-bar-status" style="flex:1">
-        <button class="seg-btn on" data-status="all" onclick="setTaskFilter('status','all')" id="fs-all">Vše</button>
-        <button class="seg-btn" data-status="open" onclick="setTaskFilter('status','open')" id="fs-open">Otevřené</button>
-        <button class="seg-btn" data-status="done" onclick="setTaskFilter('status','done')" id="fs-done">Hotové</button>
+  <!-- Filter cell - clean separated sections -->
+  <div class="filter-area">
+    <!-- Row 1: Stav + search -->
+    <div class="filt-row">
+      <span class="filt-row-label">Stav</span>
+      <div class="filt-pills" id="filter-bar-status">
+        <button class="filt-pill on" data-status="all" onclick="setTaskFilter('status','all')" id="fs-all">Vše</button>
+        <button class="filt-pill" data-status="open" onclick="setTaskFilter('status','open')" id="fs-open">Otevřené</button>
+        <button class="filt-pill" data-status="done" onclick="setTaskFilter('status','done')" id="fs-done">Hotové</button>
       </div>
-      <button class="search-iconbtn" id="search-toggle-btn" onclick="toggleTaskSearch()" title="Hledat">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <button class="filt-search-btn" id="search-toggle-btn" onclick="toggleTaskSearch()" title="Hledat">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
-      <input type="text" class="search-task-input" id="search-task-input" placeholder="Hledat..." oninput="onTaskSearch(this.value)" onblur="onTaskSearchBlur()" style="display:none">
+      <input type="text" class="filt-search-input" id="search-task-input" placeholder="Hledat…" oninput="onTaskSearch(this.value)" onblur="onTaskSearchBlur()" style="display:none">
     </div>
-    <div class="filter-row-prio" id="filter-row-prio">
-      <span class="filter-label">Priorita:</span>
-      <div class="seg-control seg-prio" id="filter-bar-prio">
-        <button class="seg-btn on" data-prio="all" onclick="setTaskFilter('prio','all')" id="fp-all">Vše</button>
-        <button class="seg-btn" data-prio="hi" onclick="setTaskFilter('prio','hi')"><span class="prio-dot prio-hi-dot"></span>Vys.</button>
-        <button class="seg-btn" data-prio="med" onclick="setTaskFilter('prio','med')"><span class="prio-dot prio-med-dot"></span>Stř.</button>
-        <button class="seg-btn" data-prio="lo" onclick="setTaskFilter('prio','lo')"><span class="prio-dot prio-lo-dot"></span>Níz.</button>
+    <!-- Row 2: Priorita pills (only for tasks/bugs) -->
+    <div class="filt-row" id="filter-row-prio">
+      <span class="filt-row-label">Priorita</span>
+      <div class="filt-pills filt-pills-sub" id="filter-bar-prio">
+        <button class="filt-pill on" data-prio="all" onclick="setTaskFilter('prio','all')" id="fp-all">Vše</button>
+        <button class="filt-pill" data-prio="hi" onclick="setTaskFilter('prio','hi')"><span class="prio-dot prio-hi-dot"></span>Vys.</button>
+        <button class="filt-pill" data-prio="med" onclick="setTaskFilter('prio','med')"><span class="prio-dot prio-med-dot"></span>Stř.</button>
+        <button class="filt-pill" data-prio="lo" onclick="setTaskFilter('prio','lo')"><span class="prio-dot prio-lo-dot"></span>Níz.</button>
       </div>
     </div>
-    <div class="proj-scroll" id="filter-bar-proj"></div>
+    <!-- Row 3: Projekty -->
+    <div class="filt-proj-row">
+      <span class="filt-row-label">Projekt</span>
+      <div class="proj-scroll filt-proj" id="filter-bar-proj"></div>
+    </div>
   </div>
   <div class="tasks-all-body" id="tasks-all-body"></div>
   <button class="fab" id="tasks-fab" onclick="openTaskFab()" style="display:none">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    <span id="fab-task-lbl">Nový úkol</span>
+    <span id="fab-task-lbl">Nový nápad</span>
   </button>
 </div>
 
@@ -882,12 +933,12 @@ html{height:100%;-webkit-text-size-adjust:100%}body{height:100%;margin:0;padding
 <script>
 
 // ── i18n ──────────────────────────────────────────────────────────────────
-const APP_VERSION = '4.0.0';
+const APP_VERSION = '4.7.0';
 const APP_BUILD = '2026-05-16';
 
 const L={
 cs:{
-  langBtn:'EN',back:'Zpět',fabLbl:'Nový nápad',searchPh:'Hledat...',
+  langBtn:'EN',back:'Zpět',fabLbl:'Nový projekt',searchPh:'Hledat...',
   tabs:['Vše','Idea','Research','In progress','Delegated','Done'],
   sk:['spark','exploring','active','delegated','done'],
   sl:['Idea','Research','In progress','Delegated','Done'],
@@ -936,7 +987,7 @@ cs:{
   ]
 },
 en:{
-  langBtn:'CS',back:'Back',fabLbl:'New idea',searchPh:'Search...',
+  langBtn:'CS',back:'Back',fabLbl:'New project',searchPh:'Search...',
   tabs:['All','Idea','Research','In progress','Delegated','Done'],
   sk:['spark','exploring','active','delegated','done'],
   sl:['Idea','Research','In progress','Delegated','Done'],
@@ -987,6 +1038,10 @@ en:{
 
 let lang=localStorage.getItem('is-lang')||'cs';
 let theme=localStorage.getItem('is-theme')||'light';
+let taskFilters = {status:'all', prio:'all', proj:'all'};
+let activeTaskType = 'ideas'; // tasks | ideas | bugs | updates
+let taskSearchQuery = '';
+let activeTab = 'projects'; // projects | tasks
 const ll=()=>L[lang];
 
 // ── Theme ──────────────────────────────────────────────────────────────────
@@ -1098,7 +1153,8 @@ function renderList(){
     const ni=si+1;const hasNext=ni<l.sk.length;
     const _colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
     const _projColor = p.color&&_colorMap[p.color]?_colorMap[p.color]:'';
-    return `<div class="proj-card${_projColor?' has-color':''}" onclick="openDetail('${p.id}')" style="${_projColor?`--card-stripe:${_projColor};`:''}">
+    return `<div class="proj-card${_projColor?' has-color':''}" data-proj-id="${p.id}" onclick="openDetail('${p.id}')" style="${_projColor?`--card-stripe:${_projColor};`:''}">
+      <div class="drag-handle proj-drag-handle" title="Přetáhnout" onclick="event.stopPropagation()"><svg width="10" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="18" r="1" fill="currentColor"/><circle cx="15" cy="6" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="18" r="1" fill="currentColor"/><\/svg><\/div>
       <div class="card-row1">
         ${_projColor?`<span class="proj-color-dot" style="background:${_projColor}"><\/span>`:`<span class="status-dot dot-${p.status}"><\/span>`}
         <span class="proj-title">${esc(p.name||'')}<\/span>
@@ -1116,6 +1172,7 @@ function renderList(){
       <\/div>
     <\/div>`;
   }).join('') + `<div style="padding:32px 16px 8px;text-align:center">${quoteHtml}<\/div>`;
+  bindProjectDragDrop();
 }
 
 function quickAdv(id){
@@ -1175,6 +1232,21 @@ function renderDetail(p){
 
   // fields
   const te=document.getElementById('d-title');te.value=p.name||'';ar(te);
+  // Update client badge text - show name if set, otherwise placeholder
+  const _cb=document.getElementById('d-client-badge');
+  if(_cb){
+    if(p.client){
+      _cb.textContent=p.client;
+      _cb.style.background='var(--card)';
+      _cb.style.color='var(--text2)';
+      _cb.style.borderStyle='solid';
+    } else {
+      _cb.textContent=(lang==='cs'?'+ zadavatel':'+ client');
+      _cb.style.background='transparent';
+      _cb.style.color='var(--text3)';
+      _cb.style.borderStyle='dashed';
+    }
+  }
   const de=document.getElementById('d-desc');de.value=p.desc||'';ar(de);de.placeholder=l.flDesc;
   const ue=document.getElementById('d-url');ue.value=p.url||'';ue.placeholder=l.urlPh;
   document.getElementById('url-open-btn').style.display=p.url?'flex':'none';
@@ -1183,7 +1255,9 @@ function renderDetail(p){
   const _theme=p.color&&_themeColors[p.color]?_themeColors[p.color]:null;
   const _heroEl=document.getElementById('detail-hero-el');
   const _actionEl=document.getElementById('action-zone');
+  const _costWrap=document.getElementById('d-cost-wrap');
   if(_heroEl)_heroEl.style.background=_theme?_theme.bg:'';
+  if(_costWrap)_costWrap.style.background=_theme?_theme.bg:'';
   if(_actionEl){_actionEl.style.background=_theme?_theme.bg:'';_actionEl.style.borderBottomColor=_theme?_theme.col+'55':'var(--border)';}
   const _colorBtn=document.getElementById('detail-color-btn');
   if(_colorBtn)_colorBtn.style.background=_theme?_theme.col:'#0071E3';
@@ -1217,13 +1291,15 @@ function renderBugs(p){
   const el=document.getElementById('bug-list');
   if(!el) return;
   p.bugs=p.bugs||[];
-  if(!p.bugs.length){
+  const visibleBugs=p.bugs.filter(b=>!b.done);
+  if(!visibleBugs.length){
     const msg=lang==='cs'?'Žádné bugfixy':'No bugs';
     el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${msg}<\/div>`;
     return;
   }
   el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list">`+
-    p.bugs.map(it=>`<div class="chk-row" id="bug-row-${it.id}">
+    visibleBugs.map(it=>`<div class="chk-row" id="bug-row-${it.id}">
+      <span class="row-type-icon bug" title="Bugfix"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="6"/><path d="M12 7V5M8.5 3L11 5M15.5 3L13 5M5 13H3M21 13h-2M5 17l-2 1M19 17l2 1M5 9l-2-1M19 9l2-1"/><\/svg><\/span>
       <div class="cb${it.done?' chk':''}" onclick="togBug('${it.id}')">
         ${it.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
       <\/div>
@@ -1237,13 +1313,15 @@ function renderUpdates(p){
   const el=document.getElementById('update-list');
   if(!el) return;
   p.updates=p.updates||[];
-  if(!p.updates.length){
+  const visibleUpd=p.updates.filter(u=>!u.done);
+  if(!visibleUpd.length){
     const msg=lang==='cs'?'Žádné updaty':'No updates';
     el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${msg}<\/div>`;
     return;
   }
   el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list">`+
-    p.updates.map(it=>`<div class="chk-row" id="update-row-${it.id}">
+    visibleUpd.map(it=>`<div class="chk-row" id="update-row-${it.id}">
+      <span class="row-type-icon update" title="Update"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/><\/svg><\/span>
       <div class="cb${it.done?' chk':''}" onclick="togUpdate('${it.id}')">
         ${it.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
       <\/div>
@@ -1318,32 +1396,272 @@ function saveUpdate(){
 function renderImpr(p){
   const el=document.getElementById('impr-list');const l=ll();
   p.improvements=p.improvements||[];
-  if(!p.improvements.length){el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${l.emptyImpr}<\/div>`;return;}
-  el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list">`+
-    p.improvements.map(it=>`<div class="chk-row" id="impr-row-${it.id}">
+  // Hide done improvements from detail
+  const visibleImpr = p.improvements.filter(it=>!it.done);
+  if(!visibleImpr.length){el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${l.emptyImpr}<\/div>`;return;}
+  el.innerHTML=`<div style="padding:4px 16px 8px"><div class="chk-list" id="impr-chk-list">`+
+    visibleImpr.map((it,idx)=>`<div class="chk-row impr-row${it.done?' done':''}" id="impr-row-${it.id}" draggable="true" data-impr-id="${it.id}" data-impr-idx="${idx}">
+      <div class="drag-handle" title="Přetáhnout"><svg width="10" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="18" r="1" fill="currentColor"/><circle cx="15" cy="6" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="18" r="1" fill="currentColor"/><\/svg><\/div>
+      <span class="row-type-icon idea" title="Nápad"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6M12 17v4M8 17a6 6 0 118 0c0 .55-.22 1.07-.6 1.45L14 19.83V20a1 1 0 01-1 1h-2a1 1 0 01-1-1v-.17l-1.4-1.38A1.97 1.97 0 018 17z"/><\/svg><\/span>
       <div class="cb${it.done?' chk':''}" onclick="togImpr('${it.id}')">
         ${it.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
       <\/div>
-      <span class="cb-lbl${it.done?' done':''}" onclick="togImpr('${it.id}')"
-        onlongpress="showCtx(event,'impr','${it.id}')">${esc(it.text)}<\/span>
+      <span class="cb-lbl${it.done?' done':''}" onclick="editImprInline('${it.id}',this)">${esc(it.text)}<\/span>
       <button class="cb-del" onclick="delImpr('${it.id}')"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/><\/svg><\/button>
     <\/div>`).join('')+
     `<\/div><\/div>`;
-  bindLongPress();
+  // Setup drag and drop
+  bindImprDragDrop();
 }
+
+function bindImprDragDrop(){
+  const list=document.getElementById('impr-chk-list');
+  if(!list)return;
+  setupTouchDrag(list,'.impr-row','data-impr-id',(p,fromId,toId,insertBefore)=>{
+    if(!p.improvements)return;
+    const from=p.improvements.findIndex(i=>i.id===fromId);
+    let to=p.improvements.findIndex(i=>i.id===toId);
+    if(from<0||to<0||from===to)return;
+    const [moved]=p.improvements.splice(from,1);
+    // adjust to index after splice
+    if(from<to)to--;
+    if(!insertBefore)to++;
+    p.improvements.splice(to,0,moved);
+    saveD(projects);
+    renderImpr(p);
+  });
+}
+
+// Generic touch-compatible drag and drop using Pointer Events
+function bindProjectDragDrop(){
+  const list=document.getElementById('project-list');
+  if(!list)return;
+  setupTouchDrag(list,'.proj-card','data-proj-id',(p,fromId,toId,insertBefore)=>{
+    const from=projects.findIndex(pp=>pp.id===fromId);
+    let to=projects.findIndex(pp=>pp.id===toId);
+    if(from<0||to<0||from===to)return;
+    const [moved]=projects.splice(from,1);
+    if(from<to)to--;
+    if(!insertBefore)to++;
+    projects.splice(to,0,moved);
+    saveD(projects);
+    renderList();
+  });
+}
+
+// Generic touch-compatible drag and drop using Pointer Events
+function setupTouchDrag(container, rowSelector, idAttr, onReorder){
+  const rows = container.querySelectorAll(rowSelector);
+  rows.forEach(row=>{
+    const handle = row.querySelector('.drag-handle') || row;
+    let dragging = false;
+    let dragMoved = false;
+    let startY = 0;
+    let startX = 0;
+    
+    handle.style.touchAction='none';
+    handle.style.userSelect='none';
+    
+    handle.addEventListener('pointerdown', (e)=>{
+      if(e.button && e.button !== 0)return;
+      e.preventDefault();
+      e.stopPropagation();
+      dragging = true;
+      dragMoved = false;
+      startY = e.clientY;
+      startX = e.clientX;
+      try{handle.setPointerCapture(e.pointerId);}catch(_){}
+    });
+    
+    handle.addEventListener('pointermove', (e)=>{
+      if(!dragging)return;
+      const dx = Math.abs(e.clientX-startX);
+      const dy = Math.abs(e.clientY-startY);
+      // Need to actually start moving threshold
+      if(!dragMoved && (dx > 4 || dy > 4)){
+        dragMoved = true;
+        row.classList.add('dragging');
+      }
+      if(!dragMoved)return;
+      e.preventDefault();
+      // Find target row
+      const allRows = [...container.querySelectorAll(rowSelector)];
+      allRows.forEach(r=>r.classList.remove('drag-over-top','drag-over-bottom'));
+      
+      for(const r of allRows){
+        if(r===row)continue;
+        const rect = r.getBoundingClientRect();
+        if(e.clientY >= rect.top && e.clientY <= rect.bottom){
+          const midpoint = rect.top + rect.height/2;
+          if(e.clientY < midpoint){
+            r.classList.add('drag-over-top');
+          } else {
+            r.classList.add('drag-over-bottom');
+          }
+          break;
+        }
+      }
+    });
+    
+    handle.addEventListener('pointerup', (e)=>{
+      if(!dragging)return;
+      const wasMoved = dragMoved;
+      dragging = false;
+      dragMoved = false;
+      row.classList.remove('dragging');
+      try{handle.releasePointerCapture(e.pointerId);}catch(_){}
+      
+      if(!wasMoved){
+        // Was a tap, not drag - allow click through
+        return;
+      }
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Find drop target
+      const allRows = [...container.querySelectorAll(rowSelector)];
+      let targetRow = null;
+      let insertBefore = true;
+      allRows.forEach(r=>{
+        if(r.classList.contains('drag-over-top')){
+          targetRow = r;
+          insertBefore = true;
+        }
+        if(r.classList.contains('drag-over-bottom')){
+          targetRow = r;
+          insertBefore = false;
+        }
+        r.classList.remove('drag-over-top','drag-over-bottom');
+      });
+      
+      if(targetRow && targetRow !== row){
+        const fromId = row.getAttribute(idAttr);
+        const toId = targetRow.getAttribute(idAttr);
+        const p = projects.find(x => x.id === curId) || projects[0];
+        if(onReorder) onReorder(p, fromId, toId, insertBefore);
+      }
+      
+      // Prevent following click
+      const stopClick=(ev)=>{ev.stopPropagation();ev.preventDefault();handle.removeEventListener('click',stopClick,true);row.removeEventListener('click',stopClick,true);};
+      handle.addEventListener('click', stopClick, true);
+      row.addEventListener('click', stopClick, true);
+      setTimeout(()=>{
+        handle.removeEventListener('click', stopClick, true);
+        row.removeEventListener('click', stopClick, true);
+      }, 300);
+    });
+    
+    handle.addEventListener('pointercancel', ()=>{
+      dragging = false;
+      dragMoved = false;
+      row.classList.remove('dragging');
+      container.querySelectorAll(rowSelector).forEach(r=>r.classList.remove('drag-over-top','drag-over-bottom'));
+    });
+  });
+}
+
 
 function togImpr(id){const p=projects.find(x=>x.id===curId);if(!p)return;const it=(p.improvements||[]).find(x=>x.id===id);if(it){it.done=!it.done;saveD(projects);renderImpr(p);}}
 
 function editImprInline(id, el){
   const p=projects.find(x=>x.id===curId);if(!p)return;
   const it=(p.improvements||[]).find(x=>x.id===id);if(!it)return;
-  const inp=document.createElement('input');
-  inp.className='cb-lbl-input';inp.value=it.text;inp.style.flex='1';
-  el.replaceWith(inp);inp.focus();inp.select();
+  const inp=document.createElement('textarea');
+  inp.className='cb-lbl-input';inp.value=it.text;
+  inp.style.cssText='flex:1;background:none;border:none;outline:none;font-family:var(--sans);font-size:13px;color:var(--text);line-height:1.4;padding:0;resize:none;overflow:hidden;width:100%;white-space:pre-wrap;word-break:break-word';
+  inp.rows=1;
+  el.replaceWith(inp);
+  // Focus and place cursor at end - prevent select-all
+  setTimeout(()=>{
+    inp.focus();
+    const len=inp.value.length;
+    inp.setSelectionRange(len,len);
+    // Auto-size to content (multi-line)
+    inp.style.height='auto';
+    inp.style.height=(inp.scrollHeight)+'px';
+  }, 10);
+  inp.addEventListener('input',()=>{
+    inp.style.height='auto';
+    inp.style.height=(inp.scrollHeight)+'px';
+  });
   const save=()=>{const v=inp.value.trim();if(v)it.text=v;saveD(projects);renderImpr(p);};
   inp.addEventListener('blur',save);
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();inp.blur();}});
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){renderImpr(p);}
+  });
 }
+function editTaskInline(id, el){
+  const p=projects.find(x=>x.id===curId);if(!p)return;
+  const t=(p.tasks||[]).find(x=>x.id===id);if(!t)return;
+  const orig=el.textContent;
+  const inp=document.createElement('textarea');
+  inp.className='cb-lbl-input';
+  inp.value=t.text;
+  inp.style.cssText='flex:1;background:none;border:none;outline:none;font-family:var(--sans);font-size:13px;color:var(--text);line-height:1.4;padding:0;resize:none;overflow:hidden;width:100%';
+  inp.rows=1;
+  el.replaceWith(inp);
+  inp.focus();
+  const len=inp.value.length;inp.setSelectionRange(len,len);
+  const autoSize=()=>{inp.style.height='auto';inp.style.height=(inp.scrollHeight)+'px';};
+  autoSize();
+  inp.addEventListener('input',autoSize);
+  const save=()=>{const v=inp.value.trim();if(v)t.text=v;saveD(projects);renderTasks(p);};
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){renderTasks(p);}
+  });
+}
+
+
+
+function editGlobalTaskInline(projId, id, el){
+  // Switch curId temporarily and use existing inline edit
+  const p=projects.find(x=>x.id===projId);if(!p)return;
+  const t=(p.tasks||[]).find(x=>x.id===id);if(!t)return;
+  const orig=el.textContent;
+  const inp=document.createElement('textarea');
+  inp.className='cb-lbl-input';
+  inp.value=t.text;
+  inp.style.cssText='flex:1;background:none;border:none;outline:none;font-family:var(--sans);font-size:14px;color:var(--text);line-height:1.4;padding:0;resize:none;overflow:hidden;width:100%;white-space:pre-wrap';
+  inp.rows=1;
+  el.replaceWith(inp);
+  inp.focus();
+  const len=inp.value.length;inp.setSelectionRange(len,len);
+  const autoSize=()=>{inp.style.height='auto';inp.style.height=(inp.scrollHeight)+'px';};
+  autoSize();
+  inp.addEventListener('input',autoSize);
+  const save=()=>{const v=inp.value.trim();if(v)t.text=v;saveD(projects);renderTasksAll();};
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){renderTasksAll();}
+  });
+}
+
+function editGlobalImprInline(projId, id, el){
+  const p=projects.find(x=>x.id===projId);if(!p)return;
+  const it=(p.improvements||[]).find(x=>x.id===id);if(!it)return;
+  const inp=document.createElement('textarea');
+  inp.className='cb-lbl-input';
+  inp.value=it.text;
+  inp.style.cssText='flex:1;background:none;border:none;outline:none;font-family:var(--sans);font-size:14px;color:var(--text);line-height:1.4;padding:0;resize:none;overflow:hidden;width:100%;white-space:pre-wrap';
+  inp.rows=1;
+  el.replaceWith(inp);
+  inp.focus();
+  const len=inp.value.length;inp.setSelectionRange(len,len);
+  const autoSize=()=>{inp.style.height='auto';inp.style.height=(inp.scrollHeight)+'px';};
+  autoSize();
+  inp.addEventListener('input',autoSize);
+  const save=()=>{const v=inp.value.trim();if(v)it.text=v;saveD(projects);renderTasksAll();};
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){renderTasksAll();}
+  });
+}
+
 
 function imprToTask(id){
   const p=projects.find(x=>x.id===curId);if(!p)return;
@@ -1600,14 +1918,14 @@ function renderFin(p){
   if(!el)return;
   const l=ll();const fins=p.finances||[];
   if(!fins.length){el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${lang==='cs'?'Žádné náklady':'No costs yet'}<\/div>`;
-    const cs=document.getElementById('d-cost-summary');if(cs)cs.style.display='none';
+    const cs=document.getElementById('d-cost-wrap');if(cs)cs.style.display='none';
     return;}
   const subtypeIcons={sw:'💻',person:'👤',rent:'🏠',ops:'⚙️',other2:'📦'};
   const freqLabels=lang==='cs'?{monthly:'měsíčně',yearly:'ročně',once:'jednorázově'}:{monthly:'monthly',yearly:'yearly',once:'one-time'};
   const totalM=fins.reduce((s,f)=>s+calcMonthly(f),0);
   const totalY=totalM*12+fins.filter(f=>f.freq==='once').reduce((s,f)=>s+f.amount,0);
   // Update cost summary in hero
-  const csum=document.getElementById('d-cost-summary');
+  const csum=document.getElementById('d-cost-wrap');
   const cval=document.getElementById('d-cost-val');
   if(csum&&cval&&totalM>0){
     csum.style.display='block';
@@ -1647,50 +1965,38 @@ function renderRes(p){
 }
 
 function delRes(id){const p=projects.find(x=>x.id===curId);if(!p)return;p.resources=(p.resources||[]).filter(r=>r.id!==id);saveD(projects);renderRes(p);}
-function delFin(id){const p=projects.find(x=>x.id===curId);if(!p)return;p.finances=(p.finances||[]).filter(f=>f.id!==id);saveD(projects);renderRes(p);}
+function delFin(id){const p=projects.find(x=>x.id===curId);if(!p)return;p.finances=(p.finances||[]).filter(f=>f.id!==id);saveD(projects);renderFin(p);renderDetail(p);}
 
 // ── Tasks ─────────────────────────────────────────────────────────────────
 function renderTasks(p){
-  const el=document.getElementById('task-list');const l=ll();const tasks=p.tasks||[];
+  const el=document.getElementById('task-list');const l=ll();
+  // Filter: only show pure tasks (not bug/update mirrors), and HIDE done from detail (they go to global Hotové)
+  const tasks=(p.tasks||[]).filter(t=>!t.fromBug&&!t.fromUpdate&&!t.done);
   if(!tasks.length){el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${l.emptyTask}<\/div>`;return;}
-  const visibleTasks = tasks.filter(t=>!t.done);
-  const doneTasks = tasks.filter(t=>t.done);
-  if(!tasks.length){el.innerHTML=`<div style="padding:10px 16px;font-size:13px;color:var(--text3)">${l.emptyTask}<\/div>`;return;}
-  const doneSection = doneTasks.length ? `
-    <div style="border-top:0.5px solid var(--border);margin-top:4px">
-      <div onclick="toggleDoneSection(this)" style="display:flex;align-items:center;gap:6px;padding:10px 16px;cursor:pointer;font-size:12px;color:var(--text3)">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="done-chev" style="transition:transform .2s"><path d="m6 9 6 6 6-6"/><\/svg>
-        ${lang==='cs'?'Hotové':'Done'} (${doneTasks.length})
-      <\/div>
-      <div class="done-tasks-body" style="display:none">
-        ${doneTasks.map(t=>`<div class="task-item" style="opacity:.5">
-          <div class="t-check chk" onclick="togTask('${t.id}')"><svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg><\/div>
-          <div class="t-body"><div class="t-text done">${esc(t.text)}<\/div>
-            <div class="t-tags">${t.who?`<span class="t-tag">${esc(t.who)}<\/span>`:''}<\/div>
-          <\/div>
-          <button class="x-btn" onclick="delTask('${t.id}')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/><\/svg><\/button>
-        <\/div>`).join('')}
-      <\/div>
-    <\/div>` : '';
+  // Show only undone tasks in detail
   const projColor=p.color||null;
   const colorMap={blue:'#0071E3',green:'#1A7F37',pink:'#DB2777',yellow:'#B45309',purple:'#7C3AED',orange:'#C2410C',red:'#DC2626',teal:'#0891B2',amber:'#D97706',violet:'#9333EA',rose:'#E11D48',slate:'#475569'};
   const borderStyle=projColor&&colorMap[projColor]?`border-left:3px solid ${colorMap[projColor]};`:'';
-  el.innerHTML=(visibleTasks.length ? visibleTasks.map(t=>`<div class="task-item" style="${borderStyle}">
+  el.innerHTML=tasks.map(t=>`<div class="task-item" style="${borderStyle}${t.done?'opacity:.55;':''}">
     <div class="t-check${t.done?' chk':''}" onclick="togTask('${t.id}')">
       ${t.done?`<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>`:''}
     <\/div>
     <div class="t-body">
-      <div class="t-text${t.done?' done':''}">${esc(t.text)}<\/div>
-      <div class="t-tags">
+      <div class="t-text${t.done?' done':''}" ondblclick="editTaskInline('${t.id}',this)">${esc(t.text)}<\/div>
+      ${(t.who||t.contact||t.prio&&t.prio!=='med'||t.deadline||t.fromBug||t.fromUpdate)?`<div class="t-tags">
+        ${t.fromBug?`<span class="t-tag" style="background:rgba(220,38,38,0.1);color:#DC2626"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-1px;margin-right:3px"><path d="M12 2c-1.1 0-2 .9-2 2 0 .27.05.52.14.75-.7.39-1.14 1.14-1.14 2.05 0 .55.18 1.05.5 1.45-1.18.59-2 1.85-2 3.25 0 2.06 1.94 4 4 4s4-1.94 4-4c0-1.4-.82-2.66-2-3.25.32-.4.5-.9.5-1.45 0-.91-.44-1.66-1.14-2.05.09-.23.14-.48.14-.75 0-1.1-.9-2-2-2zm-4 9.5h8M6 10c-1.1 0-2 .9-2 2v3M18 10c1.1 0 2 .9 2 2v3M4 17h2M18 17h2M9 18v2M15 18v2M12 18v3"/></svg>bug<\/span>`:''}
+        ${t.fromUpdate?`<span class="t-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;margin-right:3px"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>update<\/span>`:''}
         ${t.who?`<span class="t-tag">${esc(t.who)}<\/span>`:''}
         ${t.contact?`<span class="t-tag">${esc(t.contact)}<\/span>`:''}
         ${t.prio&&t.prio!=='med'?`<span class="t-tag${t.prio==='hi'?' hi':''}">${l.pl[t.prio]}<\/span>`:''}
         ${t.deadline?`<span class="t-tag">${fmtD(t.deadline)}<\/span>`:''}
-      <\/div>
+      <\/div>`:''}
     <\/div>
     <button class="x-btn" onclick="delTask('${t.id}')"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/><\/svg><\/button>
-  <\/div>`).join('') : '') + doneSection;
+  <\/div>`).join('');
 }
+
+
 function toggleDoneSection(headerEl){
   const body = headerEl.nextElementSibling;
   const chev = headerEl.querySelector('.done-chev');
@@ -1988,12 +2294,25 @@ function bindInsLongPress() {
 function editInsInline(id, el) {
   const p = projects.find(x => x.id === curId); if(!p) return;
   const ins = (p.insights||[]).find(x => x.id === id); if(!ins) return;
-  const inp = document.createElement('input');
-  inp.className = 'ins-text-inp'; inp.value = ins.text;
-  el.replaceWith(inp); inp.focus(); inp.select();
+  const inp = document.createElement('textarea');
+  inp.className = 'ins-text-inp';
+  inp.value = ins.text;
+  inp.style.resize='none';inp.style.overflow='hidden';inp.rows=1;
+  inp.style.width='100%';inp.style.fontFamily='var(--sans)';inp.style.fontSize='13px';
+  inp.style.background='none';inp.style.border='none';inp.style.outline='none';
+  inp.style.color='var(--text)';inp.style.lineHeight='1.4';inp.style.padding='0';
+  el.replaceWith(inp);
+  inp.focus();
+  const len=inp.value.length;inp.setSelectionRange(len,len);
+  const autoSize=()=>{inp.style.height='auto';inp.style.height=(inp.scrollHeight)+'px';};
+  autoSize();
+  inp.addEventListener('input',autoSize);
   const done = () => { const v = inp.value.trim(); if(v) ins.text = v; saveD(projects); renderIns(p); };
   inp.addEventListener('blur', done);
-  inp.addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();inp.blur();} });
+  inp.addEventListener('keydown', e => {
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){renderIns(p);}
+  });
 }
 
 // ── Edit checklist items (long press) ─────────────────────────────────────
@@ -2020,20 +2339,24 @@ function editChkInline(key, id, el) {
   const p = projects.find(x => x.id === curId); if(!p) return;
   p.checkData = p.checkData || {};
   const it = (p.checkData[key]||[]).find(x => x.id === id); if(!it) return;
-  const inp = document.createElement('input');
-  inp.className = 'cb-lbl-input'; inp.value = it.text;
-  el.replaceWith(inp); inp.focus(); inp.select();
+  const inp = document.createElement('textarea');
+  inp.className = 'cb-lbl-input';
+  inp.value = it.text;
+  inp.style.resize='none';inp.style.overflow='hidden';inp.rows=1;
+  el.replaceWith(inp);
+  inp.focus();
+  const len=inp.value.length;inp.setSelectionRange(len,len);
+  const autoSize=()=>{inp.style.height='auto';inp.style.height=(inp.scrollHeight)+'px';};
+  autoSize();
+  inp.addEventListener('input',autoSize);
   const done = () => { const v = inp.value.trim(); if(v) it.text = v; saveD(projects); const body = document.getElementById('tbb-'+key); if(body) body.innerHTML = chkBlock(key, p); };
   inp.addEventListener('blur', done);
-  inp.addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();inp.blur();} });
+  inp.addEventListener('keydown', e => {
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();inp.blur();}
+    if(e.key==='Escape'){const body = document.getElementById('tbb-'+key); if(body) body.innerHTML = chkBlock(key, p);}
+  });
 }
 
-// ── Tab bar ───────────────────────────────────────────────────────────────
-let activeTab = 'projects';
-
-let taskFilters = {status:'all', prio:'all', proj:'all'};
-let activeTaskType = 'tasks'; // tasks | ideas | bugs | updates
-let taskSearchQuery = '';
 
 function setTaskType(type) {
   activeTaskType = type;
@@ -2042,7 +2365,7 @@ function setTaskType(type) {
   // FAB label changes based on type
   const fabLbl = document.getElementById('fab-task-lbl');
   if(fabLbl){
-    const labels = {tasks:'Nový úkol', ideas:'Nový nápad', bugs:'Nový bugfix', updates:'Nový update'};
+    const labels = {tasks:'Nový úkol', ideas:'Nový nápad na zlepšení', bugs:'Nový bugfix', updates:'Nový update'};
     const labelsEn = {tasks:'New task', ideas:'New idea', bugs:'New bug', updates:'New update'};
     fabLbl.textContent = (lang==='cs'?labels:labelsEn)[type] || 'Nový';
   }
@@ -2183,8 +2506,10 @@ function renderTasksAll() {
     
     if (!items.length) return;
     
-    // Sort
+    // Sort: undone first, then done; within: priority then deadline
     const sorted = [...items].sort((a, b) => {
+      // Done items go to bottom
+      if(!!a.done !== !!b.done) return a.done ? 1 : -1;
       if(activeTaskType !== 'ideas') {
         const pa = prioOrder[a.prio] ?? 1;
         const pb = prioOrder[b.prio] ?? 1;
@@ -2222,23 +2547,30 @@ function renderTasksAll() {
       ${g.items.map(t => {
         const borderStyle = projColorHex ? `border-left:3px solid ${projColorHex};padding-left:11px;` : '';
         if(activeTaskType === 'ideas') {
-          // Idea rendering (no checkbox, simpler)
+          // Idea rendering (lightbulb icon)
           return `<div class="tall-item" style="${borderStyle}">
+            <span class="row-type-icon idea" title="Nápad" style="margin-top:1px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6M12 17v4M8 17a6 6 0 118 0c0 .55-.22 1.07-.6 1.45L14 19.83V20a1 1 0 01-1 1h-2a1 1 0 01-1-1v-.17l-1.4-1.38A1.97 1.97 0 018 17z"/><\/svg><\/span>
             <div class="t-body">
-              <div class="t-text">${esc(t.text||'')}<\/div>
+              <div class="t-text" ondblclick="editGlobalImprInline('${p.id}','${t.id}',this)">${esc(t.text||'')}<\/div>
             <\/div>
           <\/div>`;
         }
         // Task/Bug/Update rendering
-        const typeBadge = t.fromBug ? `<span class="t-tag" style="background:rgba(220,38,38,0.1);color:#DC2626">bug<\/span>` 
-          : t.fromUpdate ? `<span class="t-tag" style="background:rgba(124,58,237,0.1);color:#7C3AED">update<\/span>` : '';
+        // Type icon based on item source
+        const typeIconHtml = t.fromBug 
+          ? `<span class="row-type-icon bug" title="Bugfix"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="6"/><path d="M12 7V5M8.5 3L11 5M15.5 3L13 5M5 13H3M21 13h-2M5 17l-2 1M19 17l2 1M5 9l-2-1M19 9l2-1"/><\/svg><\/span>`
+          : t.fromUpdate
+          ? `<span class="row-type-icon update" title="Update"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/><\/svg><\/span>`
+          : `<span class="row-type-icon task" title="Úkol"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/><\/svg><\/span>`;
+        const typeBadge = '';
         return `<div class="tall-item" style="${borderStyle}">
           <div class="tall-prio-bar prio-${t.prio || 'med'}"><\/div>
+          ${typeIconHtml}
           <div class="t-check${t.done ? ' chk' : ''}" onclick="togTaskAll('${p.id}','${t.id}')" style="margin-top:0;flex-shrink:0">
             ${t.done ? `<svg width="10" height="10" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/><\/svg>` : ''}
           <\/div>
           <div class="t-body">
-            <div class="t-text">${esc(t.text)}<\/div>
+            <div class="t-text" ondblclick="editGlobalTaskInline('${p.id}','${t.id}',this)">${esc(t.text)}<\/div>
             <div class="t-tags" style="margin-top:4px">
               ${typeBadge}
               ${t.who ? `<span class="t-tag">${esc(t.who)}<\/span>` : ''}
